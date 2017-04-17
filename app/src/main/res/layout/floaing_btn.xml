@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_gravity="end"
+    android:layout_width="wrap_content"
+    android:layout_height="53dp">
+
+    <LinearLayout
+        android:id="@+id/fab_about_base"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/fab_about"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@drawable/fab_about"/>
+
+        <TextView
+            style="@style/fabItemTextStyle"
+            android:background="#fdd5a0"
+            android:text="@string/fabAbout"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/fab_gallery_base"
+        android:layout_marginLeft="28dp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <ImageButton
+        android:id="@+id/fab_gallery"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:background="@drawable/fab_gallery"/>
+
+        <TextView
+            style="@style/fabItemTextStyle"
+            android:background="#cce4cf"
+            android:text="@string/fabGallery"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/fab_home_base"
+        android:layout_marginLeft="28dp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <ImageButton
+        android:id="@+id/fab_home"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:background="@drawable/fab_home"/>
+
+        <TextView
+            style="@style/fabItemTextStyle"
+            android:background="#d0d1da"
+            android:text="@string/fabHome"/>
+
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/fab_btn"
+        android:layout_marginLeft="28dp"
+        android:layout_width="53dp"
+        android:layout_height="53dp"
+        android:background="@drawable/s_btn_floating"/>
+
+</LinearLayout>
