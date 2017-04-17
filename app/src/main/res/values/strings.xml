@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">SelidPic_v2.0</string>
+    <string name="type1Size">25 x 30</string>
+    <string name="mm">(mm)</string>
+    <string name="type3Size">30 x 40</string>
+    <string name="type1Name">증명사진</string>
+    <string name="type3Name">반명함사진</string>
+    <string name="type2Name">사용자 지정 규격</string>
+    <string name="type4Size">35 x 45</string>
+    <string name="type4Name">여권사진</string>
+    <string name="type5Size">50 x 70</string>
+    <string name="type5Name">명함사진</string>
+    <string name="fabHome">Home</string>
+    <string name="fabGallery">Gallery</string>
+    <string name="fabAbout">About</string>
+    <string name="type6Name">About us</string>
 </resources>
