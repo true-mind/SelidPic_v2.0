@@ -3,21 +3,42 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#402b00" />
-
-    <View
-        android:layout_marginTop="1dp"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#402b00" />
-
-    <ImageView
+    <LinearLayout
         android:layout_width="358dp"
         android:layout_height="47dp"
+        android:orientation="vertical"
         android:layout_gravity="center"
-        android:background="@drawable/main_footer" />
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_gravity="center"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/main_footer_mark"/>
+
+            <TextView
+                android:id="@+id/txtFooter"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="12sp"
+                android:textColor="#000"
+                android:text="@string/footerText"/>
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
 
 </LinearLayout>

@@ -6,6 +6,7 @@
     android:layout_height="53dp">
 
     <LinearLayout
+        android:visibility="gone"
         android:id="@+id/fab_about_base"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
@@ -27,6 +28,7 @@
 
 
     <LinearLayout
+        android:visibility="gone"
         android:id="@+id/fab_gallery_base"
         android:layout_marginLeft="28dp"
         android:layout_gravity="center"
@@ -49,6 +51,7 @@
 
 
     <LinearLayout
+        android:visibility="gone"
         android:id="@+id/fab_home_base"
         android:layout_marginLeft="28dp"
         android:layout_gravity="center"
