@@ -15,4 +15,15 @@
     <string name="fabAbout">About</string>
     <string name="type6Name">About us</string>
     <string name="footerText">Created by \'솔직헌 심정\' - TRUEMIND</string>
+    <string name="cautionRule1">탈모, 상반신, 무배경, 6개월 이내 촬영한 사진</string>
+    <string name="cautionRule2">복사, 포토샵 등으로 수정하지 않은 사진</string>
+    <string name="cautionRule3">얼굴 방향은 정면을 응시하고 기울어지지 않은 사진</string>
+    <string name="cautionRule4">색안경 착용 등 눈을 가리지 않은 사진</string>
+    <string name="cautionRule5">귀 부분이 노출되어야 하며, 흰색 바탕의 칼라 사진</string>
+    <string name="cautionRule6">(배경 색상은 용도에 따라 변동이 있을 수 있음)</string>
+    <string name="txtCheck1">카메라 시작 시</string>
+    <string name="txtCheck2">메뉴얼 보지 않기</string>
+    <string name="camStart">촬영시작</string>
+    <string name="cancel">취소</string>
+    <string name="cautionRule7">밝기와 배경색을 꼭 확인해 주세요!</string>
 </resources>

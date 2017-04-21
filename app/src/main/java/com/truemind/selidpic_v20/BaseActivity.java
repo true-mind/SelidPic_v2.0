@@ -55,6 +55,13 @@ public abstract class BaseActivity extends Activity {
             view.setTypeface(NanumNormal);
     }
 
+    public void setFontToViewBold2(TextView... views) {
+        Typeface NanumNormal = Typeface.createFromAsset(this.getAssets(), "BMDOHYEON_ttf.ttf");
+
+        for (TextView view : views)
+            view.setTypeface(NanumNormal);
+    }
+
     public void initFooter(){
 
         txtFooter = (TextView)findViewById(R.id.txtFooter);

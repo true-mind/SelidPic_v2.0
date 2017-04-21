@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.truemind.selidpic_v20.BaseActivity;
+import com.truemind.selidpic_v20.Constants;
 import com.truemind.selidpic_v20.R;
 
 public class MainActivity extends BaseActivity {
@@ -26,25 +27,8 @@ public class MainActivity extends BaseActivity {
     private LinearLayout btn5;
     private LinearLayout btn6;
 
-    private TextView mTxtBtn1Size;
-    private TextView mTxtBtn1Size2;
-    private TextView mTxtBtn1Name;
-
-    private TextView mTxtBtn3Size;
-    private TextView mTxtBtn3Size2;
-    private TextView mTxtBtn3Name;
-
-    private TextView mTxtBtn4Size;
-    private TextView mTxtBtn4Size2;
-    private TextView mTxtBtn4Name;
-
-    private TextView mTxtBtn5Size;
-    private TextView mTxtBtn5Size2;
-    private TextView mTxtBtn5Name;
-
-    private TextView mTxtBtn2;
-    private TextView mTxtBtn6;
-
+    private final long FINISH_INTERVAL_TIME = 2000;
+    private long backPressedTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,68 +52,81 @@ public class MainActivity extends BaseActivity {
         btn5 = (LinearLayout) findViewById(R.id.main_btn5);
         btn6 = (LinearLayout) findViewById(R.id.main_btn6);
 
-        mTxtBtn6 = (TextView) findViewById(R.id.txtBtn6);
-        mTxtBtn2 = (TextView) findViewById(R.id.txtBtn2);
+        TextView mTxtBtn6 = (TextView) findViewById(R.id.txtBtn6);
+        TextView mTxtBtn2 = (TextView) findViewById(R.id.txtBtn2);
 
-        mTxtBtn1Size = (TextView) findViewById(R.id.txtBtn1Size);
-        mTxtBtn1Size2 = (TextView) findViewById(R.id.txtBtn1Size2);
-        mTxtBtn1Name = (TextView) findViewById(R.id.txtBtn1Name);
+        TextView mTxtBtn1Size = (TextView) findViewById(R.id.txtBtn1Size);
+        TextView mTxtBtn1Size2 = (TextView) findViewById(R.id.txtBtn1Size2);
+        TextView mTxtBtn1Name = (TextView) findViewById(R.id.txtBtn1Name);
 
-        mTxtBtn3Size = (TextView) findViewById(R.id.txtBtn3Size);
-        mTxtBtn3Size2 = (TextView) findViewById(R.id.txtBtn3Size2);
-        mTxtBtn3Name = (TextView) findViewById(R.id.txtBtn3Name);
+        TextView mTxtBtn3Size = (TextView) findViewById(R.id.txtBtn3Size);
+        TextView mTxtBtn3Size2 = (TextView) findViewById(R.id.txtBtn3Size2);
+        TextView mTxtBtn3Name = (TextView) findViewById(R.id.txtBtn3Name);
 
-        mTxtBtn4Size = (TextView) findViewById(R.id.txtBtn4Size);
-        mTxtBtn4Size2 = (TextView) findViewById(R.id.txtBtn4Size2);
-        mTxtBtn4Name = (TextView) findViewById(R.id.txtBtn4Name);
+        TextView mTxtBtn4Size = (TextView) findViewById(R.id.txtBtn4Size);
+        TextView mTxtBtn4Size2 = (TextView) findViewById(R.id.txtBtn4Size2);
+        TextView mTxtBtn4Name = (TextView) findViewById(R.id.txtBtn4Name);
 
-        mTxtBtn5Size = (TextView) findViewById(R.id.txtBtn5Size);
-        mTxtBtn5Size2 = (TextView) findViewById(R.id.txtBtn5Size2);
-        mTxtBtn5Name = (TextView) findViewById(R.id.txtBtn5Name);
+        TextView mTxtBtn5Size = (TextView) findViewById(R.id.txtBtn5Size);
+        TextView mTxtBtn5Size2 = (TextView) findViewById(R.id.txtBtn5Size2);
+        TextView mTxtBtn5Name = (TextView) findViewById(R.id.txtBtn5Name);
 
         setFontToViewBold(mTxtBtn1Size, mTxtBtn1Size2, mTxtBtn1Name, mTxtBtn3Size, mTxtBtn3Size2, mTxtBtn3Name,
                 mTxtBtn4Size, mTxtBtn4Size2, mTxtBtn4Name, mTxtBtn5Size, mTxtBtn5Size2, mTxtBtn5Name,
-                mTxtBtn2,mTxtBtn6);
+                mTxtBtn2, mTxtBtn6);
 
 
     }
-
-
 
     public void initListener(){
 
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "1", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getContext(), CautionActivity.class);
+                intent.putExtra("type", Constants.PHOTO_TYPE1);
+                startActivity(intent);
+                finish();
             }
         });
 
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "2", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getContext(), CautionActivity.class);
+                intent.putExtra("type", Constants.PHOTO_TYPE2);
+                startActivity(intent);
+                finish();
             }
         });
 
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "3", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getContext(), CautionActivity.class);
+                intent.putExtra("type", Constants.PHOTO_TYPE3);
+                startActivity(intent);
+                finish();
             }
         });
 
         btn4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "4", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getContext(), CautionActivity.class);
+                intent.putExtra("type", Constants.PHOTO_TYPE4);
+                startActivity(intent);
+                finish();
             }
         });
 
         btn5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "5", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getContext(), CautionActivity.class);
+                intent.putExtra("type", Constants.PHOTO_TYPE5);
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -142,6 +139,21 @@ public class MainActivity extends BaseActivity {
 
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        long tempTime = System.currentTimeMillis();
+        long intervalTime = tempTime - backPressedTime;
+
+        if(0<=intervalTime && FINISH_INTERVAL_TIME >= intervalTime) {
+            super.onBackPressed();
+        }
+        else
+        {
+            backPressedTime = tempTime;
+            Toast.makeText(getContext(), "\"Back\"버튼 을 한번 더 눌러 종료",Toast.LENGTH_SHORT).show();
+        }
     }
 
 }

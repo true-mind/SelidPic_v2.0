@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/common_back"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/common_header" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="26dp"
+                    android:layout_height="28dp"
+                    android:background="@drawable/caution_rule" />
+
+                <TextView
+                    android:id="@+id/rule"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="증명사진 규정"
+                    android:textColor="#bf1a20"
+                    android:textSize="28sp" />
+
+            </LinearLayout>
+
+            <!-- rules *******************************************************************-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    style="@style/cautionRuleItemsBaseStyle"
+                    android:layout_marginTop="24dp">
+
+                    <TextView style="@style/cautionRuleItemsStyle" />
+
+                    <TextView
+                        android:id="@+id/rule1"
+                        style="@style/cautionRuleItemsBodyStyle"
+                        android:text="@string/cautionRule1" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    style="@style/cautionRuleItemsBaseStyle"
+                    android:layout_marginTop="34dp">
+
+                    <TextView style="@style/cautionRuleItemsStyle" />
+
+                    <TextView
+                        android:id="@+id/rule2"
+                        style="@style/cautionRuleItemsBodyStyle"
+                        android:text="@string/cautionRule2" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    style="@style/cautionRuleItemsBaseStyle"
+                    android:layout_marginTop="34dp">
+
+                    <TextView style="@style/cautionRuleItemsStyle" />
+
+                    <TextView
+                        android:id="@+id/rule3"
+                        style="@style/cautionRuleItemsBodyStyle"
+                        android:text="@string/cautionRule3" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    style="@style/cautionRuleItemsBaseStyle"
+                    android:layout_marginTop="34dp">
+
+                    <TextView style="@style/cautionRuleItemsStyle" />
+
+                    <TextView
+                        android:id="@+id/rule4"
+                        style="@style/cautionRuleItemsBodyStyle"
+                        android:text="@string/cautionRule4" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    style="@style/cautionRuleItemsBaseStyle"
+                    android:layout_marginTop="34dp">
+
+                    <TextView style="@style/cautionRuleItemsStyle" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/rule5"
+                            style="@style/cautionRuleItemsBodyStyle"
+                            android:text="@string/cautionRule5" />
+
+                        <TextView
+                            android:id="@+id/rule6"
+                            style="@style/cautionRuleItemsBodyStyle"
+                            android:text="@string/cautionRule6" />
+                    </LinearLayout>
+                </LinearLayout>
+                <!-- rules *******************************************************************-->
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/cautionRuleItemsBaseStyle"
+                android:layout_gravity="center"
+                android:layout_marginTop="26dp">
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="38dp"
+                    android:background="@drawable/caution_hand" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/rule7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cautionRule7"
+                        android:textColor="#9492d3"
+                        android:textSize="18dp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="#bfbee5" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/btnBack"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/s_btn_caution_back">
+
+                <TextView
+                    android:id="@+id/txtBtnBack"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/cancel"
+                    android:textColor="#fff"
+                    android:textSize="15sp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/btnStart"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/s_btn_caution_start">
+
+                    <TextView
+                        android:id="@+id/txtBtnStart"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="@string/camStart"
+                        android:textColor="#000"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:background="@drawable/check_box"
+                        android:button="@null" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txtCheck1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/txtCheck1"
+                            android:textColor="#807b00"
+                            android:textSize="10sp" />
+
+                        <TextView
+                            android:id="@+id/txtCheck2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/txtCheck2"
+                            android:textColor="#807b00"
+                            android:textSize="10sp" />
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <include layout="@layout/common_footer" />
+
+    </LinearLayout>
+
+
+    <LinearLayout style="@style/fabBaseStyle">
+
+        <include layout="@layout/floaing_btn" />
+
+
+    </LinearLayout>
+
+</FrameLayout>
