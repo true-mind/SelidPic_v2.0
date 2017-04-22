@@ -1,6 +1,7 @@
 package com.truemind.selidpic_v20.ui;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -17,6 +18,8 @@ import android.widget.Toast;
 import com.truemind.selidpic_v20.BaseActivity;
 import com.truemind.selidpic_v20.Constants;
 import com.truemind.selidpic_v20.R;
+
+import util.UserSizeDialog;
 
 public class MainActivity extends BaseActivity {
 
@@ -78,6 +81,7 @@ public class MainActivity extends BaseActivity {
 
     }
 
+
     public void initListener(){
 
         btn1.setOnClickListener(new View.OnClickListener() {
@@ -93,10 +97,13 @@ public class MainActivity extends BaseActivity {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                UserSizeDialog dialog = new UserSizeDialog(getContext());
+                dialog.show();
+                /*
                 Intent intent = new Intent(getContext(), CautionActivity.class);
                 intent.putExtra("type", Constants.PHOTO_TYPE2);
                 startActivity(intent);
-                finish();
+                finish();*/
             }
         });
 

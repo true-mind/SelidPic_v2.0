@@ -17,6 +17,7 @@
         </activity>
 
         <activity android:name=".ui.CautionActivity"/>
+        <activity android:name="util.UserSizeDialog"/>
     </application>
 
 </manifest>
