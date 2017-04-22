@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -30,6 +31,7 @@ public class MainActivity extends BaseActivity {
     private LinearLayout btn5;
     private LinearLayout btn6;
 
+    /**for onBackPress*/
     private final long FINISH_INTERVAL_TIME = 2000;
     private long backPressedTime = 0;
 
@@ -46,6 +48,7 @@ public class MainActivity extends BaseActivity {
         floatingListener(getContext());
     }
 
+    /**View initiating, get all textview for typekit*/
     public void initView(){
 
         btn1 = (LinearLayout) findViewById(R.id.main_btn1);
@@ -78,10 +81,9 @@ public class MainActivity extends BaseActivity {
                 mTxtBtn4Size, mTxtBtn4Size2, mTxtBtn4Name, mTxtBtn5Size, mTxtBtn5Size2, mTxtBtn5Name,
                 mTxtBtn2, mTxtBtn6);
 
-
     }
 
-
+    /**initiating listener*/
     public void initListener(){
 
         btn1.setOnClickListener(new View.OnClickListener() {
@@ -97,13 +99,22 @@ public class MainActivity extends BaseActivity {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UserSizeDialog dialog = new UserSizeDialog(getContext());
+                final UserSizeDialog dialog = new UserSizeDialog(getContext());
+                dialog.setOnCloseListener(new UserSizeDialog.OnCloseListener() {
+                    @Override
+                    public void onClose(int which, Object data) {
+                        /** 1 for confirm, -1, 2 for cancel*/
+                        if(which==1){
+                            Intent intent = new Intent(getContext(), CautionActivity.class);
+                            intent.putExtra("type", Constants.PHOTO_TYPE2);
+                            startActivity(intent);
+                            finish();
+                        }else{
+                         Log.d("MyTag", getString(R.string.userCancel));
+                        }
+                    }
+                });
                 dialog.show();
-                /*
-                Intent intent = new Intent(getContext(), CautionActivity.class);
-                intent.putExtra("type", Constants.PHOTO_TYPE2);
-                startActivity(intent);
-                finish();*/
             }
         });
 
@@ -144,8 +155,6 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-
-
     }
 
     @Override
@@ -159,7 +168,7 @@ public class MainActivity extends BaseActivity {
         else
         {
             backPressedTime = tempTime;
-            Toast.makeText(getContext(), "\"Back\"버튼 을 한번 더 눌러 종료",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "\"Back\"버튼 을 한번 더 눌러 SelidPic을 종료",Toast.LENGTH_SHORT).show();
         }
     }
 

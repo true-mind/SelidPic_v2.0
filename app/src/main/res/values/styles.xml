@@ -69,6 +69,7 @@
         <item name="android:layout_height">30dp</item>
         <item name="android:background">#fff</item>
         <item name="android:textColor">#000</item>
+        <item name="android:inputType">numberDecimal</item>
         <item name="android:textColorHint">#c3f9d9</item>
         <item name="android:textSize">15sp</item>
         <item name="android:hint">@string/mm</item>

@@ -3,6 +3,7 @@ package com.truemind.selidpic_v20.ui;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -26,7 +27,9 @@ public class CautionActivity extends BaseActivity {
         setContentView(R.layout.activity_caution);
 
         getIntent().getStringExtra("type");
-        Toast.makeText(getContext(), getIntent().getStringExtra("type"), Toast.LENGTH_SHORT).show();
+
+        Log.d("MyTag", getIntent().getStringExtra("type"));
+
 
         initView();
         initListener();

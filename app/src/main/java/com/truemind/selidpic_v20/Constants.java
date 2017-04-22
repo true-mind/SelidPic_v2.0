@@ -14,8 +14,8 @@ public class Constants {
     public static final int PHOTO_TYPE1_WIDTH = 25;
     public static final int PHOTO_TYPE1_HEIGHT = 30;
 
-    public static int PHOTO_TYPE2_WIDTH;
-    public static int PHOTO_TYPE2_HEIGHT;
+    public static int PHOTO_TYPE2_WIDTH = 0;
+    public static int PHOTO_TYPE2_HEIGHT = 0;
 
     public static final int PHOTO_TYPE3_WIDTH = 30;
     public static final int PHOTO_TYPE3_HEIGHT = 40;

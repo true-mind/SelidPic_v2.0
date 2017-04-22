@@ -48,6 +48,13 @@ public abstract class BaseActivity extends Activity {
     protected abstract void initListener();
 */
 
+    /**
+     * Typeface로 폰트 적용
+     * (배민 주아체로 적용)
+     *
+     * @param views 적용을 원하는 모든 TextView
+     *              ,로 구분하여 무제한 개수의 동시 적용 가능
+     * */
     public void setFontToViewBold(TextView... views) {
         Typeface NanumNormal = Typeface.createFromAsset(this.getAssets(), "BMJUA_ttf.ttf");
 
@@ -55,6 +62,13 @@ public abstract class BaseActivity extends Activity {
             view.setTypeface(NanumNormal);
     }
 
+    /**
+     * Typeface로 폰트 적용
+     * (배민 도현체로 적용)
+     *
+     * @param views 적용을 원하는 모든 TextView
+     *              ,로 구분하여 무제한 개수의 동시 적용 가능
+     * */
     public void setFontToViewBold2(TextView... views) {
         Typeface NanumNormal = Typeface.createFromAsset(this.getAssets(), "BMDOHYEON_ttf.ttf");
 
@@ -62,6 +76,11 @@ public abstract class BaseActivity extends Activity {
             view.setTypeface(NanumNormal);
     }
 
+    /**
+     * footer initiating
+     * 공통 footer TextView의 typekit 적용.
+     *
+     * */
     public void initFooter(){
 
         txtFooter = (TextView)findViewById(R.id.txtFooter);
@@ -69,6 +88,11 @@ public abstract class BaseActivity extends Activity {
 
     }
 
+    /**
+     * fab initiating
+     * 공통 fab의 resource및 객체 연결
+     *
+     * */
     public void initFloating(){
 
         fab_btn = (ImageButton) findViewById(R.id.fab_btn);
@@ -83,6 +107,9 @@ public abstract class BaseActivity extends Activity {
         fab_btn_unselected = getResources().getDrawable(R.drawable.main_fbtn);
     }
 
+    /**
+     * fab 메뉴 open - close의 상태 변환
+     * */
     public boolean closeMenu(){
         fab_home_base.setVisibility(View.GONE);
         fab_gallery_base.setVisibility(View.GONE);
@@ -93,6 +120,9 @@ public abstract class BaseActivity extends Activity {
         return false;
     }
 
+    /**
+     * fab 메뉴 close - open의 상태 변환
+     * */
     public boolean openMenu(){
         fab_home_base.setVisibility(View.VISIBLE);
         fab_gallery_base.setVisibility(View.VISIBLE);
@@ -104,6 +134,14 @@ public abstract class BaseActivity extends Activity {
 
     }
 
+    /**
+     * fab item의 listener 등록
+     *
+     * 현재는 toast 연결되어있음
+     * @param context 해당 context는 listener를 BaseActivity를 상속받는 Activity에서
+     *                floatingListener를 호출할 때, getContext로 context를 받아넣어 호출
+     *
+     * */
     public void floatingListener(final Context context){
         fab_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,6 +179,10 @@ public abstract class BaseActivity extends Activity {
         });
     }
 
+    /**
+     * 현재 context를 불러오기
+     * @return activity
+     * */
     public Activity getContext()
     {
         return this;
