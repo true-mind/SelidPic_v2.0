@@ -20,6 +20,7 @@ import com.truemind.selidpic_v20.BaseActivity;
 import com.truemind.selidpic_v20.Constants;
 import com.truemind.selidpic_v20.R;
 
+import util.CommonDialog;
 import util.UserSizeDialog;
 
 public class MainActivity extends BaseActivity {
@@ -43,6 +44,7 @@ public class MainActivity extends BaseActivity {
         initFooter();
         initFloating();
         floatingListener(getContext());
+        CommonDialog dialog = new CommonDialog();
     }
 
     /**View initiating, get all textviews for typekit*/
@@ -165,7 +167,7 @@ public class MainActivity extends BaseActivity {
         else
         {
             backPressedTime = tempTime;
-            Toast.makeText(getContext(), "\"Back\"버튼 을 한번 더 눌러 SelidPic을 종료",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), R.string.exitMessage,Toast.LENGTH_SHORT).show();
         }
     }
 

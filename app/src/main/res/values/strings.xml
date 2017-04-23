@@ -35,4 +35,5 @@
     <string name="userSizeRule">가로 크기는 세로 크기보다 작아야 합니다</string>
     <string name="userCancel">사용자에 의해 취소됨</string>
     <string name="multiply">" x "</string>
+    <string name="exitMessage">\"Back\"버튼 을 한번 더 눌러 SelidPic을 종료</string>
 </resources>

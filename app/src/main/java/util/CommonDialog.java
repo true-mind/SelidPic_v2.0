@@ -44,7 +44,7 @@ public class CommonDialog {
      * 확인 버튼만 가지고 있음(버튼 1개), title 없음
      */
     public Dialog showDialog(Context context, String message) {
-        return showDialog(context, null, message, true, "확인");
+        return showDialog(context, "", message, true, "확인");
     }
 
     /**
@@ -88,7 +88,7 @@ public class CommonDialog {
 
         setFontToViewBold(context, mTitle, txtBtn1, txtBtn2, mMessage);
 
-        if (title.equals(null)) {
+        if (title.equals("")) {
             titleBase.setVisibility(View.GONE);
         } else {
             titleBase.setVisibility(View.VISIBLE);
