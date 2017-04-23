@@ -172,6 +172,7 @@ public abstract class BaseActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, "gallery", Toast.LENGTH_SHORT).show();
+                
             }
         });
 
