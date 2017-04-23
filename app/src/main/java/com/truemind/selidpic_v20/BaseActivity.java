@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.truemind.selidpic_v20.ui.GalleryActivity;
 import com.truemind.selidpic_v20.ui.MainActivity;
 
 /**
@@ -163,6 +164,11 @@ public abstract class BaseActivity extends Activity {
             public void onClick(View v) {
                 Toast.makeText(context, "home", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(context, MainActivity.class);
+                /**Flag - Clear Top
+                 * Clear Top으로 intent 실행 시 해당 intent 위의 모든 액티비티 스택을 지운다.
+                 * */
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent);
                 finish();
             }
@@ -171,8 +177,9 @@ public abstract class BaseActivity extends Activity {
         fab_gallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "gallery", Toast.LENGTH_SHORT).show();
-                
+                Intent intent = new Intent(context, GalleryActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
             }
         });
 
