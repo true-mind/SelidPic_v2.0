@@ -129,7 +129,7 @@
             <LinearLayout
                 android:id="@+id/confirm"
                 style="@style/sizeDialogBtnStyle"
-                android:background="#6a9a76">
+                android:background="@drawable/s_size_dialog_confim">
 
                 <TextView
                     android:id="@+id/txtConfirm"
@@ -141,7 +141,7 @@
             <LinearLayout
                 android:id="@+id/cancel"
                 style="@style/sizeDialogBtnStyle"
-                android:background="#ae7c7c"
+                android:background="@drawable/s_size_dialog_cancel"
                 android:layout_marginBottom="20dp">
 
                 <TextView
