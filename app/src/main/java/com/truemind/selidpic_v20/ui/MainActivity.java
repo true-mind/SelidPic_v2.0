@@ -31,9 +31,6 @@ public class MainActivity extends BaseActivity {
     private LinearLayout btn5;
     private LinearLayout btn6;
 
-    /**for onBackPress*/
-    private final long FINISH_INTERVAL_TIME = 2000;
-    private long backPressedTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +45,7 @@ public class MainActivity extends BaseActivity {
         floatingListener(getContext());
     }
 
-    /**View initiating, get all textview for typekit*/
+    /**View initiating, get all textviews for typekit*/
     public void initView(){
 
         btn1 = (LinearLayout) findViewById(R.id.main_btn1);

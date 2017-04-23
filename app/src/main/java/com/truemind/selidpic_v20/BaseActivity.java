@@ -34,6 +34,10 @@ public abstract class BaseActivity extends Activity {
     private Drawable fab_btn_unselected;
 
     public boolean isMenu = false;
+
+    /**for onBackPress*/
+    public final long FINISH_INTERVAL_TIME = 2000;
+    public long backPressedTime = 0;
 /*
 
     @Override
