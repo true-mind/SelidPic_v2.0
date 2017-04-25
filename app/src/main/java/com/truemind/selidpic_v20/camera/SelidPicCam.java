@@ -2,13 +2,19 @@ package com.truemind.selidpic_v20.camera;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.hardware.Camera;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
 import android.os.Bundle;
+import android.view.SurfaceHolder;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import com.truemind.selidpic_v20.BaseActivity;
 import com.truemind.selidpic_v20.Constants;
@@ -22,22 +28,17 @@ import util.CommonDialog;
 /**
  * Created by 현석 on 2017-04-24.
  */
-public class SelidPicCam extends BaseActivity {
+public class SelidPicCam extends BaseActivity implements SurfaceHolder.Callback, Camera.PreviewCallback, SensorEventListener {
 
     private TextView txtSize;
     private TextView txtType;
-    private TextView txtCurType;/*
-    private TextView txtManual;
-    private TextView txtAuto;
-    private RadioButton checkManual;
-    private RadioButton checkAuto;
-    private RadioGroup rdoBase;
-    private LinearLayout menu;*/
+    private TextView txtCurType;
     private ImageButton btnCam;
     private ImageButton btnBack;
     private ImageButton btnGallery;
 
-    //private boolean isTypeMenu = true;
+    private VideoView camView;
+
     private boolean isTypeManual = true;
     private String type;
     private int width;
@@ -61,18 +62,13 @@ public class SelidPicCam extends BaseActivity {
 
         txtType = (TextView) findViewById(R.id.txtType);
         txtSize = (TextView) findViewById(R.id.txtSize);
-        txtCurType = (TextView) findViewById(R.id.txtCurType);/*
-        txtManual = (TextView) findViewById(R.id.txtManual);
-        txtAuto = (TextView) findViewById(R.id.txtAuto);
-        checkManual = (RadioButton) findViewById(R.id.checkManual);
-        checkAuto = (RadioButton) findViewById(R.id.checkAuto);
-        rdoBase = (RadioGroup) findViewById(R.id.rdoBase);
-        menu = (LinearLayout) findViewById(R.id.menu);*/
+        txtCurType = (TextView) findViewById(R.id.txtCurType);
         btnCam = (ImageButton) findViewById(R.id.btnCam);
         btnBack = (ImageButton) findViewById(R.id.btnBack);
         btnGallery = (ImageButton) findViewById(R.id.btnGallery);
+        camView = (VideoView)findViewById(R.id.camView);
 
-        setFontToViewBold(txtType, txtSize, txtCurType);//, txtManual, txtAuto);
+        setFontToViewBold(txtType, txtSize, txtCurType);
 
         String size = width + getContext().getResources().getString(R.string.multiply) + height +
                 getContext().getResources().getString(R.string.mm);
@@ -86,7 +82,6 @@ public class SelidPicCam extends BaseActivity {
         txtCurType.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //isTypeMenu = modifiyTypeMenu(isTypeMenu);
                 if(isTypeManual){
                     txtCurType.setText("A");
                     txtCurType.setTextColor(getResources().getColor(R.color.colorAuto));
@@ -121,33 +116,8 @@ public class SelidPicCam extends BaseActivity {
                 cameraCancel();
             }
         });
-/*
-        rdoBase.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId) {
-                    case R.id.checkAuto:
-                        checkManual.setChecked(false);
-                        break;
-                    case R.id.checkManual:
-                        checkAuto.setChecked(false);
-                        break;
-                }
-            }
-        });*/
 
     }
-
-/*
-    public boolean modifiyTypeMenu(boolean isMenu) {
-
-        if (isMenu)
-            menu.setVisibility(View.GONE);
-        else
-            menu.setVisibility(View.VISIBLE);
-
-        return !isMenu;
-    }*/
 
     public void cameraCancel(){
 
@@ -170,4 +140,33 @@ public class SelidPicCam extends BaseActivity {
     }
 
 
+    @Override
+    public void surfaceCreated(SurfaceHolder holder) {
+
+    }
+
+    @Override
+    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+
+    }
+
+    @Override
+    public void surfaceDestroyed(SurfaceHolder holder) {
+
+    }
+
+    @Override
+    public void onPreviewFrame(byte[] data, Camera camera) {
+
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+    }
 }
