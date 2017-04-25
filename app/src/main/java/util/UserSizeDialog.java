@@ -3,7 +3,6 @@ package util;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -65,7 +64,7 @@ public class UserSizeDialog extends Dialog {
                         && edtHeight.getText().toString().length() > 0) {
                     if (Integer.parseInt(edtWidth.getText().toString()) <
                             Integer.parseInt(edtHeight.getText().toString())) {
-                        new Constants().writeUserTypeSize(Integer.parseInt(edtWidth.getText().toString()),
+                        new Constants().setUserTypeSize(Integer.parseInt(edtWidth.getText().toString()),
                                 Integer.parseInt(edtHeight.getText().toString()));
                         if (mListener != null)
                             mListener.onClose(BUTTON1, null);

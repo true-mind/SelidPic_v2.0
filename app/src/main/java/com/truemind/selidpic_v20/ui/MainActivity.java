@@ -44,7 +44,6 @@ public class MainActivity extends BaseActivity {
         initFooter();
         initFloating();
         floatingListener(getContext());
-        CommonDialog dialog = new CommonDialog();
     }
 
     /**View initiating, get all textviews for typekit*/

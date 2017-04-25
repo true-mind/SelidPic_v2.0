@@ -39,7 +39,7 @@ import util.CommonDialog;
  * Users have to grant their permission due to accessibility,
  * and provider (application) must check it's permission matter, periodically.
  *
- * Using PhotoView, Apache licensed
+ * Using PhotoView, Apache licensed on ChrisBanes
  *
  */
 public class GalleryActivity extends BaseActivity {

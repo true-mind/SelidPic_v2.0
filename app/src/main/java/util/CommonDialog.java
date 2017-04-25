@@ -51,14 +51,14 @@ public class CommonDialog {
      * 확인 버튼만 가지고 있음(버튼 1개), title 있음
      */
     public Dialog showDialog(Context context, String message, boolean cancelable) {
-        return showDialog(context, null, message, cancelable, "확인");
+        return showDialog(context, "", message, cancelable, "확인");
     }
 
     /**
      * title없는 dialog의 경우
      */
     public Dialog showDialog(Context context, String message, boolean cancelable, String... btns) {
-        return showDialog(context, null, message, cancelable, btns);
+        return showDialog(context, "", message, cancelable, btns);
     }
 
     /**
@@ -75,7 +75,7 @@ public class CommonDialog {
 
     public Dialog showDialog(Context context, String title, String message, boolean cancelable, String... btns) {
 
-        final Dialog dialog = new Dialog(context, R.style.AppTheme);
+        final Dialog dialog = new Dialog(context, R.style.AppThemeTranslucent);
         dialog.setContentView(R.layout.common_dialog);
 
         LinearLayout titleBase = (LinearLayout) dialog.findViewById(R.id.titleBase);

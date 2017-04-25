@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <VideoView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/camView"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="22dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtType"
+                android:layout_marginTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#fff"
+                android:textSize="24sp"
+                android:text="사용자 지정 규격" />
+
+            <TextView
+                android:id="@+id/txtSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#fff"
+                android:textSize="14sp"
+                android:text="25 x 35 mm" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_gravity="bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            
+            <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:background="@drawable/s_btn_back"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/btnCam"
+                    android:layout_gravity="center"
+                    android:layout_width="120dp"
+                    android:layout_height="42dp"
+                    android:background="@drawable/s_cam_btn"/>
+
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/btnGallery"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:background="@drawable/s_btn_gallery"/>
+            
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_margin="22dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!--<include layout="@layout/cam_type"/>-->
+
+        <TextView
+            android:id="@+id/txtCurType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:textColor="#e0dfd9"
+            android:textSize="50sp"
+            android:text="M" />
+
+        <ImageButton
+            android:id="@+id/btnSetting"
+            android:layout_gravity="end"
+            android:layout_marginTop="15dp"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:background="@drawable/cam_setting"/>
+
+    </LinearLayout>
+
+</FrameLayout>

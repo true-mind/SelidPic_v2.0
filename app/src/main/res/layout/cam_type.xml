@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:minHeight="60dp"
+    android:layout_gravity="end"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/menu"
+        android:layout_width="125dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:background="@drawable/cam_type_menu">
+
+        <RadioGroup
+            android:id="@+id/rdoBase"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/checkManual"
+                    android:checked="true"
+                    style="@style/camTypeMenuCheckStyle"/>
+
+                <TextView
+                    android:id="@+id/txtManual"
+                    style="@style/camTypeMenuTextStyle"
+                    android:text="@string/manual"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/checkAuto"
+                    style="@style/camTypeMenuCheckStyle"/>
+
+                <TextView
+                    android:id="@+id/txtAuto"
+                    style="@style/camTypeMenuTextStyle"
+                    android:text="@string/auto"/>
+
+            </LinearLayout>
+
+        </RadioGroup>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtCurType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:text="M"
+        android:textColor="#e0dfd9"
+        android:textSize="48sp" />
+
+</LinearLayout>

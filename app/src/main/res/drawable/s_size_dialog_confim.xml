@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:state_pressed="true" android:drawable="@drawable/s_size_confirm"/>
+    <item android:state_pressed="true" android:drawable="@drawable/size_confirm_s"/>
     <item android:drawable="@drawable/size_confirm"/>
 
 </selector>
