@@ -1,5 +1,7 @@
 package com.truemind.selidpic_v20.ui;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
@@ -11,6 +13,9 @@ import android.widget.TextView;
 import com.truemind.selidpic_v20.BaseActivity;
 import com.truemind.selidpic_v20.Constants;
 import com.truemind.selidpic_v20.R;
+import com.truemind.selidpic_v20.camera.SelidPicCam;
+
+import util.CommonDialog;
 
 /**
  * Created by 현석 on 2017-04-27.
@@ -112,6 +117,13 @@ public class TouchtoolActivity extends BaseActivity{
     }
 
     public void initListener(){
+        btnHelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CommonDialog dialog = new CommonDialog();
+                dialog.showDialog(getContext(), getResources().getString(R.string.help), getResources().getString(R.string.helper));
+            }
+        });
         btnDraw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -156,4 +168,20 @@ public class TouchtoolActivity extends BaseActivity{
         });
     }
 
+    public void onBackPressed() {
+
+        CommonDialog dialog = new CommonDialog();
+        dialog.setOnCloseListener(new CommonDialog.OnCloseListener() {
+            @Override
+            public void onClose(DialogInterface dialog, int which, Object data) {
+                if(which==1){
+                    Intent intent = new Intent(getContext(), SelidPicCam.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        });
+        dialog.showDialog(getContext(), "작업을 끝내시겠습니까?\n현재까지의 작업 내역은 저장되지 않습니다.", true, "확인", "취소");
+
+    }
 }

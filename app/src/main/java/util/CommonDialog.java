@@ -50,8 +50,8 @@ public class CommonDialog {
     /**
      * 확인 버튼만 가지고 있음(버튼 1개), title 있음
      */
-    public Dialog showDialog(Context context, String message, boolean cancelable) {
-        return showDialog(context, "", message, cancelable, "확인");
+    public Dialog showDialog(Context context, String title, String message) {
+        return showDialog(context, title, message, true, "확인");
     }
 
     /**

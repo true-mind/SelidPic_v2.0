@@ -132,7 +132,7 @@ public class SelidPicCam extends BaseActivity implements SurfaceHolder.Callback,
                 }
             }
         });
-        dialog.showDialog(getContext(), "촬영을 취소하겠습니까?", true, "확인", "취소");
+        dialog.showDialog(getContext(), "촬영을 취소하시겠습니까?", true, "확인", "취소");
     }
 
     public void onBackPressed() {
