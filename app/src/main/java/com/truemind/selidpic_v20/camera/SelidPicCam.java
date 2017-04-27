@@ -10,9 +10,6 @@ import android.os.Bundle;
 import android.view.SurfaceHolder;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.VideoView;
 
@@ -21,7 +18,7 @@ import com.truemind.selidpic_v20.Constants;
 import com.truemind.selidpic_v20.R;
 import com.truemind.selidpic_v20.ui.CautionActivity;
 import com.truemind.selidpic_v20.ui.GalleryActivity;
-import com.truemind.selidpic_v20.ui.MainActivity;
+import com.truemind.selidpic_v20.ui.TouchtoolActivity;
 
 import util.CommonDialog;
 
@@ -51,7 +48,7 @@ public class SelidPicCam extends BaseActivity implements SurfaceHolder.Callback,
 
         type = new Constants().getCurrentPhotoType();
         width = new Constants().getCurrentPhotoWidth();
-        height = new Constants().getCurrentPhotoHeigth();
+        height = new Constants().getCurrentPhotoHeight();
 
         initView();
         initListener();
@@ -97,6 +94,9 @@ public class SelidPicCam extends BaseActivity implements SurfaceHolder.Callback,
         btnCam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(getContext(), TouchtoolActivity.class);
+                startActivity(intent);
+                finish();
 
             }
         });

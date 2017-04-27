@@ -159,6 +159,13 @@
         <item name="android:gravity">center</item>
     </style>
 
+    <style name="touchtoolSubTitleBaseStyle2">
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_width">150dp</item>
+        <item name="android:layout_height">28dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
     <style name="touchtoolSubTitleTextStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -194,6 +201,8 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">16dp</item>
         <item name="android:gravity">center</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:progress">0</item>
         <item name="android:secondaryProgress">0</item>
@@ -211,10 +220,42 @@
     </style>
 
     <style name="toolSizeViewStyle">
-        <item name="android:layout_marginTop">4dp</item>
         <item name="android:layout_width">42dp</item>
         <item name="android:layout_height">42dp</item>
         <item name="android:background">@drawable/tool_size</item>
+    </style>
+
+    <style name="preparedBackgroundPreviewStyle">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">64dp</item>
+        <item name="android:background">@null</item>
+        <item name="android:scaleType">centerCrop</item>
+    </style>
+
+    <style name="imageSaveOrShareBtnStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:background">@drawable/s_btn_image_sos</item>
+    </style>
+
+    <style name="imageSaveOrShareBtnOnRightStyle">
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:background">@drawable/s_btn_image_sos</item>
+    </style>
+
+    <style name="imageSaveOrShareTxtStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#fff</item>
     </style>
 
 </resources>

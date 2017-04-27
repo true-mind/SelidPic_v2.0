@@ -43,7 +43,7 @@ public class Constants {
         return PHOTO_CURRENT_WIDTH;
     }
 
-    public int getCurrentPhotoHeigth() {
+    public int getCurrentPhotoHeight() {
         return PHOTO_CURRENT_HEIGTH;
     }
 

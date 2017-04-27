@@ -1,13 +1,11 @@
 package com.truemind.selidpic_v20.ui;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.truemind.selidpic_v20.BaseActivity;
 import com.truemind.selidpic_v20.Constants;
@@ -38,7 +36,7 @@ public class CautionActivity extends BaseActivity {
 
         Log.d("MyTag", new Constants().getCurrentPhotoType());
         Log.d("MyTag", Integer.toString(new Constants().getCurrentPhotoWidth()));
-        Log.d("MyTag", Integer.toString(new Constants().getCurrentPhotoHeigth()));
+        Log.d("MyTag", Integer.toString(new Constants().getCurrentPhotoHeight()));
 
         initView();
         initListener();

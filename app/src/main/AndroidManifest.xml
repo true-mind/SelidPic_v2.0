@@ -25,6 +25,7 @@
 
         <activity android:name=".ui.CautionActivity"/>
         <activity android:name=".ui.GalleryActivity"/>
+        <activity android:name=".ui.TouchtoolActivity"/>
         <activity android:name=".camera.SelidPicCam"/>
     </application>
 

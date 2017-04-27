@@ -38,4 +38,17 @@
     <string name="exitMessage">\"Back\"버튼 을 한번 더 눌러 SelidPic을 종료</string>
     <string name="auto">Auto</string>
     <string name="manual">Manual</string>
+    <string name="imageEdit">이미지 편집</string>
+    <string name="draw">그리기</string>
+    <string name="erase">지우기</string>
+    <string name="changeBack">배경 바꾸기</string>
+    <string name="getBack">배경 가져오기</string>
+    <string name="imageSaveOrShare">이미지 저장 및 공유</string>
+    <string name="imageSave">사진 저장</string>
+    <string name="imageCompare">원본과 비교</string>
+    <string name="imageShare">사진 공유</string>
+    <string name="imageReplay">다시 찍기</string>
+    <string name="txtTouchtoolCheck1">사진을 저장할 때</string>
+    <string name="txtTouchtoolCheck2">원본을 함께 저장하기</string>
+    <string name="help">잘 모르겠어요</string>
 </resources>
