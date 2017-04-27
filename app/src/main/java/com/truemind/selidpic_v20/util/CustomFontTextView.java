@@ -1,4 +1,4 @@
-package util;
+package com.truemind.selidpic_v20.util;
 
 import android.annotation.TargetApi;
 import android.content.Context;

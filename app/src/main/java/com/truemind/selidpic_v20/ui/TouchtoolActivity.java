@@ -15,7 +15,7 @@ import com.truemind.selidpic_v20.Constants;
 import com.truemind.selidpic_v20.R;
 import com.truemind.selidpic_v20.camera.SelidPicCam;
 
-import util.CommonDialog;
+import com.truemind.selidpic_v20.util.CommonDialog;
 
 /**
  * Created by 현석 on 2017-04-27.

@@ -1,4 +1,4 @@
-package util;
+package com.truemind.selidpic_v20.util;
 
 import android.app.Dialog;
 import android.content.Context;

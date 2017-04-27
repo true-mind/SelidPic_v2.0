@@ -16,20 +16,16 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.truemind.selidpic_v20.BaseActivity;
 import com.truemind.selidpic_v20.R;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.net.URL;
 
-import uk.co.senab.photoview.PhotoView;
 import uk.co.senab.photoview.PhotoViewAttacher;
-import util.CommonDialog;
+import com.truemind.selidpic_v20.util.CommonDialog;
 
 /**
  * Created by 현석 on 2017-04-24.

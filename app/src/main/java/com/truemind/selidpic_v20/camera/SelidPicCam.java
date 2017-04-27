@@ -20,7 +20,7 @@ import com.truemind.selidpic_v20.ui.CautionActivity;
 import com.truemind.selidpic_v20.ui.GalleryActivity;
 import com.truemind.selidpic_v20.ui.TouchtoolActivity;
 
-import util.CommonDialog;
+import com.truemind.selidpic_v20.util.CommonDialog;
 
 /**
  * Created by 현석 on 2017-04-24.
