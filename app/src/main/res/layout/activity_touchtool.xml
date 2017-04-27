@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/common_back">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_margin="30dp"
+            android:layout_marginBottom="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/titleName"
+                    style="@style/touchtoolTitleTextStyle"
+                    android:textSize="30sp"
+                    android:text="사용자 정의 규격"/>
+
+                <TextView
+                    android:id="@+id/titleSize"
+                    android:layout_marginLeft="5dp"
+                    style="@style/touchtoolTitleTextStyle"
+                    android:textSize="14sp"
+                    android:text="25 x 35 mm"/>
+            </LinearLayout>
+
+            <ImageView
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:background="@drawable/imageview_border"
+                android:src="@drawable/final_default"/>
+
+
+            <LinearLayout
+                style="@style/touchtoolSubTitleBaseStyle"
+                android:background="#414d41">
+
+                <TextView
+                    android:id="@+id/subTitle1"
+                    style="@style/touchtoolSubTitleTextStyle"
+                    android:text="이미지 편집"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        style="@style/touchtoolEditItemBtnStyle"
+                        android:background="@drawable/s_btn_draw">
+                        <TextView
+                            android:id="@+id/txtDraw"
+                            style="@style/touchtoolEditItemTextStyle"
+                            android:text="그리기"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        style="@style/touchtoolSeekbarBaseStyle"
+                        android:orientation="vertical">
+
+                        <include layout="@layout/seekbar_num"/>
+
+                        <SeekBar
+                            android:id="@+id/seekBarDraw"
+                            style="@style/seekbar"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/toolSizeTextStyle"
+                            android:id="@+id/toolSize"/>
+
+                        <ImageView
+                            style="@style/toolSizeViewStyle"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        style="@style/touchtoolEditItemBtnStyle"
+                        android:background="@drawable/s_btn_erase">
+                        <TextView
+                            style="@style/touchtoolEditItemTextStyle"
+                            android:text="지우기"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        style="@style/touchtoolSeekbarBaseStyle"
+                        android:orientation="vertical">
+
+                        <include layout="@layout/seekbar_num"/>
+
+                        <SeekBar
+                            android:id="@+id/seekBarErase"
+                            style="@style/seekbar"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/toolSizeTextStyle"
+                            android:id="@+id/toolSize2"/>
+
+                        <ImageView
+                            style="@style/toolSizeViewStyle"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/touchtoolSubTitleBaseStyle"
+                android:background="#41414d">
+
+                <TextView
+                    android:id="@+id/subTitle2"
+                    style="@style/touchtoolSubTitleTextStyle"
+                    android:text="배경 바꾸기"/>
+
+            </LinearLayout>
+
+
+
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
+
+
+
+
+
+
+
+
+
+    <include layout="@layout/common_footer" />
+    <LinearLayout style="@style/fabBaseStyle">
+        <include layout="@layout/floaing_btn" />
+    </LinearLayout>
+
+</FrameLayout>

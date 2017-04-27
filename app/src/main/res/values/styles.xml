@@ -145,4 +145,76 @@
         <item name="android:background">@drawable/check_box</item>
     </style>
 
+    <style name="touchtoolTitleTextStyle">
+        <item name="android:layout_gravity">bottom</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#000</item>
+    </style>
+
+    <style name="touchtoolSubTitleBaseStyle">
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:layout_width">150dp</item>
+        <item name="android:layout_height">28dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="touchtoolSubTitleTextStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">#fff</item>
+    </style>
+
+    <style name="touchtoolEditItemBtnStyle">
+        <item name="android:layout_width">42dp</item>
+        <item name="android:layout_height">42dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    <style name="touchtoolEditItemTextStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">#fff</item>
+    </style>
+
+    <style name="touchtoolSeekbarBaseStyle">
+        <item name="android:layout_marginLeft">8dp</item>
+        <item name="android:layout_marginRight">8dp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    <style name="seekbar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">16dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:progress">0</item>
+        <item name="android:secondaryProgress">0</item>
+        <item name="android:progressDrawable">@drawable/progress_drawable</item>
+        <item name="android:thumb">@drawable/tool_size_btn</item>
+    </style>
+
+    <style name="toolSizeTextStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">#000</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:text">size</item>
+    </style>
+
+    <style name="toolSizeViewStyle">
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:layout_width">42dp</item>
+        <item name="android:layout_height">42dp</item>
+        <item name="android:background">@drawable/tool_size</item>
+    </style>
+
 </resources>
