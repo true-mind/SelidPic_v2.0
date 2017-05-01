@@ -137,7 +137,7 @@ public class Compose {
         int photoW = options.outHeight;
         int photoH = options.outWidth;
 
-        //Determine how much to scale down the image
+        //Determine how much to alpha down the image
         int scaleFactor = Math.min(photoW/targetW, photoH/targetH);
 
         //Decode the image file into a Bitmap sized to fill the View

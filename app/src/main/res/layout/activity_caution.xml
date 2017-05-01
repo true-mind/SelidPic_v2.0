@@ -35,7 +35,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:text="증명사진 규정"
+                    android:text="@string/ruleTitle"
                     android:textColor="#bf1a20"
                     android:textSize="28sp" />
 
@@ -220,6 +220,7 @@
                     android:orientation="horizontal">
 
                     <CheckBox
+                        android:id="@+id/checkBox"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:background="@drawable/check_box"

@@ -87,10 +87,20 @@ public abstract class BaseActivity extends Activity {
      *
      * */
     public void initFooter(){
-
         txtFooter = (TextView)findViewById(R.id.txtFooter);
         setFontToViewBold(txtFooter);
+    }
 
+    /**
+     * footer initiating
+     * 공통 footer TextView의 typekit 적용.
+     * color white
+     *
+     * */
+    public void initFooterWhite(){
+        txtFooter = (TextView)findViewById(R.id.txtFooter);
+        txtFooter.setTextColor(getResources().getColor(R.color.colorWhite));
+        setFontToViewBold(txtFooter);
     }
 
     /**

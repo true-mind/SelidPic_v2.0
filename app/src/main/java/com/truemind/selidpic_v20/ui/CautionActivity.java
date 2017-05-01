@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -19,7 +20,7 @@ public class CautionActivity extends BaseActivity {
 
     private LinearLayout btnStart;
     private LinearLayout btnBack;
-
+    private CheckBox checkBox;
     private String type;
 
     @Override
@@ -65,6 +66,13 @@ public class CautionActivity extends BaseActivity {
 
         btnBack = (LinearLayout) findViewById(R.id.btnBack);
         btnStart = (LinearLayout) findViewById(R.id.btnStart);
+
+        checkBox = (CheckBox)findViewById(R.id.checkBox);
+        if(Constants.camManualGuide){
+            checkBox.setChecked(false);
+        }else{
+            checkBox.setChecked(true);
+        }
 
         setFontToViewBold(rule1, rule2, rule3, rule4, rule5, rule6, rule7, txtBtnBack, txtBtnStart, txtCheck1, txtCheck2);
         setFontToViewBold2(rule);
@@ -131,6 +139,11 @@ public class CautionActivity extends BaseActivity {
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(checkBox.isChecked()){
+                    Constants.camManualGuide = false;
+                }else{
+                    Constants.camManualGuide = true;
+                }
                 Intent intent = new Intent(getContext(), SelidPicCam.class);
                 startActivity(intent);
                 finish();

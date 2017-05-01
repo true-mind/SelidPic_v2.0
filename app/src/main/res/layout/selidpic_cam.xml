@@ -77,10 +77,18 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_margin="22dp"
+    <View
+        android:id="@+id/cam_guide"
+        android:visibility="gone"
+        android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/cam_guide"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="22dp"
         android:orientation="vertical">
 
         <!--<include layout="@layout/cam_type"/>-->
@@ -90,17 +98,140 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
+            android:text="M"
             android:textColor="#e0dfd9"
-            android:textSize="50sp"
-            android:text="M" />
+            android:textSize="50sp" />
 
         <ImageButton
             android:id="@+id/btnSetting"
-            android:layout_gravity="end"
-            android:layout_marginTop="15dp"
             android:layout_width="34dp"
             android:layout_height="34dp"
-            android:background="@drawable/cam_setting"/>
+            android:layout_gravity="end"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/cam_setting" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/manual_guide"
+        android:paddingLeft="16dp"
+        android:paddingBottom="22dp"
+        android:paddingTop="22dp"
+        android:paddingRight="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/back_trans70"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_marginTop="50dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="8dp"
+                    android:background="@drawable/manual_line"/>
+                <ImageView
+                    android:layout_marginTop="8dp"
+                    android:layout_width="76dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/manual1"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_gravity="end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_gravity="center"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:background="@drawable/manual2"/>
+
+                    <ImageView
+                        android:layout_marginLeft="15dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/manual_circle2" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_gravity="end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_gravity="center"
+                        android:layout_width="72dp"
+                        android:layout_height="20dp"
+                        android:background="@drawable/manual3"/>
+
+                    <ImageView
+                        android:layout_marginLeft="15dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/manual_circle3" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginBottom="60dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="20dp"
+                android:background="@drawable/manual4"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"/>
+
+            <ImageView
+                android:layout_width="55dp"
+                android:layout_height="20dp"
+                android:background="@drawable/manual5"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"/>
+
+            <ImageView
+                android:layout_width="66dp"
+                android:layout_height="20dp"
+                android:background="@drawable/manual6"/>
+
+        </LinearLayout>
+
 
     </LinearLayout>
 

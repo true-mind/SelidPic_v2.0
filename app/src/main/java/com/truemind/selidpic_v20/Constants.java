@@ -24,7 +24,7 @@ public class Constants {
     public static final int PHOTO_TYPE4_HEIGHT = 45;
 
     public static final int PHOTO_TYPE5_WIDTH = 50;
-    public static final int PHOTO_TYPE5_HEIGHT = 60;
+    public static final int PHOTO_TYPE5_HEIGHT = 70;
 
     public static String PHOTO_CURRENT_TYPE = "0";
     public static int PHOTO_CURRENT_WIDTH = 0;
@@ -52,6 +52,11 @@ public class Constants {
         PHOTO_CURRENT_WIDTH = width;
         PHOTO_CURRENT_HEIGTH = height;
     }
+
+    public static boolean camGuideValidate = false;
+    public static boolean camTitleInvalidate = false;
+    public static int camTimerTime = 5;
+    public static boolean camManualGuide = false;
 
 
 }
