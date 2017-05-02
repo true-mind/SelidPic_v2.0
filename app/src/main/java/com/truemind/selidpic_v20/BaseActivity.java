@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.truemind.selidpic_v20.ui.AboutActivity;
 import com.truemind.selidpic_v20.ui.GalleryActivity;
 import com.truemind.selidpic_v20.ui.MainActivity;
 
@@ -216,7 +217,9 @@ public abstract class BaseActivity extends Activity {
         fab_about.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "about", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context, AboutActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
             }
         });
     }

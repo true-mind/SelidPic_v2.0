@@ -149,7 +149,7 @@ public class UserSizeDialog extends Dialog {
         if (Constants.PHOTO_TYPE2_WIDTH > 0 && Constants.PHOTO_TYPE2_HEIGHT > 0) {
             SpannableString content = new SpannableString(Constants.PHOTO_TYPE2_WIDTH +
                     getContext().getResources().getString(R.string.multiply) + Constants.PHOTO_TYPE2_HEIGHT +
-                    getContext().getResources().getString(R.string.mm));
+            getContext().getResources().getString(R.string.mm));
             content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
             txtPreviousValue.setText(content);
             txtPreviousValue.setOnClickListener(new View.OnClickListener() {
