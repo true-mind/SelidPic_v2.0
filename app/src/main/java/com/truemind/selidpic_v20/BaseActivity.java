@@ -7,8 +7,11 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.PersistableBundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -124,11 +127,23 @@ public abstract class BaseActivity extends Activity {
 
     /**
      * fab 메뉴 open - close의 상태 변환
+     * animation 적용됨
+     * 적용된 animation 모두 작동 이후 각각의 item visibility 조정.
+     * 이 visibility 문제로 인해 0.3초 내에 on - off - on 반복 시 레이아웃에서 오류 발생
      * */
     public boolean closeMenu(){
-        fab_home_base.setVisibility(View.GONE);
-        fab_gallery_base.setVisibility(View.GONE);
-        fab_about_base.setVisibility(View.GONE);
+        Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.slide_reverse);
+        fab_home_base.startAnimation(animation);
+        fab_gallery_base.startAnimation(animation);
+        fab_about_base.startAnimation(animation);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                fab_home_base.setVisibility(View.GONE);
+                fab_gallery_base.setVisibility(View.GONE);
+                fab_about_base.setVisibility(View.GONE);
+            }
+        }, 300);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             fab_btn.setBackground(fab_btn_unselected);
         }
@@ -137,8 +152,13 @@ public abstract class BaseActivity extends Activity {
 
     /**
      * fab 메뉴 close - open의 상태 변환
+     * animation 적용됨
      * */
     public boolean openMenu(){
+        Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.slide);
+        fab_home_base.startAnimation(animation);
+        fab_gallery_base.startAnimation(animation);
+        fab_about_base.startAnimation(animation);
         fab_home_base.setVisibility(View.VISIBLE);
         fab_gallery_base.setVisibility(View.VISIBLE);
         fab_about_base.setVisibility(View.VISIBLE);

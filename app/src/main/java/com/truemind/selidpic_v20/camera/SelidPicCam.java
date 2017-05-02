@@ -78,7 +78,6 @@ public class SelidPicCam extends BaseActivity implements SurfaceHolder.Callback,
      * Autoshoot에서 사용되는 timer의 값도 기존 설정에 의한 constants를 불러와 사용
      */
     public void initView() {
-
         txtType = (TextView) findViewById(R.id.txtType);
         txtSize = (TextView) findViewById(R.id.txtSize);
         txtCurType = (TextView) findViewById(R.id.txtCurType);
@@ -88,6 +87,9 @@ public class SelidPicCam extends BaseActivity implements SurfaceHolder.Callback,
         btnSetting = (ImageButton) findViewById(R.id.btnSetting);
         camView = (VideoView) findViewById(R.id.camView);
         manualGuide = (LinearLayout) findViewById(R.id.manual_guide);
+        /**camManualDialog는 설정에서의 guide와는 다른 guide
+         * 만약 설정에서의 guide가 각 버튼에 대한 설명이라면
+         * 이 다이얼로그에서의 guide는 각 기능에 대한 설명(자세함)*/
         if (Constants.camManualGuide) {
             CamManualDialog dialog = new CamManualDialog(getContext());
             dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
@@ -96,7 +98,23 @@ public class SelidPicCam extends BaseActivity implements SurfaceHolder.Callback,
 
         camGuide = findViewById(R.id.cam_guide);
         camGuideUpdate();
+        settingUpdate();
 
+        setFontToViewBold(txtType, txtSize, txtCurType);
+
+        String size = width + getContext().getResources().getString(R.string.multiply) + height +
+                getContext().getResources().getString(R.string.mm);
+        txtType.setText(type);
+        txtSize.setText(size);
+    }
+
+    /**
+     * 현재 constants에 저장되어 있는 상수 혹은 조건에 맞춰
+     * 변경 사항 혹은 초기 설정으로 업데이트.
+     * view initiating 혹은 setting에서 설정 저장 시 호출
+     *
+     * */
+    public void settingUpdate(){
         if (Constants.camTitleInvalidate) {
             txtType.setVisibility(View.GONE);
             txtSize.setVisibility(View.GONE);
@@ -112,14 +130,6 @@ public class SelidPicCam extends BaseActivity implements SurfaceHolder.Callback,
         }
 
         timerTime = Constants.camTimerTime;
-
-        setFontToViewBold(txtType, txtSize, txtCurType);
-
-        String size = width + getContext().getResources().getString(R.string.multiply) + height +
-                getContext().getResources().getString(R.string.mm);
-        txtType.setText(type);
-        txtSize.setText(size);
-
     }
 
     /**
@@ -129,7 +139,6 @@ public class SelidPicCam extends BaseActivity implements SurfaceHolder.Callback,
      * match_parent 속성이 부여되지 않은 쪽은 사진 크기의 비율에 맞춰서 출력
      */
     public void camGuideUpdate() {
-
         DisplayMetrics dm = getApplicationContext().getResources().getDisplayMetrics();
         guideHeight = (dm.widthPixels * height) / width;
         guidewidth = (dm.heightPixels * width) / height;
@@ -145,8 +154,13 @@ public class SelidPicCam extends BaseActivity implements SurfaceHolder.Callback,
         camGuide.setLayoutParams(lp);
     }
 
+    /**listener initiating
+     * setting 버튼 클릭 시 setting dialog 출력
+     * setting dialog의 버튼에 따라 가이드가 출력되거나 현재 설정 값을 저장하는 것을 선택
+     * 가이드는 취소 버튼 혹은 뷰를 터치하면 해제되어 사라짐
+     * 설정 값 저장시 settingUpdate 호출
+     * */
     public void initListener() {
-
         txtCurType.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -172,21 +186,7 @@ public class SelidPicCam extends BaseActivity implements SurfaceHolder.Callback,
                     @Override
                     public void onClose(int which, Object data) {
                         if (which == 1) {
-                            if (Constants.camTitleInvalidate) {
-                                txtType.setVisibility(View.GONE);
-                                txtSize.setVisibility(View.GONE);
-                            } else {
-                                txtType.setVisibility(View.VISIBLE);
-                                txtSize.setVisibility(View.VISIBLE);
-                            }
-
-                            if (Constants.camGuideValidate) {
-                                camGuide.setVisibility(View.VISIBLE);
-                            } else {
-                                camGuide.setVisibility(View.GONE);
-                            }
-
-                            timerTime = Constants.camTimerTime;
+                            settingUpdate();
                         } else if (which == 2) {
                             manualGuide.setVisibility(View.VISIBLE);
                         }

@@ -1,5 +1,6 @@
 package com.truemind.selidpic_v20.util;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Typeface;
@@ -16,6 +17,7 @@ import android.widget.TextView;
  * low variability, highly simplify-able
  *
  */
+@SuppressLint("AppCompatCustomView")
 public class CustomFontTextView extends TextView {
 
     public CustomFontTextView(Context context) {

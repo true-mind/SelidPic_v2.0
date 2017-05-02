@@ -67,8 +67,8 @@
     <string name="manual3">우측 상단의 Setting에서 자동촬영 Timer의 제한시간을 설정할 수 있습니다.</string>
     <string name="manual4">우측 상단의 Setting에서 현재 규격에 맞춰 출력될 사진의 범위를 볼 수 있는 가이드를 활성화시킬 수 있습니다.</string>
     <string name="next">다음</string>
-    <string name="quater">1/4</string>
-    <string name="quater2">2/4</string>
-    <string name="quater3">3/4</string>
-    <string name="quater4">4/4</string>
+    <string name="quater">●○○○</string>
+    <string name="quater2">○●○○</string>
+    <string name="quater3">○○●○</string>
+    <string name="quater4">○○○●</string>
 </resources>
