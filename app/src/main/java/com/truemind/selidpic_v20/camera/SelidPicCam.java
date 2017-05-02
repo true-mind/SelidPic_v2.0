@@ -20,6 +20,7 @@ import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -63,6 +64,9 @@ public class SelidPicCam extends BaseActivity implements SensorEventListener {
     Camera camera;
     Preview preview;
 
+    private Handler handler;
+    private boolean b[];
+
     private TextView txtSize;
     private TextView txtType;
     private TextView txtCurType;
@@ -99,11 +103,35 @@ public class SelidPicCam extends BaseActivity implements SensorEventListener {
         initView();
         initListener();
         initSensor();
+        initHandler();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkPermission();
         } else {
             startCamera();
         }
+    }
+
+    private void initHandler() {
+        b = new boolean[3];
+        handler = new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                int value = msg.what;
+                b[value] = true;
+
+                boolean all_task_done = true;
+                for(int i=0;i<3;i++){
+                    if(!b[i]){
+                        all_task_done = false;
+                    }
+                }
+                if(all_task_done){
+                    Intent intent = new Intent(getContext(), TouchtoolActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            }
+        };
     }
 
     /**
@@ -373,19 +401,22 @@ public class SelidPicCam extends BaseActivity implements SensorEventListener {
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
             Constants.photoByteStream = stream.toByteArray();
-            Log.d(TAG, stream.toString());
+            handler.sendEmptyMessage(0);
+            //Log.d(TAG, stream.toString());
         }
     };
 
     Camera.ShutterCallback shutterCallback = new Camera.ShutterCallback() {
         public void onShutter() {
             Log.d(TAG, "onShutter'd");
+            handler.sendEmptyMessage(1);
         }
     };
 
     Camera.PictureCallback rawCallback = new Camera.PictureCallback() {
         public void onPictureTaken(byte[] data, Camera camera) {
             Log.d(TAG, "onPictureTaken - raw");
+            handler.sendEmptyMessage(2);
         }
     };
 
