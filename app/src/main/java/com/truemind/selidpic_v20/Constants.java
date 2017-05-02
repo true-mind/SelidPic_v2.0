@@ -53,10 +53,19 @@ public class Constants {
         PHOTO_CURRENT_HEIGTH = height;
     }
 
+    public static double photoWidth = 0;
+    public static double photoHeight = 0;
+
+    public void setFinalPhotoSize(int width, int height){
+        photoWidth = width;
+        photoHeight = height;
+    }
+
     public static boolean camGuideValidate = false;
     public static boolean camTitleInvalidate = false;
     public static int camTimerTime = 5;
     public static boolean camManualGuide = false;
 
+    public static byte[] photoByteStream;
 
 }

@@ -40,6 +40,8 @@ import com.truemind.selidpic_v20.util.CommonDialog;
  */
 public class GalleryActivity extends BaseActivity {
 
+    private static final String TAG = "MyTag";
+
     private String selectedImagePath;
     private static final int SELECT_PICTURE = 1;
     private static final int MY_PERMISSION_REQUEST_STORAGE = 1;
@@ -163,17 +165,17 @@ public class GalleryActivity extends BaseActivity {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
                 //퍼미션을 재요청 하는 경우 - 왜 이 퍼미션이 필요한지등을 대화창에 넣어서 사용자를 설득할 수 있다.
                 //대화상자에 '다시 묻지 않기' 체크박스가 자동으로 추가된다.
-                Log.d("MyTag", "퍼미션을 재요청 합니다.");
+                Log.d(TAG, "퍼미션을 재요청 합니다.");
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_PERMISSION_REQUEST_STORAGE);
 
             } else {
-                Log.d("MyTag", "첫 퍼미션 요청입니다.");
+                Log.d(TAG, "첫 퍼미션 요청입니다.");
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_PERMISSION_REQUEST_STORAGE);
             }
         } else {
             /** Access already granted (Permission granted)*/
 
-            Log.d("MyTag", "Permission is granted");
+            Log.d(TAG, "Permission is granted");
             Intent intent = new Intent();
             intent.setType("image/*");
             intent.setAction(Intent.ACTION_GET_CONTENT);

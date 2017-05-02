@@ -29,7 +29,6 @@ class Preview extends ViewGroup implements SurfaceHolder.Callback {
         super(context);
 
         mSurfaceView = sv;
-//        addView(mSurfaceView);
 
         mHolder = mSurfaceView.getHolder();
         mHolder.addCallback(this);
@@ -37,14 +36,17 @@ class Preview extends ViewGroup implements SurfaceHolder.Callback {
 
     }
 
+    /**
+     *
+     * Important: Call release() to release the camera for use by other
+     * applications. Applications should release the camera immediately
+     * during onPause() and re-open() it during onResume()).
+     *
+     * */
     public void setCamera(Camera camera) {
         if (mCamera != null) {
             // Call stopPreview() to stop updating the preview surface.
             mCamera.stopPreview();
-
-            // Important: Call release() to release the camera for use by other
-            // applications. Applications should release the camera immediately
-            // during onPause() and re-open() it during onResume()).
             mCamera.release();
             mCamera = null;
         }
@@ -79,11 +81,14 @@ class Preview extends ViewGroup implements SurfaceHolder.Callback {
 
     }
 
+    /**
+     *
+     * We purposely disregard child measurements because act as a
+     * wrapper to a SurfaceView that centers the camera preview instead
+     * of stretching it.
+     * */
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        // We purposely disregard child measurements because act as a
-        // wrapper to a SurfaceView that centers the camera preview instead
-        // of stretching it.
         final int width = resolveSize(getSuggestedMinimumWidth(), widthMeasureSpec);
         final int height = resolveSize(getSuggestedMinimumHeight(), heightMeasureSpec);
         setMeasuredDimension(width, height);

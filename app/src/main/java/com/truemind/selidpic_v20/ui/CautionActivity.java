@@ -18,6 +18,8 @@ import com.truemind.selidpic_v20.camera.SelidPicCam;
  */
 public class CautionActivity extends BaseActivity {
 
+    private static final String TAG = "MyTag";
+
     private LinearLayout btnStart;
     private LinearLayout btnBack;
     private CheckBox checkBox;
@@ -35,9 +37,9 @@ public class CautionActivity extends BaseActivity {
             new Constants().setCurrentPhotoAll(type, getTypeMatchedSize(type)[0], getTypeMatchedSize(type)[1]);
         }
 
-        Log.d("MyTag", new Constants().getCurrentPhotoType());
-        Log.d("MyTag", Integer.toString(new Constants().getCurrentPhotoWidth()));
-        Log.d("MyTag", Integer.toString(new Constants().getCurrentPhotoHeight()));
+        Log.d(TAG, new Constants().getCurrentPhotoType());
+        Log.d(TAG, Integer.toString(new Constants().getCurrentPhotoWidth()));
+        Log.d(TAG, Integer.toString(new Constants().getCurrentPhotoHeight()));
 
         initView();
         initListener();

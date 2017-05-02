@@ -18,6 +18,8 @@ import com.truemind.selidpic_v20.util.UserSizeDialog;
 
 public class MainActivity extends BaseActivity {
 
+    private static final String TAG = "MyTag";
+
     private LinearLayout btn1;
     private LinearLayout btn2;
     private LinearLayout btn3;
@@ -101,7 +103,7 @@ public class MainActivity extends BaseActivity {
                             startActivity(intent);
                             finish();
                         }else{
-                         Log.d("MyTag", getString(R.string.userCancel));
+                         Log.d(TAG, getString(R.string.userCancel));
                         }
                     }
                 });
@@ -144,7 +146,6 @@ public class MainActivity extends BaseActivity {
             public void onClick(View v) {
                 final ProgressDialog progressDialog = new ProgressDialog(getContext());
                 progressDialog.show();
-
             }
         });
 

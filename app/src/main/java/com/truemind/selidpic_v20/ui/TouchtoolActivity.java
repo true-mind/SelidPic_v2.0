@@ -2,7 +2,10 @@ package com.truemind.selidpic_v20.ui;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
@@ -13,9 +16,11 @@ import android.widget.TextView;
 import com.truemind.selidpic_v20.BaseActivity;
 import com.truemind.selidpic_v20.Constants;
 import com.truemind.selidpic_v20.R;
+import com.truemind.selidpic_v20.camera.Compose;
 import com.truemind.selidpic_v20.camera.SelidPicCam;
 
 import com.truemind.selidpic_v20.util.CommonDialog;
+import com.truemind.selidpic_v20.util.ProgressDialog;
 
 /**
  * Created by 현석 on 2017-04-27.
@@ -47,6 +52,8 @@ public class TouchtoolActivity extends BaseActivity{
 
     private CheckBox checkBox;
 
+    Compose compose;
+    Bitmap composedImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +67,22 @@ public class TouchtoolActivity extends BaseActivity{
         initFloating();
         floatingListener(getContext());
 
+        //final ProgressDialog progressDialog = new ProgressDialog(getContext());
+        //progressDialog.show();
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                composedImage = compose.compose(getContext(), Constants.photoByteStream, Constants.photoWidth, Constants.photoHeight, 440);
+                threadhandler.sendEmptyMessage(0);
+            }
+        });
+        thread.start();
     }
+    private Handler threadhandler = new Handler(){
+        public void handleMessage(Message msg){
+            finalImage.setImageBitmap(composedImage);
+        }
+    };
 
     public void initView(){
         titleSize = (TextView)findViewById(R.id.titleSize);
