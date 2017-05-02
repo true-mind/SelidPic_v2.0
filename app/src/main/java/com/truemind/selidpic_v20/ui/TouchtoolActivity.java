@@ -72,6 +72,7 @@ public class TouchtoolActivity extends BaseActivity{
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
+                compose = new Compose();
                 composedImage = compose.compose(getContext(), Constants.photoByteStream, Constants.photoWidth, Constants.photoHeight, 440);
                 threadhandler.sendEmptyMessage(0);
             }
