@@ -2,6 +2,7 @@ package com.truemind.selidpic_v20.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -12,6 +13,7 @@ import com.truemind.selidpic_v20.BaseActivity;
 import com.truemind.selidpic_v20.Constants;
 import com.truemind.selidpic_v20.R;
 
+import com.truemind.selidpic_v20.util.ProgressDialog;
 import com.truemind.selidpic_v20.util.UserSizeDialog;
 
 public class MainActivity extends BaseActivity {
@@ -140,7 +142,9 @@ public class MainActivity extends BaseActivity {
         btn6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "6", Toast.LENGTH_SHORT).show();
+                final ProgressDialog progressDialog = new ProgressDialog(getContext());
+                progressDialog.show();
+
             }
         });
 

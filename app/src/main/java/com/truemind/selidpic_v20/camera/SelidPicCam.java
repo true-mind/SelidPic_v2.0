@@ -1,11 +1,14 @@
 package com.truemind.selidpic_v20.camera;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.ImageFormat;
 import android.hardware.Camera;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.SurfaceHolder;
@@ -44,6 +47,9 @@ public class SelidPicCam extends BaseActivity implements SurfaceHolder.Callback,
     private LinearLayout manualGuide;
     private View camGuide;
 
+    static Camera camera;
+    private SensorManager sensorManager;
+    private Sensor sensor;
     private VideoView camView;
 
     private boolean isTypeManual = true;
@@ -68,8 +74,8 @@ public class SelidPicCam extends BaseActivity implements SurfaceHolder.Callback,
 
         initView();
         initListener();
-
     }
+
 
     /**
      * view initiating
