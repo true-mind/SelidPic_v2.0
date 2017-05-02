@@ -4,9 +4,9 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.util.Log;
 
 import com.truemind.selidpic_v20.R;
-
 
 public class Compose {
     private double ppi;
@@ -39,8 +39,10 @@ public class Compose {
 
     public Bitmap compose(final Context context, final byte[] arr, final double width, final double height, final double ppi) {
         this.ppi = ppi;
-        this.width = width;
-        this.height = height;
+        this.width = height;
+        this.height = width;
+        //this.width = width;
+        //this.height = height;
         this.context = context;
         this.arr = arr;
 
@@ -58,12 +60,7 @@ public class Compose {
         @Override
         public void run() {
             //이미지 해상도 조절
-            image = set_resolution(arr);
-
-            //배경 이미지 가져오기
-            background_before_crop = BitmapFactory.decodeResource(context.getResources(), R.drawable.photo_back);
-            back_width = background_before_crop.getWidth();
-            back_height = background_before_crop.getHeight();
+            image = set_resolution();
 
             screenWidth = image.getWidth();
             screenHeight = image.getHeight();
@@ -79,26 +76,33 @@ public class Compose {
             if(picHeight>screenHeight){
                 picHeight = screenHeight;
                 picWidth = (picHeight/height*width);
-                cropStartX = widthMid - (picWidth/2);
-                cropStartY = heightMid - (picHeight/2);
-
-                imageCropped = Bitmap.createBitmap(image, (int) cropStartX, (int) cropStartY, (int) picWidth, (int) picHeight);
-                double crop_w = (back_width - picHeight);
-                crop_w/=2;
-                background = Bitmap.createBitmap(background_before_crop, (int) crop_w, 0, (int) picHeight, (int) picWidth);
-            }
-            else{
+            }else{
                 picWidth = screenWidth;
                 picHeight = (picWidth/width*height);
-                cropStartX = widthMid - (picWidth/2);
-                cropStartY = heightMid - (picHeight/2);
-                double crop_w = (back_width - picHeight);
-                crop_w/=2;
-                imageCropped = Bitmap.createBitmap(image, (int) cropStartX, (int) cropStartY, (int) picWidth, (int) picHeight);
-                background = Bitmap.createBitmap(background_before_crop, (int) crop_w, 0, (int) picHeight, (int) picWidth);
             }
+            cropStartX = widthMid - (picWidth/2);
+            cropStartY = heightMid - (picHeight/2);
+
+            imageCropped = Bitmap.createBitmap(image, (int) cropStartX, (int) cropStartY, (int) picWidth, (int) picHeight);
+            image.recycle();
+
+            //배경 이미지 가져오기
+            background_before_crop = BitmapFactory.decodeResource(context.getResources(), R.drawable.photo_back);
+            back_width = background_before_crop.getWidth();
+            back_height = background_before_crop.getHeight();
+
+            double crop_w = (back_width - picHeight);
+            crop_w/=2;
+
+            Log.d("mytag", "width : "+width+", height : "+height+", screenWidth : "+screenWidth+", screenHeight : "+screenHeight+", picHeight : "+picHeight+", picWidth : "+picWidth
+                    +", cropStartX : "+cropStartX+", cropStartY : "+cropStartY+", back_width : "+back_width+", back_height : "+back_height+", crop_w : "+crop_w);
+
+            background = Bitmap.createBitmap(background_before_crop, (int) crop_w, 0, (int) picHeight, (int) picWidth);
+            background_before_crop.recycle();
 
             image = getEdge(rotateImage(imageCropped, 90));
+            imageCropped.recycle();
+            background.recycle();
         }
     });
 
@@ -116,7 +120,7 @@ public class Compose {
     }
 
 
-    private Bitmap set_resolution(byte[] arr) { //Get the dimensions of the View
+    private Bitmap set_resolution() { //Get the dimensions of the View
 
         int targetW, targetH;
         //onCreate 안에서 view가 아직 안 띄워짐 고로 임의 값 설정하겠음 나중에 수정해도 됨
@@ -133,7 +137,10 @@ public class Compose {
         //Get the dimensions of the bitmap
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
-        BitmapFactory.decodeByteArray(arr, 0, arr.length, options);
+        if(arr==null){
+            Log.d("mytag", "null");
+        }
+        //BitmapFactory.decodeByteArray(arr, 0, arr.length, options);
         int photoW = options.outHeight;
         int photoH = options.outWidth;
 
