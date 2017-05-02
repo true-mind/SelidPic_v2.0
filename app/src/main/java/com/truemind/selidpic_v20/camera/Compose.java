@@ -34,15 +34,17 @@ public class Compose {
     private Bitmap background_before_crop;
     private Bitmap image;
     private Bitmap background;
+    private Bitmap backgroundPara;
     private Bitmap imageCropped;
     private byte[] arr;
 
-    public Bitmap compose(final Context context, final byte[] arr, final double width, final double height, final double ppi) {
+    public Bitmap compose(final Context context, final byte[] arr, final double width, final double height, final double ppi, Bitmap backgroundPara) {
         this.ppi = ppi;
         this.width = height;
         this.height = width;
         this.context = context;
         this.arr = arr;
+        this.backgroundPara = backgroundPara;
 
         thread.start();
         try {
@@ -85,7 +87,8 @@ public class Compose {
             image.recycle();
 
             //배경 이미지 가져오기
-            background_before_crop = BitmapFactory.decodeResource(context.getResources(), R.drawable.photo_back);
+                    //background_before_crop = BitmapFactory.decodeResource(context.getResources(), R.drawable.photo_back);
+                    background_before_crop = backgroundPara;
             back_width = background_before_crop.getWidth();
             back_height = background_before_crop.getHeight();
 

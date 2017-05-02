@@ -154,7 +154,6 @@ public class SelidPicCam extends BaseActivity implements SensorEventListener {
          * 이 다이얼로그에서의 guide는 각 기능에 대한 설명(자세함)*/
         if (Constants.camManualGuide) {
             CamManualDialog dialog = new CamManualDialog(getContext());
-            dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
             dialog.show();
         }
 
@@ -268,9 +267,6 @@ public class SelidPicCam extends BaseActivity implements SensorEventListener {
             @Override
             public void onClick(View v) {
                 camera.takePicture(shutterCallback, rawCallback, jpegCallback);
-                //Intent intent = new Intent(getContext(), TouchtoolActivity.class);
-                //startActivity(intent);
-                //finish();
             }
         });
 
@@ -391,20 +387,32 @@ public class SelidPicCam extends BaseActivity implements SensorEventListener {
      * */
     Camera.PictureCallback jpegCallback = new Camera.PictureCallback() {
         public void onPictureTaken(byte[] data, Camera camera) {
-
             //byte array를 bitmap으로 변환
             BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+            options.inSampleSize = 4;
             Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length, options);
+            //bitmap = rotateImage(bitmap, 90);
 
             //bitmap을 byte array로 변환
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
             Constants.photoByteStream = stream.toByteArray();
             handler.sendEmptyMessage(0);
-            //Log.d(TAG, stream.toString());
+
         }
     };
+
+    /*private Bitmap rotateImage(Bitmap src, float degree) {
+        // Matrix 객체 생성
+        Matrix matrix = new Matrix();
+        // 회전 각도 셋팅
+        matrix.setScale(1, -1);  // 상하반전
+        matrix.setScale(-1, 1);  // 좌우반전
+
+        matrix.postRotate(degree);
+        // 이미지와 Matrix 를 셋팅해서 Bitmap 객체 생성
+        return Bitmap.createBitmap(src, 0, 0, src.getWidth(), src.getHeight(), matrix, true);
+    }*/
 
     Camera.ShutterCallback shutterCallback = new Camera.ShutterCallback() {
         public void onShutter() {

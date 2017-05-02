@@ -22,6 +22,7 @@ public class ProgressDialog extends Dialog{
         requestWindowFeature(getWindow().FEATURE_NO_TITLE);
         setContentView(R.layout.progress_dialog);
         getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        setCancelable(false);
 
         ImageView icon = (ImageView)findViewById(R.id.progressIcon);
         TextView text1 = (TextView)findViewById(R.id.textProgress);
