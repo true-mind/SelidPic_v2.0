@@ -41,8 +41,6 @@ public class Compose {
         this.ppi = ppi;
         this.width = height;
         this.height = width;
-        //this.width = width;
-        //this.height = height;
         this.context = context;
         this.arr = arr;
 
