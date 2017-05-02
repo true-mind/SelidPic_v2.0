@@ -61,7 +61,10 @@ public class UserSizeDialog extends Dialog {
             @Override
             public void onClick(View v) {
                 if (edtWidth.getText().toString().length() > 0
-                        && edtHeight.getText().toString().length() > 0) {
+                        && edtHeight.getText().toString().length() > 0 &&
+                        Integer.parseInt(edtHeight.getText().toString()) - Integer.parseInt(edtWidth.getText().toString()) < 50
+                        && Integer.parseInt(edtHeight.getText().toString()) != 0
+                        && Integer.parseInt(edtWidth.getText().toString()) != 0) {
                     if (Integer.parseInt(edtWidth.getText().toString()) <
                             Integer.parseInt(edtHeight.getText().toString())) {
                         new Constants().setUserTypeSize(Integer.parseInt(edtWidth.getText().toString()),
@@ -69,6 +72,10 @@ public class UserSizeDialog extends Dialog {
                         if (mListener != null)
                             mListener.onClose(BUTTON1, null);
                         dismiss();
+                    } else if (edtWidth.getText().toString().length() > 0
+                            && edtHeight.getText().toString().length() > 0 &&
+                            Integer.parseInt(edtHeight.getText().toString()) - Integer.parseInt(edtWidth.getText().toString()) >= 50) {
+                        Toast.makeText(getContext(), getContext().getResources().getString(R.string.userSizeRule2), Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(getContext(), getContext().getResources().getString(R.string.userSizeRule), Toast.LENGTH_SHORT).show();
                     }
@@ -149,7 +156,7 @@ public class UserSizeDialog extends Dialog {
         if (Constants.PHOTO_TYPE2_WIDTH > 0 && Constants.PHOTO_TYPE2_HEIGHT > 0) {
             SpannableString content = new SpannableString(Constants.PHOTO_TYPE2_WIDTH +
                     getContext().getResources().getString(R.string.multiply) + Constants.PHOTO_TYPE2_HEIGHT +
-            getContext().getResources().getString(R.string.mm));
+                    getContext().getResources().getString(R.string.mm));
             content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
             txtPreviousValue.setText(content);
             txtPreviousValue.setOnClickListener(new View.OnClickListener() {

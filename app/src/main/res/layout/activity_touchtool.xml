@@ -6,10 +6,6 @@
     android:orientation="vertical">
 
 
-    <LinearLayout style="@style/fabBaseStyle">
-
-        <include layout="@layout/floaing_btn" />
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -406,6 +402,10 @@
 
         <include layout="@layout/common_footer" />
 
+    </LinearLayout>
+    <LinearLayout style="@style/fabBaseStyle">
+
+        <include layout="@layout/floaing_btn" />
     </LinearLayout>
 
 </FrameLayout>

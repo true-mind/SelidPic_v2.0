@@ -45,9 +45,6 @@ public class AboutActivity extends BaseActivity{
         intro = (TextView)findViewById(R.id.intro);
         back = (TextView)findViewById(R.id.back);
         licenseBase = (LinearLayout)findViewById(R.id.licenseDetailBase);
-        TextView licenseDetail1 = (TextView)findViewById(R.id.licenseDetail);
-        TextView licenseDetail2 = (TextView)findViewById(R.id.licenseDetail2);
-        TextView licenseDetail3 = (TextView)findViewById(R.id.licenseDetail3);
 
         setFontToViewBold(appId, version, license, intro, back);
 

@@ -52,11 +52,13 @@ public class TouchtoolActivity extends BaseActivity {
     private LinearLayout btnSos4;
 
     private CheckBox checkBox;
+    private boolean composed = true;
 
     ProgressDialog progressDialog;
     Compose compose = new Compose();
     Bitmap background;
     Bitmap composedImage;
+    Bitmap imageOrigin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +71,6 @@ public class TouchtoolActivity extends BaseActivity {
         initFooter();
         initFloating();
         floatingListener(getContext());
-        //getBackgroundToBitmap();
         background = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.photo_back);
         updateBack(background);
     }
@@ -134,13 +135,6 @@ public class TouchtoolActivity extends BaseActivity {
                 subTitle2, txtGetBack, subTitle3, imageSave, imageShare, imageReplay, imageCompare,
                 txtCheck1, txtCheck2);
     }
-/*
-    public void getBackgroundToBitmap() {
-        background1 = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.photo_back);
-        background2 = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.photo_back2);
-        background3 = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.photo_back3);
-        background4 = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.photo_back4);
-    }*/
 
     public void initListener() {
         btnHelp.setOnClickListener(new View.OnClickListener() {
@@ -204,7 +198,12 @@ public class TouchtoolActivity extends BaseActivity {
         });
         btnSos2.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) {/*
+                if (composed) {
+                    finalImage.setImageBitmap(imageOrigin);
+                } else {
+                    finalImage.setImageBitmap(composedImage);
+                }*/
 
             }
         });
@@ -217,7 +216,7 @@ public class TouchtoolActivity extends BaseActivity {
         btnSos4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                cancelEdit();
             }
         });
     }
@@ -236,7 +235,7 @@ public class TouchtoolActivity extends BaseActivity {
         thread.start();
     }
 
-    public void onBackPressed() {
+    public void cancelEdit() {
 
         CommonDialog dialog = new CommonDialog();
         dialog.setOnCloseListener(new CommonDialog.OnCloseListener() {
@@ -251,5 +250,9 @@ public class TouchtoolActivity extends BaseActivity {
         });
         dialog.showDialog(getContext(), "작업을 끝내시겠습니까?\n현재까지의 작업 내역은 저장되지 않습니다.", true, "확인", "취소");
 
+    }
+
+    public void onBackPressed() {
+        cancelEdit();
     }
 }
