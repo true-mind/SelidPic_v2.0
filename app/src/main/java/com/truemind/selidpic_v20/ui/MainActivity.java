@@ -144,8 +144,7 @@ public class MainActivity extends BaseActivity {
         btn6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final ProgressDialog progressDialog = new ProgressDialog(getContext());
-                progressDialog.show();
+                Toast.makeText(getContext(), "6", Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -2,10 +2,12 @@ package com.truemind.selidpic_v20.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,9 +27,11 @@ public class AboutActivity extends BaseActivity{
     private TextView license;
     private TextView intro;
     private TextView back;
+    private ImageView iconShow;
     private LinearLayout licenseBase;
 
     private boolean showLicense = false;
+    private int i = 0;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +43,7 @@ public class AboutActivity extends BaseActivity{
     }
 
     public void initView(){
+        iconShow = (ImageView)findViewById(R.id.iconShow);
         appId = (TextView)findViewById(R.id.appId);
         version = (TextView)findViewById(R.id.version);
         license = (TextView)findViewById(R.id.license);
@@ -80,6 +85,21 @@ public class AboutActivity extends BaseActivity{
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), "intro", Toast.LENGTH_SHORT).show();
+            }
+        });
+        iconShow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                i++;
+                if(i>4){
+                    Toast.makeText(getContext(), "짜잔", Toast.LENGTH_SHORT).show();
+                }
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        i = 0;
+                    }
+                }, 500);
             }
         });
 

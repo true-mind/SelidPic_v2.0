@@ -193,7 +193,6 @@ public abstract class BaseActivity extends Activity {
         fab_home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "home", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(context, MainActivity.class);
                 /**Flag - Clear Top
                  * Clear Top으로 intent 실행 시 해당 intent 위의 모든 액티비티 스택을 지운다.
