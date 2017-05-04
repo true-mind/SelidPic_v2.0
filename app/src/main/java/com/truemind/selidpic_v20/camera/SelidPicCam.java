@@ -82,10 +82,13 @@ public class SelidPicCam extends BaseActivity implements SensorEventListener {
     private float sensorValue = 0;
     ByteArrayOutputStream outstr;
 
-    private boolean isTypeManual = true;
     private String type;
     private int width;
     private int height;
+    /**
+     * Auto 촬영인지 결정
+     * */
+    private boolean isTypeManual = true;
     /**
      * timer를 사용할 시에는 해당 클래스에서 private으로 선언된 아래의 timerTime을 사용할 것.
      */
@@ -401,18 +404,6 @@ public class SelidPicCam extends BaseActivity implements SensorEventListener {
 
         }
     };
-
-    /*private Bitmap rotateImage(Bitmap src, float degree) {
-        // Matrix 객체 생성
-        Matrix matrix = new Matrix();
-        // 회전 각도 셋팅
-        matrix.setScale(1, -1);  // 상하반전
-        matrix.setScale(-1, 1);  // 좌우반전
-
-        matrix.postRotate(degree);
-        // 이미지와 Matrix 를 셋팅해서 Bitmap 객체 생성
-        return Bitmap.createBitmap(src, 0, 0, src.getWidth(), src.getHeight(), matrix, true);
-    }*/
 
     Camera.ShutterCallback shutterCallback = new Camera.ShutterCallback() {
         public void onShutter() {

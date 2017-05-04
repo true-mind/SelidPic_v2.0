@@ -13,6 +13,10 @@ import com.truemind.selidpic_v20.R;
 
 /**
  * Created by 현석 on 2017-05-02.
+ *
+ * CutomProgressDialog
+ * 취소 불가능 (setCancelable - false)
+ *
  */
 
 public class ProgressDialog extends Dialog{

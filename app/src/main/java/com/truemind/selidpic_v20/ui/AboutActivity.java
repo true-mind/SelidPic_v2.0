@@ -92,7 +92,8 @@ public class AboutActivity extends BaseActivity{
             public void onClick(View v) {
                 i++;
                 if(i>4){
-                    Toast.makeText(getContext(), "짜잔", Toast.LENGTH_SHORT).show();
+                    /** Easter Egg!*/
+                    Toast.makeText(getContext(), "Hi Sally!", Toast.LENGTH_SHORT).show();
                 }
                 new Handler().postDelayed(new Runnable() {
                     @Override

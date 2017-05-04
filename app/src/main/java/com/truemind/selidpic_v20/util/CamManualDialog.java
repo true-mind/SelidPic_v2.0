@@ -18,6 +18,12 @@ import org.w3c.dom.Text;
 
 /**
  * Created by 현석 on 2017-05-02.
+ *
+ * 주의사항 화면에서의 체크박스 선택에 따라
+ * 카메라 시작 시 설명 다이얼로그의 출력 여부를 결정할 수 있다
+ * CamManualDialog는 이와 같은 경우의 다이얼로그 출력을 담당하며,
+ * 총 4장의 Image로 구성되어 있다.
+ *
  */
 
 public class CamManualDialog extends Dialog {
