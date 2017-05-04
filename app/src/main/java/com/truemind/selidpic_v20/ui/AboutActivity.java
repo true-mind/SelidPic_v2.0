@@ -13,8 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.truemind.selidpic_v20.BaseActivity;
-import com.truemind.selidpic_v20.Constants;
 import com.truemind.selidpic_v20.R;
+import com.truemind.selidpic_v20.MiniGame;
 
 /**
  * Created by 현석 on 2017-05-02.
@@ -94,6 +94,8 @@ public class AboutActivity extends BaseActivity{
                 if(i>4){
                     /** Easter Egg!*/
                     Toast.makeText(getContext(), "Hi Sally!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getContext(), MiniGame.class);
+                    startActivity(intent);
                 }
                 new Handler().postDelayed(new Runnable() {
                     @Override
