@@ -114,7 +114,7 @@ public class TouchtoolActivity extends BaseActivity {
     private Handler threadhandler = new Handler() {
         public void handleMessage(Message msg) {
             finalImage.setImageBitmap(composedImage);
-            imageEditter();
+            //imageEditter();
             progressDialog.dismiss();
         }
     };

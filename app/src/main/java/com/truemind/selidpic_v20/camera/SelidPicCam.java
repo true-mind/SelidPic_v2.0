@@ -8,10 +8,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.ImageFormat;
-import android.graphics.Matrix;
-import android.graphics.Rect;
-import android.graphics.YuvImage;
 import android.hardware.Camera;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -26,8 +22,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Surface;
-import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,36 +30,37 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.VideoView;
 
 import com.truemind.selidpic_v20.BaseActivity;
 import com.truemind.selidpic_v20.Constants;
 import com.truemind.selidpic_v20.R;
 import com.truemind.selidpic_v20.ui.CautionActivity;
 import com.truemind.selidpic_v20.ui.GalleryActivity;
-import com.truemind.selidpic_v20.ui.MainActivity;
 import com.truemind.selidpic_v20.ui.TouchtoolActivity;
 
 import com.truemind.selidpic_v20.util.CamManualDialog;
 import com.truemind.selidpic_v20.util.CamSettingDialog;
 import com.truemind.selidpic_v20.util.CommonDialog;
-import com.truemind.selidpic_v20.util.UserSizeDialog;
 
 import java.io.ByteArrayOutputStream;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by 현석 on 2017-04-24.
  */
 public class SelidPicCam extends BaseActivity implements SensorEventListener {
+
     private static final String TAG = "MyTag";
     private final static int CAMERA_FACING = Camera.CameraInfo.CAMERA_FACING_FRONT;
     private final static int MY_PERMISSION_REQUEST_CAMERA = 1;
+    private final static int MIN_SENSOR_LIGHT_VALUE = 0;
+    private final static int MAX_SENSOR_LIGHT_VALUE = 320;
 
     Camera camera;
     Preview preview;
 
-    private Handler handler;
-    private boolean b[];
+    private boolean taskComplete[];
 
     private TextView txtSize;
     private TextView txtType;
@@ -76,6 +71,8 @@ public class SelidPicCam extends BaseActivity implements SensorEventListener {
     private ImageButton btnSetting;
     private LinearLayout manualGuide;
     private View camGuide;
+    private TextView autoGuide;
+    private TextView autoTime;
 
     private SensorManager sensorManager;
     private Sensor sensor;
@@ -85,9 +82,12 @@ public class SelidPicCam extends BaseActivity implements SensorEventListener {
     private String type;
     private int width;
     private int height;
+
+    private Handler handler;
+    private Timer timer;
     /**
      * Auto 촬영인지 결정
-     * */
+     */
     private boolean isTypeManual = true;
     /**
      * timer를 사용할 시에는 해당 클래스에서 private으로 선언된 아래의 timerTime을 사용할 것.
@@ -98,6 +98,8 @@ public class SelidPicCam extends BaseActivity implements SensorEventListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.selidpic_cam);
+
+        timer = new Timer(false);
 
         type = new Constants().getCurrentPhotoType();
         width = new Constants().getCurrentPhotoWidth();
@@ -112,23 +114,111 @@ public class SelidPicCam extends BaseActivity implements SensorEventListener {
         } else {
             startCamera();
         }
+        Autoshoot();
     }
 
+    /**
+     * Timer의 handler로, Auto guide를 통해 2초간 "Initiate Auto shot"을 노출 시키며,
+     * 이후에는 1초 간격으로 타이머의 값을 노출시킴
+     * */
+    public void Autoshoot() {
+        final Handler timeHandler = new Handler() {
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                if (Integer.toString(msg.arg1).length() < 1) {
+                    autoGuide.setVisibility(View.GONE);
+                    autoTime.setVisibility(View.GONE);
+                } else if (msg.arg1 == timerTime) {
+                    autoGuide.setVisibility(View.VISIBLE);
+                    autoTime.setText(Integer.toString(msg.arg1+1));
+                } else if (msg.arg1 != timerTime) {
+                    autoGuide.setVisibility(View.GONE);
+                    autoTime.setVisibility(View.VISIBLE);
+                    autoTime.setText(Integer.toString(msg.arg1+1));
+                }
+            }
+        };
+
+        /**
+         * Timer를 통해 자동 촬영 조건을 조사하며, 조사된 값이 조건과 맞을 때 자동 촬영 타이머 활성화
+         * timerTime은 사용자를 통해 설정된 타이머 최대값이며, 이 최대값과 현재 타이머 값(counter)가
+         * 같을 때 sleep은 2초이며, 외의 경우에서 sleep이 1초
+         * 이후 timeHandler를 통해 Text노출
+         * */
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (sensorValue < MIN_SENSOR_LIGHT_VALUE) {
+                            Toast.makeText(getContext(), "사용자의 조명이 너무 어두움", Toast.LENGTH_SHORT).show();
+                        } else if (sensorValue > MAX_SENSOR_LIGHT_VALUE) {
+                            Toast.makeText(getContext(), "사용자의 조명이 너무 밝음", Toast.LENGTH_SHORT).show();
+                        } else {
+                            if (!isTypeManual) {
+                                new Thread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        int counter = timerTime;
+                                        while (!isTypeManual) {
+                                            if (counter == -1) {
+                                                Log.d(TAG, Integer.toString(counter));
+                                                camera.takePicture(shutterCallback, rawCallback, jpegCallback);
+                                                isTypeManual=!isTypeManual;
+                                                break;
+                                            } else {
+                                                Log.d(TAG, Integer.toString(counter));
+                                                Message msg = timeHandler.obtainMessage();
+                                                msg.arg1 = counter;
+                                                timeHandler.sendMessage(msg);
+                                            }
+
+                                            if (counter == timerTime) {
+                                                try {
+                                                    Thread.sleep(2000);
+                                                } catch (InterruptedException e) {
+                                                    e.printStackTrace();
+                                                }
+                                            } else {
+                                                try {
+                                                    Thread.sleep(1000);
+                                                } catch (InterruptedException e) {
+                                                    e.printStackTrace();
+                                                }
+                                            }
+                                            counter--;
+                                        }
+                                    }
+                                }).start();
+                            }
+                        }
+                    }
+                });
+            }
+        }, 5000, 11000);
+
+    }
+
+
+    /**
+     * 사진 활영 후 콜백 함수 완료를 판단하기 위한 thread의 핸들러
+     */
     private void initHandler() {
-        b = new boolean[3];
-        handler = new Handler(){
+        taskComplete = new boolean[3];
+        handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 int value = msg.what;
-                b[value] = true;
+                taskComplete[value] = true;
 
                 boolean all_task_done = true;
-                for(int i=0;i<3;i++){
-                    if(!b[i]){
+                for (int i = 0; i < 3; i++) {
+                    if (!taskComplete[i]) {
                         all_task_done = false;
                     }
                 }
-                if(all_task_done){
+                if (all_task_done) {
                     Intent intent = new Intent(getContext(), TouchtoolActivity.class);
                     startActivity(intent);
                     finish();
@@ -146,6 +236,8 @@ public class SelidPicCam extends BaseActivity implements SensorEventListener {
     public void initView() {
         txtType = (TextView) findViewById(R.id.txtType);
         txtSize = (TextView) findViewById(R.id.txtSize);
+        autoGuide = (TextView) findViewById(R.id.auto_guide);
+        autoTime = (TextView) findViewById(R.id.auto_time);
         txtCurType = (TextView) findViewById(R.id.txtCurType);
         btnCam = (ImageButton) findViewById(R.id.btnCam);
         btnBack = (ImageButton) findViewById(R.id.btnBack);
@@ -164,7 +256,7 @@ public class SelidPicCam extends BaseActivity implements SensorEventListener {
         camGuideUpdate();
         settingUpdate();
 
-        setFontToViewBold(txtType, txtSize, txtCurType);
+        setFontToViewBold(txtType, txtSize, txtCurType, autoTime, autoGuide);
 
         String size = width + getContext().getResources().getString(R.string.multiply) + height +
                 getContext().getResources().getString(R.string.mm);
@@ -240,6 +332,8 @@ public class SelidPicCam extends BaseActivity implements SensorEventListener {
                     txtCurType.setText("M");
                     txtCurType.setTextColor(getResources().getColor(R.color.colorManual));
                     isTypeManual = !isTypeManual;
+                    autoGuide.setVisibility(View.GONE);
+                    autoTime.setVisibility(View.GONE);
                     Toast.makeText(getContext(), "Manual", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -284,8 +378,7 @@ public class SelidPicCam extends BaseActivity implements SensorEventListener {
             }
         });
 
-        btnBack.setOnClickListener(new View.OnClickListener()
-        {
+        btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 cameraCancel();
@@ -306,8 +399,7 @@ public class SelidPicCam extends BaseActivity implements SensorEventListener {
      * 카메라 촬영을 중단하고 해당 액티비티를 강제로 벗어나는 경우에 해당됨
      * camera관련된 모든 센서 및 기능을 함수로 정의하여 호출하려고 하였지만,
      * 코드 상의 변화로 인해 해당 기능은 카메라를 벗어날 때 자동으로 실행됨
-     *
-     * */
+     */
     public void cameraCancel() {
         if (manualGuide.getVisibility() == View.VISIBLE) {
             manualGuide.setVisibility(View.GONE);
@@ -336,7 +428,6 @@ public class SelidPicCam extends BaseActivity implements SensorEventListener {
      * init sensor
      * sensor intiating
      * 센서를 이용한 동작은 아직 정의되지 않음
-     *
      */
     private void initSensor() {
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
@@ -348,8 +439,7 @@ public class SelidPicCam extends BaseActivity implements SensorEventListener {
      * start camera
      * 카메라 시작 시점은 권한 체크 이후, 권한 승인 시 카메라 시작 됨
      * 아래 startCamera에서는 프리뷰 생성 및 카메라 생성을 수행
-     *
-     * */
+     */
     public void startCamera() {
         if (preview == null) {
             preview = new Preview(this, (SurfaceView) findViewById(R.id.camView));
@@ -387,7 +477,7 @@ public class SelidPicCam extends BaseActivity implements SensorEventListener {
     /**
      * 카메라의 셔터 체크 시 콜백 함수
      * outputStream을 Log로 찍어본 결과 해당 스트림은 출력 잘 됨
-     * */
+     */
     Camera.PictureCallback jpegCallback = new Camera.PictureCallback() {
         public void onPictureTaken(byte[] data, Camera camera) {
             //byte array를 bitmap으로 변환
@@ -434,7 +524,7 @@ public class SelidPicCam extends BaseActivity implements SensorEventListener {
 
     @Override
     protected void onDestroy() {
-        //timer.cancel();
+        timer.cancel();
         sensorManager.unregisterListener(this);
         super.onDestroy();
     }
@@ -462,11 +552,12 @@ public class SelidPicCam extends BaseActivity implements SensorEventListener {
         preview = null;
 
     }
+
     /**
      * 카메라 관련 권한 승인 및 체크
      * 이 권한이 승인되지 않으면 카메라를 실행할 수 없음
      * 마쉬멜로 이상의 안드로이드 버전에서 실행되게 하였음
-     * */
+     */
     @TargetApi(Build.VERSION_CODES.M)
     private void checkPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {

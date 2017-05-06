@@ -28,16 +28,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#fff"
-                android:textSize="24sp"
-                android:text="사용자 지정 규격" />
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/txtSize"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#fff"
-                android:textSize="14sp"
-                android:text="25 x 35 mm" />
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -235,5 +233,24 @@
 
 
     </LinearLayout>
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/auto_guide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="18sp"
+        android:textColor="#fff"
+        android:text="@string/initiate_auto_shot"/>
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/auto_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="110sp"
+        android:textColor="#fff"/>
 
 </FrameLayout>

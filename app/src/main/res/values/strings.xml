@@ -65,7 +65,7 @@
     <string name="splashText">#어디서나 #찍는 #증명사진\n#TrueMind</string>
     <string name="manual1">현재 지정되어 있는 사진의 규격명과 그 사이즈를 카메라 좌측 상단에서 확인할 수 있습니다.</string>
     <string name="manual2">우측 상단의 M을 클릭하여 Auto(자동촬영)와 Manual(수동촬영)간의 전환이 가능합니다.</string>
-    <string name="manual3">우측 상단의 Setting에서 자동촬영 Timer의 제한시간을 설정할 수 있습니다.</string>
+    <string name="manual3">우측 상단의 Setting에서 자동촬영 Timer의 제한시간을 설정할 수 있습니다. (자동 촬영은 센서의 밝기값 조건에 따라 촬영됩니다.)</string>
     <string name="manual4">우측 상단의 Setting에서 현재 규격에 맞춰 출력될 사진의 범위를 볼 수 있는 가이드를 활성화시킬 수 있습니다.</string>
     <string name="next">다음</string>
     <string name="quater">● ○ ○ ○</string>
@@ -127,4 +127,5 @@ limitations under the License.
 \n\n9. Accepting Warranty or Additional Liability. While redistributing the Work or Derivative Works thereof, You may choose to offer, and charge a fee for, acceptance of support, warranty, indemnity, or other liability obligations and/or rights consistent with this License. However, in accepting such obligations, You may act only on Your own behalf and on Your sole responsibility, not on behalf of any other Contributor, and only if You agree to indemnify, defend, and hold each Contributor harmless for any liability incurred by, or claims asserted against, such Contributor by reason of your accepting any such warranty or additional liability.
 \n\nEND OF TERMS AND CONDITIONS
     </string>
+    <string name="initiate_auto_shot">Initiate auto shot</string>
 </resources>

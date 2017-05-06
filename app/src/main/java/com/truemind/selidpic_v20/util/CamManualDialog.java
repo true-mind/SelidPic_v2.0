@@ -54,6 +54,7 @@ public class CamManualDialog extends Dialog {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.manual_dialog);
+        getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 
         initView();
 
