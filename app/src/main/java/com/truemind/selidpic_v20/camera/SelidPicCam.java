@@ -409,7 +409,7 @@ public class SelidPicCam extends BaseActivity implements SensorEventListener {
                 @Override
                 public void onClose(DialogInterface dialog, int which, Object data) {
                     if (which == 1) {
-                        //TODO Camera관련된 모든 센서 / 기능 전부 중지
+                        isTypeManual = false;
                         Intent intent = new Intent(getContext(), CautionActivity.class);
                         startActivity(intent);
                         finish();
