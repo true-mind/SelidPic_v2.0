@@ -51,6 +51,7 @@ public class Compose {
 
         thread.start();
         try {
+
             thread.join();
             return image;
         } catch (InterruptedException e) {
@@ -106,7 +107,7 @@ public class Compose {
 
             image = getEdge(rotateImage(imageCropped, 90));
             imageCropped.recycle();
-            background.recycle();
+            //background.recycle();
         }
     });
 

@@ -114,7 +114,7 @@ public class TouchtoolActivity extends BaseActivity {
     private Handler threadhandler = new Handler() {
         public void handleMessage(Message msg) {
             finalImage.setImageBitmap(composedImage);
-            //imageEditter();
+            imageEditter();
             progressDialog.dismiss();
         }
     };
@@ -342,8 +342,11 @@ public class TouchtoolActivity extends BaseActivity {
      * getPixel에서는 recycle된 비트맵에 대해 지원되지 않는다.
      * */
     public void imageEditter(){
-        final int xv = (finalImage.getWidth() - composedImage.getWidth())/2;
-        final int yv = (finalImage.getHeight() - composedImage.getHeight())/2;
+        final int[] viewCoords = new int[2];
+        finalImage.getLocationOnScreen(viewCoords);
+
+        Log.d(TAG, "viewCoords[0] : "+viewCoords[0] +", viewCoordes[1] : "+viewCoords[1]+", finalImage.getWidth : "+finalImage.getWidth()+", finalImage.getHeight : "+finalImage.getHeight());
+
         finalImage.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -351,28 +354,44 @@ public class TouchtoolActivity extends BaseActivity {
                 if(action==MotionEvent.ACTION_DOWN){
                     global_x = (int) motionEvent.getX();
                     global_y = (int) motionEvent.getY();
-                    global_x -= xv;
-                    global_y -= yv;
-                    Log.i(TAG, "x:"+global_x+", y:"+global_y);
+                    Log.i(TAG, "getX() : "+motionEvent.getX()+", getY() : "+motionEvent.getY());
+                    global_x -= viewCoords[0];
+                    global_y -= viewCoords[1];
+                    Log.i(TAG, "global_x : "+global_x+", global_y : "+global_y);
+
                 }
                 if(action==MotionEvent.ACTION_MOVE){
+                    Log.d(TAG, "action move");
                     global_x = (int) motionEvent.getX();
                     global_y = (int) motionEvent.getY();
-                    global_x -= xv;
-                    global_y -= yv;
-                    Log.i(TAG, "x:"+global_x+", y:"+global_y);
-                    if(btnDraw.isSelected()) {
+                    Log.i(TAG, "getX() : "+motionEvent.getX()+", getY() : "+motionEvent.getY());
+                    global_x -= viewCoords[0];
+                    global_y -= viewCoords[1];
+                    Log.i(TAG, "global_x : "+global_x+", global_y : "+global_y);
+                    //if(btnDraw.isSelected()) {
+                        Log.i(TAG, "penceil_size : "+pencil_size+", composedImage.getHeight() : "+composedImage.getHeight()+", composedImage.getWidth() : "+composedImage.getWidth());
                         if(global_x>pencil_size/2 && global_x<composedImage.getHeight()-pencil_size/2 && global_y>pencil_size/2 && global_y<composedImage.getWidth()-pencil_size/2) {
                             for (int n = global_x - pencil_size/2; n < global_x + pencil_size/2; n++) {
                                 for (int m = global_y - pencil_size/2; m < global_y + pencil_size/2; m++) {
-                                    int c = background.getPixel(n, m);
+                                    int c = 0;
+                                    if(background.isRecycled()){
+                                        Log.d(TAG, "background is recycled.");
+                                        background = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.photo_back);
+                                    }
+                                    c = background.getPixel(n, m);
+
+                                    if(composedImage.isRecycled()){
+                                        Log.d(TAG, "composedImage is recycled.");
+                                        updateBack(background);
+                                    }
                                     composedImage.setPixel(n, m, c);
                                 }
                             }
                             finalImage.setImageBitmap(composedImage);
                             finalImage.invalidate();
                         }
-                    }else{/*
+                    //}else{
+                     /*
                         if(global_x>eraser_size/2 && global_x<composedImage.getHeight()-eraser_size/2 && global_y>eraser_size/2 && global_y<composedImage.getWidth()-eraser_size/2) {
                             for (int n = global_x - eraser_size/2; n < global_x + eraser_size/2; n++) {
                                 for (int m = global_y - eraser_size/2; m < global_y + eraser_size/2; m++) {
@@ -383,7 +402,7 @@ public class TouchtoolActivity extends BaseActivity {
                             finalImage.setImageBitmap(composedImage);
                             finalImage.invalidate();
                         }*/
-                    }
+                    //}
                 }
                 return true;
             }
