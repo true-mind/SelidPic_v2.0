@@ -10,8 +10,10 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RectShape;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
@@ -26,6 +28,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.truemind.selidpic_v20.BaseActivity;
 import com.truemind.selidpic_v20.Constants;
@@ -35,6 +38,13 @@ import com.truemind.selidpic_v20.camera.SelidPicCam;
 
 import com.truemind.selidpic_v20.util.CommonDialog;
 import com.truemind.selidpic_v20.util.ProgressDialog;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by 현석 on 2017-04-27.
@@ -47,6 +57,8 @@ public class TouchtoolActivity extends BaseActivity {
     private String selectedImagePath;
     private static final int SELECT_PICTURE = 1;
     private static final int MY_PERMISSION_REQUEST_STORAGE = 1;
+    private static final String FOLDER_NAME = "/SelicPic";
+    private static final String FINAL_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + FOLDER_NAME + "/";
 
     private TextView titleName;
     private TextView titleSize;
@@ -85,6 +97,7 @@ public class TouchtoolActivity extends BaseActivity {
     private int eraser_size = 15;
     private int global_x;
     private int global_y;
+    private String FILE_NAME = "default";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,7 +123,7 @@ public class TouchtoolActivity extends BaseActivity {
      * 쓰레드 이후 핸들러 발생
      * 이 핸들러 내부에서 ImageEditter의 호출이 필요하다.
      * (아니면 compose가 완료되지 않아 bitmap에서 nullPointerException 발생)
-     * */
+     */
     private Handler threadhandler = new Handler() {
         public void handleMessage(Message msg) {
             finalImage.setImageBitmap(composedImage);
@@ -122,8 +135,7 @@ public class TouchtoolActivity extends BaseActivity {
     /**
      * View initiating
      * Seekbar에 의한 size 조절부도 initiating
-     *
-     * */
+     */
     public void initView() {
         titleSize = (TextView) findViewById(R.id.titleSize);
         titleName = (TextView) findViewById(R.id.titleName);
@@ -133,12 +145,12 @@ public class TouchtoolActivity extends BaseActivity {
         btnHelp = (LinearLayout) findViewById(R.id.btnHelp);
         btnDraw = (LinearLayout) findViewById(R.id.btnDraw);
         TextView txtDraw = (TextView) findViewById(R.id.txtDraw);
-        seekBarDraw = (SeekBar)findViewById(R.id.seekBarDraw);
+        seekBarDraw = (SeekBar) findViewById(R.id.seekBarDraw);
         TextView toolSize1 = (TextView) findViewById(R.id.toolSize1);
         sizeView1 = (ImageView) findViewById(R.id.sizeView1);
         btnErase = (LinearLayout) findViewById(R.id.btnErase);
         TextView txtErase = (TextView) findViewById(R.id.txtErase);
-        seekBarErase = (SeekBar)findViewById(R.id.seekBarErase);
+        seekBarErase = (SeekBar) findViewById(R.id.seekBarErase);
         TextView toolSize2 = (TextView) findViewById(R.id.toolSize2);
         sizeView2 = (ImageView) findViewById(R.id.sizeView2);
         TextView seekbarNum1 = (TextView) findViewById(R.id.seekbarNum1);
@@ -191,7 +203,7 @@ public class TouchtoolActivity extends BaseActivity {
     /**
      * 모든 listener 등록
      * 단 이미지 터치로 합성하는 부분은 imageEditter로 따로 등록
-     * */
+     */
     public void initListener() {
         btnHelp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -204,7 +216,7 @@ public class TouchtoolActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 btnDraw.setSelected(true);
-                if(btnErase.isSelected())
+                if (btnErase.isSelected())
                     btnErase.setSelected(false);
             }
         });
@@ -212,7 +224,7 @@ public class TouchtoolActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 btnErase.setSelected(true);
-                if(btnDraw.isSelected())
+                if (btnDraw.isSelected())
                     btnDraw.setSelected(false);
 
             }
@@ -220,11 +232,11 @@ public class TouchtoolActivity extends BaseActivity {
         seekBarDraw.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                if(i<5){
-                    pencil_size=5;
+                if (i < 5) {
+                    pencil_size = 5;
 
-                }else{
-                    pencil_size=i;
+                } else {
+                    pencil_size = i;
                 }
                 ShapeDrawable sd = new ShapeDrawable(new RectShape());
                 sd.setIntrinsicWidth(pencil_size);
@@ -247,10 +259,10 @@ public class TouchtoolActivity extends BaseActivity {
         seekBarErase.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                if(i<5){
-                    eraser_size=5;
-                }else{
-                    eraser_size=i;
+                if (i < 5) {
+                    eraser_size = 5;
+                } else {
+                    eraser_size = i;
                 }
                 ShapeDrawable sd = new ShapeDrawable(new RectShape());
                 sd.setIntrinsicWidth(eraser_size);
@@ -308,7 +320,16 @@ public class TouchtoolActivity extends BaseActivity {
         btnSos1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if(checkBox.isChecked()){
+                    imageSave(imageOrigin, true);
+                    imageSave(composedImage, false);
+                    Toast.makeText(getContext(), FINAL_PATH + "에 원본과 함께 저장됨", Toast.LENGTH_SHORT).show();
+                    galleryRefresh();
+                }else{
+                    imageSave(composedImage, false);
+                    Toast.makeText(getContext(), FINAL_PATH + "에 저장됨", Toast.LENGTH_SHORT).show();
+                    galleryRefresh();
+                }
             }
         });
         btnSos2.setOnClickListener(new View.OnClickListener() {
@@ -326,6 +347,19 @@ public class TouchtoolActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
 
+                File files = new File(FINAL_PATH, FILE_NAME);
+
+                if (files.exists())
+                {
+                    Intent intentSend = new Intent(Intent.ACTION_SEND);
+                    intentSend.setType("image/*");
+                    intentSend.putExtra(Intent.EXTRA_STREAM, Uri.parse(FINAL_PATH + FILE_NAME));
+                    startActivity(Intent.createChooser(intentSend, "Share"));
+                    Toast.makeText(getApplicationContext(), "가장 최근에 저장된 파일이 공유됩니다.", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Save first", Toast.LENGTH_LONG).show();
+                }
+
             }
         });
         btnSos4.setOnClickListener(new View.OnClickListener() {
@@ -336,35 +370,77 @@ public class TouchtoolActivity extends BaseActivity {
         });
     }
 
+    public void imageSave(Bitmap image, boolean isOrigin) {
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+
+        try {
+            File mediaStorageDir = new File(FINAL_PATH);
+
+            if (!mediaStorageDir.isDirectory()) {
+                mediaStorageDir.mkdirs();
+            }
+
+            if (isOrigin) {
+                FILE_NAME = "Origin_" + timeStamp + ".jpeg";
+            } else {
+                FILE_NAME = "SelidPic_" + timeStamp + ".jpeg";
+            }
+            FileOutputStream out = new FileOutputStream(FINAL_PATH + FILE_NAME);
+            image.compress(Bitmap.CompressFormat.JPEG, 100, out);
+            out.close();
+
+        } catch (FileNotFoundException e) {
+            Log.d("FileNotFoundException:", e.getMessage());
+        } catch (IOException exception) {
+            Log.e("IOException", exception.getMessage());
+        }
+    }
+
+    private void galleryRefresh() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            final Intent scanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+            File outputFile = new File(FINAL_PATH+FILE_NAME);
+            final Uri contentUri = Uri.fromFile(outputFile);
+            scanIntent.setData(contentUri);
+            sendBroadcast(scanIntent);
+            Log.d(TAG, "Gallery Refreshed");
+        } else {
+            final Intent intent = new Intent(Intent.ACTION_MEDIA_MOUNTED, Uri.parse(FINAL_PATH));
+            sendBroadcast(intent);
+            Log.d(TAG, "Gallery Refreshed");
+        }
+    }
+
+
     /**
      * 화면 터치로 합성하는 기능
      * 이 부분에서는 compose완료된 이미지와 오리지널 이미지를 비트맵으로 가지고 있어야 하며,
      * getPixel에서는 recycle된 비트맵에 대해 지원되지 않는다.
-     * */
-    public void imageEditter(){
-        final int xv = (finalImage.getWidth() - composedImage.getWidth())/2;
-        final int yv = (finalImage.getHeight() - composedImage.getHeight())/2;
+     */
+    public void imageEditter() {
+        final int xv = (finalImage.getWidth() - composedImage.getWidth()) / 2;
+        final int yv = (finalImage.getHeight() - composedImage.getHeight()) / 2;
         finalImage.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 int action = motionEvent.getAction();
-                if(action==MotionEvent.ACTION_DOWN){
+                if (action == MotionEvent.ACTION_DOWN) {
                     global_x = (int) motionEvent.getX();
                     global_y = (int) motionEvent.getY();
                     global_x -= xv;
                     global_y -= yv;
-                    Log.i(TAG, "x:"+global_x+", y:"+global_y);
+                    Log.i(TAG, "x:" + global_x + ", y:" + global_y);
                 }
-                if(action==MotionEvent.ACTION_MOVE){
+                if (action == MotionEvent.ACTION_MOVE) {
                     global_x = (int) motionEvent.getX();
                     global_y = (int) motionEvent.getY();
                     global_x -= xv;
                     global_y -= yv;
-                    Log.i(TAG, "x:"+global_x+", y:"+global_y);
-                    if(btnDraw.isSelected()) {
-                        if(global_x>pencil_size/2 && global_x<composedImage.getHeight()-pencil_size/2 && global_y>pencil_size/2 && global_y<composedImage.getWidth()-pencil_size/2) {
-                            for (int n = global_x - pencil_size/2; n < global_x + pencil_size/2; n++) {
-                                for (int m = global_y - pencil_size/2; m < global_y + pencil_size/2; m++) {
+                    Log.i(TAG, "x:" + global_x + ", y:" + global_y);
+                    if (btnDraw.isSelected()) {
+                        if (global_x > pencil_size / 2 && global_x < composedImage.getHeight() - pencil_size / 2 && global_y > pencil_size / 2 && global_y < composedImage.getWidth() - pencil_size / 2) {
+                            for (int n = global_x - pencil_size / 2; n < global_x + pencil_size / 2; n++) {
+                                for (int m = global_y - pencil_size / 2; m < global_y + pencil_size / 2; m++) {
                                     int c = background.getPixel(n, m);
                                     composedImage.setPixel(n, m, c);
                                 }
@@ -372,7 +448,7 @@ public class TouchtoolActivity extends BaseActivity {
                             finalImage.setImageBitmap(composedImage);
                             finalImage.invalidate();
                         }
-                    }else{/*
+                    } else {/*
                         if(global_x>eraser_size/2 && global_x<composedImage.getHeight()-eraser_size/2 && global_y>eraser_size/2 && global_y<composedImage.getWidth()-eraser_size/2) {
                             for (int n = global_x - eraser_size/2; n < global_x + eraser_size/2; n++) {
                                 for (int m = global_y - eraser_size/2; m < global_y + eraser_size/2; m++) {
@@ -393,7 +469,7 @@ public class TouchtoolActivity extends BaseActivity {
     /**
      * background를 사용자가 원하는 것으로 바꾸어 다시 compose가능
      * 합수에서 쓰레드 진행됨, 핸들러는 공유
-     * */
+     */
     public void updateBack(final Bitmap back) {
         progressDialog = new ProgressDialog(getContext());
         progressDialog.show();
@@ -411,10 +487,10 @@ public class TouchtoolActivity extends BaseActivity {
     /**
      * Android 6.0이상에서만 구동되는 권한 체크 함수
      * 해당 Permission 확인 시 다이얼로그 자동 생성
-     * */
+     */
     @TargetApi(Build.VERSION_CODES.M)
     private void checkPermission() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+        if ((ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)) {
 
             /** Access denied (Permission denied)*/
 
