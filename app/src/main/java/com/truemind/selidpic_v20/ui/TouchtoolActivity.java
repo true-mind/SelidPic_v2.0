@@ -314,7 +314,7 @@ public class TouchtoolActivity extends BaseActivity {
         btnGetBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Toast.makeText(getContext(), "서비스 준비중입니다.", Toast.LENGTH_SHORT).show();
             }
         });
         btnSos1.setOnClickListener(new View.OnClickListener() {

@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.truemind.selidpic_v20.ui.AboutActivity;
 import com.truemind.selidpic_v20.ui.GalleryActivity;
 import com.truemind.selidpic_v20.ui.MainActivity;
+import com.truemind.selidpic_v20.util.OnSingleClickListener;
 
 /**
  * Created by 현석 on 2017-04-20.
@@ -179,9 +180,9 @@ public abstract class BaseActivity extends Activity {
      *
      * */
     public void floatingListener(final Context context){
-        fab_btn.setOnClickListener(new View.OnClickListener() {
+        fab_btn.setOnClickListener(new OnSingleClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onSingleClick(View v) {
                 if(isMenu){
                     isMenu = closeMenu();
                 }else{
