@@ -5,7 +5,7 @@ android {
     buildToolsVersion '25.0.2'
 
     defaultConfig {
-        applicationId "com.truemind.selidpic_v20"
+        applicationId "com.truemind.selidpic"
         minSdkVersion 15
         targetSdkVersion 25
         versionCode 2
@@ -21,8 +21,7 @@ android {
 
 subprojects{
     repositories{
-        mavenCentral()
-        maven{url 'http://devrepo.kako.com:8088/nexus/content/groups/public/'}
+        jcenter()
     }
 }
 

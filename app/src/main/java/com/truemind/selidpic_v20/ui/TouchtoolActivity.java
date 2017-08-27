@@ -143,6 +143,15 @@ public class TouchtoolActivity extends BaseActivity {
         }
     };
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        scrollEnable(checkScroll.isChecked());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            checkPermission();
+        }
+    }
+
     /**
      * View initiating
      * Seekbar에 의한 size 조절부도 initiating
@@ -323,33 +332,69 @@ public class TouchtoolActivity extends BaseActivity {
         back1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                background = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.photo_back);
-                updateBack(background);
-                currentBackground = BACKGROUND_NUM1;
+                CommonDialog dialog = new CommonDialog();
+                dialog.setOnCloseListener(new CommonDialog.OnCloseListener() {
+                    @Override
+                    public void onClose(DialogInterface dialog, int which, Object data) {
+                        if (which == 1) {
+                            background = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.photo_back);
+                            updateBack(background);
+                            currentBackground = BACKGROUND_NUM1;
+                        }
+                    }
+                });
+                dialog.showDialog(getContext(), "배경 변경 시 현재까지의 작업이 유지되지 않습니다.", true, "확인", "취소");
             }
         });
         back2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                background = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.photo_back2);
-                updateBack(background);
-                currentBackground = BACKGROUND_NUM2;
+                CommonDialog dialog = new CommonDialog();
+                dialog.setOnCloseListener(new CommonDialog.OnCloseListener() {
+                    @Override
+                    public void onClose(DialogInterface dialog, int which, Object data) {
+                        if (which == 1) {
+                            background = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.photo_back2);
+                            updateBack(background);
+                            currentBackground = BACKGROUND_NUM2;
+                        }
+                    }
+                });
+                dialog.showDialog(getContext(), "배경 변경 시 현재까지의 작업이 유지되지 않습니다.", true, "확인", "취소");
             }
         });
         back3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                background = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.photo_back3);
-                updateBack(background);
-                currentBackground = BACKGROUND_NUM3;
+                CommonDialog dialog = new CommonDialog();
+                dialog.setOnCloseListener(new CommonDialog.OnCloseListener() {
+                    @Override
+                    public void onClose(DialogInterface dialog, int which, Object data) {
+                        if (which == 1) {
+                            background = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.photo_back3);
+                            updateBack(background);
+                            currentBackground = BACKGROUND_NUM3;
+                        }
+                    }
+                });
+                dialog.showDialog(getContext(), "배경 변경 시 현재까지의 작업이 유지되지 않습니다.", true, "확인", "취소");
             }
         });
         back4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                background = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.photo_back4);
-                updateBack(background);
-                currentBackground = BACKGROUND_NUM4;
+                CommonDialog dialog = new CommonDialog();
+                dialog.setOnCloseListener(new CommonDialog.OnCloseListener() {
+                    @Override
+                    public void onClose(DialogInterface dialog, int which, Object data) {
+                        if (which == 1) {
+                            background = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.photo_back4);
+                            updateBack(background);
+                            currentBackground = BACKGROUND_NUM4;
+                        }
+                    }
+                });
+                dialog.showDialog(getContext(), "배경 변경 시 현재까지의 작업이 유지되지 않습니다.", true, "확인", "취소");
             }
         });
         btnGetBack.setOnClickListener(new View.OnClickListener() {
@@ -362,14 +407,12 @@ public class TouchtoolActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 if (checkBox.isChecked()) {
-                    imageSave(imageOrigin, true);
+                    imageSave(Save.originImage(getContext()), true);
                     imageSave(composedImage, false);
                     Toast.makeText(getContext(), FINAL_PATH + "에 원본과 함께 저장됨", Toast.LENGTH_SHORT).show();
-                    galleryRefresh();
                 } else {
                     imageSave(composedImage, false);
                     Toast.makeText(getContext(), FINAL_PATH + "에 저장됨", Toast.LENGTH_SHORT).show();
-                    galleryRefresh();
                 }
             }
         });
@@ -430,6 +473,7 @@ public class TouchtoolActivity extends BaseActivity {
             FileOutputStream out = new FileOutputStream(FINAL_PATH + FILE_NAME);
             image.compress(Bitmap.CompressFormat.JPEG, 100, out);
             out.close();
+            galleryRefresh();
 
         } catch (FileNotFoundException e) {
             Log.d("FileNotFoundException:", e.getMessage());
@@ -568,7 +612,7 @@ public class TouchtoolActivity extends BaseActivity {
                 if (imageOrigin == null) {
                     originImage = new OriginImage();
                     imageOrigin = originImage.getOriginImage(Constants.photoByteStream, Constants.photoWidth, Constants.photoHeight, 440);
-                    Save.originImage(getContext(), composedImage);
+                    Save.originImage(getContext(), imageOrigin);
                 }
                 threadhandler.sendEmptyMessage(0);
             }

@@ -21,6 +21,8 @@ public final class Save {
     public static final String KEY_ORIGIN_IMAGE = "oi";
     public static final String KEY_COMPOSED_IMAGE = "ci";
     public static final String KEY_CAM_MANUAL = "cm";
+    public static final String KEY_USER_SIZE_WIDTH = "usw";
+    public static final String KEY_USER_SIZE_HEIGHT = "ush";
 
     private static SharedPreferences instance(Context context) {
         if (SP == null) {
@@ -113,6 +115,22 @@ public final class Save {
 
     public static boolean camManualValidate(Context context){
         return instance(context).getBoolean(KEY_CAM_MANUAL, true);
+    }
+
+    public static void userSizeWidth(Context context, int width){
+        instance(context).edit().putInt(KEY_USER_SIZE_WIDTH, width).apply();
+    }
+
+    public static int userSizeWidth(Context context){
+        return instance(context).getInt(KEY_USER_SIZE_WIDTH, 0);
+    }
+
+    public static void userSizeHeight(Context context, int height){
+        instance(context).edit().putInt(KEY_USER_SIZE_HEIGHT, height).apply();
+    }
+
+    public static int userSizeHeight(Context context){
+        return instance(context).getInt(KEY_USER_SIZE_HEIGHT, 0);
     }
 
     /**

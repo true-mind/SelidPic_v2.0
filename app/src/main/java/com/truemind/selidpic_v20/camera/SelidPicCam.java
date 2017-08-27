@@ -223,8 +223,6 @@ public class SelidPicCam extends BaseActivity implements SensorEventListener {
                 if (all_task_done) {
                     isTypeManual = true;
                     Intent intent = new Intent(getContext(), TouchtoolActivity.class);
-                    /**Simplified result Activity*/
-                    //Intent intent = new Intent(getContext(), ResultActivity.class);
                     startActivity(intent);
                     finish();
                 }
@@ -414,7 +412,7 @@ public class SelidPicCam extends BaseActivity implements SensorEventListener {
                 @Override
                 public void onClose(DialogInterface dialog, int which, Object data) {
                     if (which == 1) {
-                        isTypeManual = false;
+                        isTypeManual = true;
                         Intent intent = new Intent(getContext(), CautionActivity.class);
                         startActivity(intent);
                         finish();
@@ -614,7 +612,6 @@ public class SelidPicCam extends BaseActivity implements SensorEventListener {
                     }, 2000);
 
                 }
-                return;
         }
 
     }

@@ -6,7 +6,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.util.Log;
 
-import com.truemind.selidpic_v20.R;
 
 public class Compose {
 
@@ -16,21 +15,7 @@ public class Compose {
     private double width;
     private double height;
 
-    private int screenWidth;
-    private int screenHeight;
     private int counterPara;
-
-    private int widthMid;
-    private int heightMid;
-
-    private double picHeight;
-    private double picWidth;
-
-    private double cropStartX;
-    private double cropStartY;
-
-    private double back_width;
-    private double back_height;
 
     private Context context;
 
@@ -43,8 +28,8 @@ public class Compose {
 
     public Bitmap compose(final Context context, final byte[] arr, final double width, final double height, final double ppi, Bitmap backgroundPara) {
         this.ppi = ppi;
-        this.width = height;
-        this.height = width;
+        this.height = height;
+        this.width = width;
         this.context = context;
         this.arr = arr;
         this.backgroundPara = backgroundPara;
@@ -66,26 +51,26 @@ public class Compose {
             //이미지 해상도 조절
             image = set_resolution();
 
-            screenWidth = image.getWidth();
-            screenHeight = image.getHeight();
+            int screenWidth = image.getWidth();
+            int screenHeight = image.getHeight();
 
             counterPara = (int) Math.sqrt(ppi) * 240000;
 
-            widthMid = screenWidth / 2;
-            heightMid = screenHeight / 2;
+            int widthMid = screenWidth / 2;
+            int heightMid = screenHeight / 2;
 
-            picHeight = (screenWidth / width * height);
-            picWidth = (screenHeight / height * width);
+            double picHeight = (screenWidth / height * width);
+            double picWidth = (screenHeight / width * height);
 
             if (picHeight > screenHeight) {
                 picHeight = screenHeight;
-                picWidth = (picHeight / height * width);
+                picWidth = (picHeight / width * height);
             } else {
                 picWidth = screenWidth;
-                picHeight = (picWidth / width * height);
+                picHeight = (picWidth / height * width);
             }
-            cropStartX = widthMid - (picWidth / 2);
-            cropStartY = heightMid - (picHeight / 2);
+            double cropStartX = widthMid - (picWidth / 2);
+            double cropStartY = heightMid - (picHeight / 2);
 
             imageCropped = Bitmap.createBitmap(image, (int) cropStartX, (int) cropStartY, (int) picWidth, (int) picHeight);
             image.recycle();
@@ -93,13 +78,13 @@ public class Compose {
             //배경 이미지 가져오기
             //background_before_crop = BitmapFactory.decodeResource(context.getResources(), R.drawable.photo_back);
             background_before_crop = backgroundPara;
-            back_width = background_before_crop.getWidth();
-            back_height = background_before_crop.getHeight();
+            double back_width = background_before_crop.getWidth();
+            double back_height = background_before_crop.getHeight();
 
             double crop_w = (back_width - picHeight);
             crop_w /= 2;
 
-            Log.d(TAG, "width : " + width + ", height : " + height + ", screenWidth : " + screenWidth + ", screenHeight : " + screenHeight + ", picHeight : " + picHeight + ", picWidth : " + picWidth
+            Log.d(TAG, "width : " + height + ", height : " + width + ", screenWidth : " + screenWidth + ", screenHeight : " + screenHeight + ", picHeight : " + picHeight + ", picWidth : " + picWidth
                     + ", cropStartX : " + cropStartX + ", cropStartY : " + cropStartY + ", back_width : " + back_width + ", back_height : " + back_height + ", crop_w : " + crop_w);
 
             background = Bitmap.createBitmap(background_before_crop, (int) crop_w, 0, (int) picHeight, (int) picWidth);
@@ -130,8 +115,8 @@ public class Compose {
         int targetW, targetH;
         //onCreate 안에서 view가 아직 안 띄워짐 고로 임의 값 설정하겠음 나중에 수정해도 됨
 
-        double tempW = width;
-        double tempH = height;
+        double tempW = height;
+        double tempH = width;
         double multy_value = ppi / 30;
         tempW *= multy_value;
         tempH *= multy_value;

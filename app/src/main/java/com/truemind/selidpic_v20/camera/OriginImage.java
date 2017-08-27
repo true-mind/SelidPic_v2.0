@@ -14,30 +14,17 @@ public class OriginImage {
     private static final String TAG = "MyTag";
 
     private double ppi;
-    private double width;
     private double height;
-
-    private int screenWidth;
-    private int screenHeight;
-
-    private int widthMid;
-    private int heightMid;
-
-    private double picHeight;
-    private double picWidth;
-
-    private double cropStartX;
-    private double cropStartY;
+    private double width;
 
     private Bitmap image;
-    private Bitmap imageCropped;
     private byte[] arr;
 
 
     public Bitmap getOriginImage(final byte[] arr, final double width, final double height, final double ppi) {
         this.ppi = ppi;
-        this.width = height;
-        this.height = width;
+        this.height = height;
+        this.width = width;
         this.arr = arr;
 
         thread.start();
@@ -57,26 +44,26 @@ public class OriginImage {
             //이미지 해상도 조절
             image = set_resolution();
 
-            screenWidth = image.getWidth();
-            screenHeight = image.getHeight();
+            int screenWidth = image.getWidth();
+            int screenHeight = image.getHeight();
 
-            widthMid = screenWidth / 2;
-            heightMid = screenHeight / 2;
+            int widthMid = screenWidth / 2;
+            int heightMid = screenHeight / 2;
 
-            picHeight = (screenWidth / width * height);
-            picWidth = (screenHeight / height * width);
+            double picHeight = (screenWidth / height * width);
+            double picWidth = (screenHeight / width * height);
 
             if (picHeight > screenHeight) {
                 picHeight = screenHeight;
-                picWidth = (picHeight / height * width);
+                picWidth = (picHeight / width * height);
             } else {
                 picWidth = screenWidth;
-                picHeight = (picWidth / width * height);
+                picHeight = (picWidth / height * width);
             }
-            cropStartX = widthMid - (picWidth / 2);
-            cropStartY = heightMid - (picHeight / 2);
+            double cropStartX = widthMid - (picWidth / 2);
+            double cropStartY = heightMid - (picHeight / 2);
 
-            imageCropped = Bitmap.createBitmap(image, (int) cropStartX, (int) cropStartY, (int) picWidth, (int) picHeight);
+            Bitmap imageCropped = Bitmap.createBitmap(image, (int) cropStartX, (int) cropStartY, (int) picWidth, (int) picHeight);
             image = rotateImage(imageCropped, 90);
             imageCropped.recycle();
         }
@@ -102,8 +89,8 @@ public class OriginImage {
         int targetW, targetH;
         //onCreate 안에서 view가 아직 안 띄워짐 고로 임의 값 설정하겠음 나중에 수정해도 됨
 
-        double tempW = width;
-        double tempH = height;
+        double tempW = height;
+        double tempH = width;
         double multy_value = ppi / 30;
         tempW *= multy_value;
         tempH *= multy_value;

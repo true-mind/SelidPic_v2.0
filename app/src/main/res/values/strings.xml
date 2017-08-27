@@ -132,4 +132,5 @@ limitations under the License.
 \n\nEND OF TERMS AND CONDITIONS
     </string>
     <string name="initiate_auto_shot">Initiate auto shot</string>
+    <string name="scroll">화면 스크롤 허용</string>
 </resources>

@@ -67,8 +67,8 @@ public class UserSizeDialog extends Dialog {
                         && Integer.parseInt(edtWidth.getText().toString()) != 0) {
                     if (Integer.parseInt(edtWidth.getText().toString()) <
                             Integer.parseInt(edtHeight.getText().toString())) {
-                        new Constants().setUserTypeSize(Integer.parseInt(edtWidth.getText().toString()),
-                                Integer.parseInt(edtHeight.getText().toString()));
+                        Save.userSizeWidth(getContext(), Integer.parseInt(edtWidth.getText().toString()));
+                        Save.userSizeHeight(getContext(), Integer.parseInt(edtHeight.getText().toString()));
                         if (mListener != null)
                             mListener.onClose(BUTTON1, null);
                         dismiss();
@@ -153,17 +153,17 @@ public class UserSizeDialog extends Dialog {
      * if text onClick event occurs, set width, height - Constants value.
      */
     public void getPreviousValue() {
-        if (Constants.PHOTO_TYPE2_WIDTH > 0 && Constants.PHOTO_TYPE2_HEIGHT > 0) {
-            SpannableString content = new SpannableString(Constants.PHOTO_TYPE2_WIDTH +
-                    getContext().getResources().getString(R.string.multiply) + Constants.PHOTO_TYPE2_HEIGHT +
+        if (Save.userSizeWidth(getContext()) > 0 && Save.userSizeHeight(getContext()) > 0) {
+            SpannableString content = new SpannableString(Save.userSizeWidth(getContext()) +
+                    getContext().getResources().getString(R.string.multiply) + Save.userSizeHeight(getContext()) +
                     getContext().getResources().getString(R.string.mm));
             content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
             txtPreviousValue.setText(content);
             txtPreviousValue.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    edtWidth.setText(Integer.toString(Constants.PHOTO_TYPE2_WIDTH));
-                    edtHeight.setText(Integer.toString(Constants.PHOTO_TYPE2_HEIGHT));
+                    edtWidth.setText(Integer.toString(Save.userSizeWidth(getContext())));
+                    edtHeight.setText(Integer.toString(Save.userSizeHeight(getContext())));
                 }
             });
         } else {

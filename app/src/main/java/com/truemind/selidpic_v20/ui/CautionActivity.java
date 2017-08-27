@@ -102,8 +102,8 @@ public class CautionActivity extends BaseActivity {
                 break;
 
             case Constants.PHOTO_TYPE2:
-                typeMatchedSize[0] = Constants.PHOTO_TYPE2_WIDTH;
-                typeMatchedSize[1] = Constants.PHOTO_TYPE2_HEIGHT;
+                typeMatchedSize[0] = Save.userSizeWidth(getContext());
+                typeMatchedSize[1] = Save.userSizeHeight(getContext());
                 break;
 
             case Constants.PHOTO_TYPE3:
