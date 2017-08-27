@@ -30,7 +30,7 @@
         <activity android:name=".ui.TouchtoolActivity"/>
         <activity android:name=".ui.AboutActivity"/>
         <activity android:name=".camera.SelidPicCam"/>
-        <activity android:name=".MiniGame"/>
+        <activity android:name=".easter.MiniGame"/>
     </application>
 
 </manifest>

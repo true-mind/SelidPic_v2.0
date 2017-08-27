@@ -141,11 +141,7 @@ public class CautionActivity extends BaseActivity {
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(checkBox.isChecked()){
-                    Constants.camManualGuide = false;
-                }else{
-                    Constants.camManualGuide = true;
-                }
+                Constants.camManualGuide = !checkBox.isChecked();
                 Intent intent = new Intent(getContext(), SelidPicCam.class);
                 startActivity(intent);
                 finish();

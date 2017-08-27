@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.truemind.selidpic_v20.BaseActivity;
 import com.truemind.selidpic_v20.R;
-import com.truemind.selidpic_v20.MiniGame;
+import com.truemind.selidpic_v20.easter.MiniGame;
 
 /**
  * Created by 현석 on 2017-05-02.

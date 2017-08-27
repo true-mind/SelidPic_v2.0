@@ -1,8 +1,6 @@
 package com.truemind.selidpic_v20.camera;
 
-import java.io.IOException;
-import java.util.List;
-
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.hardware.Camera;
 import android.hardware.Camera.Size;
@@ -12,10 +10,15 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.io.IOException;
+import java.util.List;
+
 
 /**
  * Created by 현석 on 2017-05-02.
  */
+@SuppressWarnings("deprecation")
+@SuppressLint("ViewConstructor")
 class Preview extends ViewGroup implements SurfaceHolder.Callback {
     private final String TAG = "Preview";
 
@@ -43,6 +46,7 @@ class Preview extends ViewGroup implements SurfaceHolder.Callback {
      * during onPause() and re-open() it during onResume()).
      *
      * */
+    @SuppressWarnings("deprecation")
     public void setCamera(Camera camera) {
         if (mCamera != null) {
             // Call stopPreview() to stop updating the preview surface.
@@ -53,8 +57,7 @@ class Preview extends ViewGroup implements SurfaceHolder.Callback {
 
         mCamera = camera;
         if (mCamera != null) {
-            List<Size> localSizes = mCamera.getParameters().getSupportedPreviewSizes();
-            mSupportedPreviewSizes = localSizes;
+            mSupportedPreviewSizes = mCamera.getParameters().getSupportedPreviewSizes();
             requestLayout();
 
             // get Camera parameters
@@ -150,6 +153,7 @@ class Preview extends ViewGroup implements SurfaceHolder.Callback {
     }
 
 
+    @SuppressWarnings("deprecation")
     private Size getOptimalPreviewSize(List<Size> sizes, int w, int h) {
         final double ASPECT_TOLERANCE = 0.1;
         double targetRatio = (double) w / h;
@@ -158,15 +162,13 @@ class Preview extends ViewGroup implements SurfaceHolder.Callback {
         Size optimalSize = null;
         double minDiff = Double.MAX_VALUE;
 
-        int targetHeight = h;
-
         // Try to find an size match aspect ratio and size
         for (Size size : sizes) {
             double ratio = (double) size.width / size.height;
             if (Math.abs(ratio - targetRatio) > ASPECT_TOLERANCE) continue;
-            if (Math.abs(size.height - targetHeight) < minDiff) {
+            if (Math.abs(size.height - h) < minDiff) {
                 optimalSize = size;
-                minDiff = Math.abs(size.height - targetHeight);
+                minDiff = Math.abs(size.height - h);
             }
         }
 
@@ -174,15 +176,16 @@ class Preview extends ViewGroup implements SurfaceHolder.Callback {
         if (optimalSize == null) {
             minDiff = Double.MAX_VALUE;
             for (Size size : sizes) {
-                if (Math.abs(size.height - targetHeight) < minDiff) {
+                if (Math.abs(size.height - h) < minDiff) {
                     optimalSize = size;
-                    minDiff = Math.abs(size.height - targetHeight);
+                    minDiff = Math.abs(size.height - h);
                 }
             }
         }
         return optimalSize;
     }
 
+    @SuppressWarnings("deprecation")
     public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
         if ( mCamera != null) {
             Camera.Parameters parameters = mCamera.getParameters();

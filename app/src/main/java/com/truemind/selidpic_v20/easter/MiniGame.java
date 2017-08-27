@@ -1,4 +1,4 @@
-package com.truemind.selidpic_v20;
+package com.truemind.selidpic_v20.easter;
 
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.truemind.selidpic_v20.BaseActivity;
+import com.truemind.selidpic_v20.R;
 import com.truemind.selidpic_v20.util.CommonDialog;
 
 import java.util.Random;

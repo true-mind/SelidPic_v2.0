@@ -49,7 +49,6 @@ public class GalleryActivity extends BaseActivity {
     private ImageView photoView;
     private Bitmap image_bitmap;
     private InputStream imageStream;
-    private Bitmap resized;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +79,7 @@ public class GalleryActivity extends BaseActivity {
                 selectedImagePath = getPath(selectedImageUri);
 
                 //resized = resizeBitmap(selectedImagePath);
-                resized = resizeBitmapWithURL(selectedImageUri);
+                Bitmap resized = resizeBitmapWithURL(selectedImageUri);
 
                 photoView.setImageBitmap(resized);
                 PhotoViewAttacher mAttacher = new PhotoViewAttacher(photoView);
@@ -96,6 +95,7 @@ public class GalleryActivity extends BaseActivity {
      * @param uri 갤러리에서 이미지 선택시 생성되는 Uri
      * @return String string 형식의 path를 반환
      * */
+    @SuppressWarnings("deprecation")
     public String getPath(Uri uri) {
         if (uri == null) {
             return null;
@@ -213,7 +213,6 @@ public class GalleryActivity extends BaseActivity {
                     }, 2000);
 
                 }
-                return;
         }
 
     }

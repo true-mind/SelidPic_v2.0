@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppThemeGreenBar" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -9,11 +9,10 @@
     </style>
 
     <style name="AppThemeTranslucent" parent="Theme.AppCompat.Dialog">
-        <item name="android:windowBackground">@drawable/color_empty</item>
+        <item name="android:windowBackground">@color/color_empty</item>
         <item name="android:windowIsTranslucent">true</item>
     </style>
 
-    <drawable name="color_empty">#00FFFFFF</drawable>
 
     <style name="mainBtnTextStyle">
         <item name="android:layout_gravity">center</item>
