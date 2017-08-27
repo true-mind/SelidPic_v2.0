@@ -83,20 +83,11 @@
 
 
                 <TextView
-                    android:id="@+id/intro"
+                    android:id="@+id/update"
                     style="@style/aboutTextButtonStyle"
                     android:layout_marginTop="30dp"
-                    android:text="@string/about_truemind" />
+                    android:text="@string/figure_update" />
 
-                <LinearLayout
-                    android:id="@+id/about_truemind_base"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-
-
-                </LinearLayout>
 
                 <TextView
                     android:id="@+id/back"

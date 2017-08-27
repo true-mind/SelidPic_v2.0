@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SelidPic_v2.0</string>
+    <string name="app_name">SelidPic</string>
     <string name="type1Size">25 x 30</string>
     <string name="mm">(mm)</string>
     <string name="type3Size">30 x 40</string>
@@ -80,6 +80,7 @@
     <string name="back">뒤로</string>
     <string name="intro_to_ur_fos">친구들에게 소개하기</string>
     <string name="about_truemind">About Truemind</string>
+    <string name="figure_update">업데이트 확인하기</string>
 
 
     <string name="licenseDetail">

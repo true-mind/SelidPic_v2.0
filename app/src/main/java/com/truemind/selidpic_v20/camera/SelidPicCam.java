@@ -222,9 +222,9 @@ public class SelidPicCam extends BaseActivity implements SensorEventListener {
                 }
                 if (all_task_done) {
                     isTypeManual = true;
-                    //Intent intent = new Intent(getContext(), TouchtoolActivity.class);
+                    Intent intent = new Intent(getContext(), TouchtoolActivity.class);
                     /**Simplified result Activity*/
-                    Intent intent = new Intent(getContext(), ResultActivity.class);
+                    //Intent intent = new Intent(getContext(), ResultActivity.class);
                     startActivity(intent);
                     finish();
                 }

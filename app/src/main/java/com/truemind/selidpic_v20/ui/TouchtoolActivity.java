@@ -26,6 +26,7 @@ import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -61,10 +62,13 @@ public class TouchtoolActivity extends BaseActivity {
     private static final String FINAL_PATH = Environment.getExternalStorageDirectory().getAbsolutePath() + FOLDER_NAME + "/";
     private static final int MODE_DRAW = 300;
     private static final int MODE_ERASE = 301;
+    private static final int BACKGROUND_NUM1 = 401;
+    private static final int BACKGROUND_NUM2 = 402;
+    private static final int BACKGROUND_NUM3 = 403;
+    private static final int BACKGROUND_NUM4 = 404;
 
-    private TextView titleName;
-    private TextView titleSize;
     private ImageView finalImage;
+    private ScrollView scrollView;
 
     private LinearLayout btnHelp;
     private LinearLayout btnDraw;
@@ -87,6 +91,7 @@ public class TouchtoolActivity extends BaseActivity {
     private LinearLayout btnSos4;
 
     private CheckBox checkBox;
+    private CheckBox checkScroll;
     private boolean composed = true;
 
     ProgressDialog progressDialog;
@@ -103,6 +108,7 @@ public class TouchtoolActivity extends BaseActivity {
     private int global_y;
     private String FILE_NAME = "default";
     private int currentMode = MODE_DRAW;
+    private int currentBackground = BACKGROUND_NUM1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,8 +148,9 @@ public class TouchtoolActivity extends BaseActivity {
      * Seekbar에 의한 size 조절부도 initiating
      */
     public void initView() {
-        titleSize = (TextView) findViewById(R.id.titleSize);
-        titleName = (TextView) findViewById(R.id.titleName);
+        TextView titleSize = (TextView) findViewById(R.id.titleSize);
+        TextView titleName = (TextView) findViewById(R.id.titleName);
+        TextView scrollText = (TextView) findViewById(R.id.scrollEnable);
         finalImage = (ImageView) findViewById(R.id.finalImage);
         TextView subTitle1 = (TextView) findViewById(R.id.subTitle1);
         TextView txtHelp = (TextView) findViewById(R.id.txtHelp);
@@ -183,8 +190,9 @@ public class TouchtoolActivity extends BaseActivity {
         TextView txtCheck1 = (TextView) findViewById(R.id.txtCheck1);
         TextView txtCheck2 = (TextView) findViewById(R.id.txtCheck2);
         checkBox = (CheckBox) findViewById(R.id.checkBox);
+        checkScroll = (CheckBox) findViewById(R.id.scrollCheck);
         btnDraw.setSelected(true);
-
+        scrollView = (ScrollView) findViewById(R.id.scrollView);
         ShapeDrawable sd = new ShapeDrawable(new RectShape());
         sd.setIntrinsicWidth(pencil_size);
         sd.setIntrinsicHeight(eraser_size);
@@ -199,10 +207,24 @@ public class TouchtoolActivity extends BaseActivity {
         titleSize.setText(size);
         titleName.setText(name);
 
-        setFontToViewBold(titleSize, titleName, subTitle1, txtHelp, txtDraw, toolSize1, txtErase, toolSize2,
+        setFontToViewBold(titleSize, titleName, scrollText, subTitle1, txtHelp, txtDraw, toolSize1, txtErase, toolSize2,
                 seekbarNum1, seekbarNum2, seekbarNum3, seekbar2Num1, seekbar2Num2, seekbar2Num3,
                 subTitle2, txtGetBack, subTitle3, imageSave, imageShare, imageReplay, imageCompare,
                 txtCheck1, txtCheck2);
+    }
+
+    public void scrollEnable(boolean enable) {
+        if (enable) {
+            scrollView.setOnTouchListener(null);
+        } else {
+            scrollView.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    return true;
+                }
+            });
+        }
+
     }
 
     /**
@@ -210,6 +232,13 @@ public class TouchtoolActivity extends BaseActivity {
      * 단 이미지 터치로 합성하는 부분은 imageEditter로 따로 등록
      */
     public void initListener() {
+        checkScroll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                scrollEnable(checkScroll.isChecked());
+            }
+        });
+
         btnHelp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -296,6 +325,7 @@ public class TouchtoolActivity extends BaseActivity {
             public void onClick(View v) {
                 background = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.photo_back);
                 updateBack(background);
+                currentBackground = BACKGROUND_NUM1;
             }
         });
         back2.setOnClickListener(new View.OnClickListener() {
@@ -303,6 +333,7 @@ public class TouchtoolActivity extends BaseActivity {
             public void onClick(View v) {
                 background = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.photo_back2);
                 updateBack(background);
+                currentBackground = BACKGROUND_NUM2;
             }
         });
         back3.setOnClickListener(new View.OnClickListener() {
@@ -310,6 +341,7 @@ public class TouchtoolActivity extends BaseActivity {
             public void onClick(View v) {
                 background = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.photo_back3);
                 updateBack(background);
+                currentBackground = BACKGROUND_NUM3;
             }
         });
         back4.setOnClickListener(new View.OnClickListener() {
@@ -317,6 +349,7 @@ public class TouchtoolActivity extends BaseActivity {
             public void onClick(View v) {
                 background = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.photo_back4);
                 updateBack(background);
+                currentBackground = BACKGROUND_NUM4;
             }
         });
         btnGetBack.setOnClickListener(new View.OnClickListener() {
@@ -457,7 +490,7 @@ public class TouchtoolActivity extends BaseActivity {
                                     for (int m = global_y - pencil_size / 2; m < global_y + pencil_size / 2; m++) {
                                         int c = 0;
                                         if (background.isRecycled()) {
-                                            background = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.photo_back);
+                                            generateBack(currentBackground);
                                         } else {
                                             c = background.getPixel(n, m);
                                         }
@@ -492,13 +525,31 @@ public class TouchtoolActivity extends BaseActivity {
                                 finalImage.setImageBitmap(composedImage);
                                 finalImage.invalidate();
                             } else {
-                                Log.d(TAG, "Out Of Range");}
+                                Log.d(TAG, "Out Of Range");
+                            }
                             break;
                     }
                 }
                 return true;
             }
         });
+    }
+
+    public void generateBack(int currentBackground) {
+        switch (currentBackground) {
+            case BACKGROUND_NUM1:
+                background = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.photo_back);
+                break;
+            case BACKGROUND_NUM2:
+                background = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.photo_back2);
+                break;
+            case BACKGROUND_NUM3:
+                background = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.photo_back3);
+                break;
+            case BACKGROUND_NUM4:
+                background = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.photo_back4);
+                break;
+        }
     }
 
     /**

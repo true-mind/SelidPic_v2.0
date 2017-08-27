@@ -5,6 +5,8 @@ package com.truemind.selidpic_v20;
  */
 public class Constants {
 
+    public static final String APP_LINK = "https://play.google.com/store/apps/details?id=com.truemind.selidpic_v20";
+
     /** PHOTO_TYPE은 촬영하고자 하는 규격의 이름을 담당함*/
     public static final String PHOTO_TYPE1 = "증명사진";
     public static final String PHOTO_TYPE2 = "사용자 지정 규격";

@@ -1,6 +1,7 @@
 package com.truemind.selidpic_v20.ui;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.truemind.selidpic_v20.BaseActivity;
+import com.truemind.selidpic_v20.Constants;
 import com.truemind.selidpic_v20.R;
 import com.truemind.selidpic_v20.easter.MiniGame;
 
@@ -25,7 +27,7 @@ public class AboutActivity extends BaseActivity{
     private TextView appId;
     private TextView version;
     private TextView license;
-    private TextView intro;
+    private TextView update;
     private TextView back;
     private ImageView iconShow;
     private LinearLayout licenseBase;
@@ -47,20 +49,20 @@ public class AboutActivity extends BaseActivity{
         appId = (TextView)findViewById(R.id.appId);
         version = (TextView)findViewById(R.id.version);
         license = (TextView)findViewById(R.id.license);
-        intro = (TextView)findViewById(R.id.intro);
+        update = (TextView)findViewById(R.id.update);
         back = (TextView)findViewById(R.id.back);
         licenseBase = (LinearLayout)findViewById(R.id.licenseDetailBase);
 
-        setFontToViewBold(appId, version, license, intro, back);
+        setFontToViewBold(appId, version, license, update, back);
 
 
         SpannableString licenseContent = new SpannableString(getContext().getResources().getString(R.string.license));
         licenseContent.setSpan(new UnderlineSpan(), 0, licenseContent.length(), 0);
         license.setText(licenseContent);
 
-        SpannableString introContent = new SpannableString(getContext().getResources().getString(R.string.about_truemind));
+        SpannableString introContent = new SpannableString(getContext().getResources().getString(R.string.figure_update));
         introContent.setSpan(new UnderlineSpan(), 0, introContent.length(), 0);
-        intro.setText(introContent);
+        update.setText(introContent);
 
         SpannableString backContent = new SpannableString(getContext().getResources().getString(R.string.back));
         backContent.setSpan(new UnderlineSpan(), 0, backContent.length(), 0);
@@ -81,10 +83,10 @@ public class AboutActivity extends BaseActivity{
                 }
             }
         });
-        intro.setOnClickListener(new View.OnClickListener() {
+        update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "intro", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(Constants.APP_LINK)));
             }
         });
         iconShow.setOnClickListener(new View.OnClickListener() {
