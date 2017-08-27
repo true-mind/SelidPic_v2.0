@@ -36,7 +36,6 @@ import com.truemind.selidpic_v20.R;
 import com.truemind.selidpic_v20.camera.Compose;
 import com.truemind.selidpic_v20.camera.OriginImage;
 import com.truemind.selidpic_v20.camera.SelidPicCam;
-
 import com.truemind.selidpic_v20.util.CommonDialog;
 import com.truemind.selidpic_v20.util.ProgressDialog;
 import com.truemind.selidpic_v20.util.Save;
@@ -49,10 +48,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Created by 현석 on 2017-04-27.
+ * Created by Hyunseok on 2017-08-27.
  */
 
-public class TouchtoolActivity extends BaseActivity {
+public class ResultActivity extends BaseActivity {
 
     private static final String TAG = "MyTag";
 
@@ -68,13 +67,6 @@ public class TouchtoolActivity extends BaseActivity {
     private ImageView finalImage;
 
     private LinearLayout btnHelp;
-    private LinearLayout btnDraw;
-    private SeekBar seekBarDraw;
-    private ImageView sizeView1;
-
-    private LinearLayout btnErase;
-    private SeekBar seekBarErase;
-    private ImageView sizeView2;
 
     private ImageView back1;
     private ImageView back2;
@@ -98,19 +90,13 @@ public class TouchtoolActivity extends BaseActivity {
     Bitmap composedImage;
     Bitmap imageOrigin;
 
-    private int pencil_size = 15;
-    private int eraser_size = 15;
-    private int global_x;
-    private int global_y;
     private String FILE_NAME = "default";
-    private int currentMode = MODE_DRAW;
-
     private boolean isOriginImageValidate = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_touchtool);
+        setContentView(R.layout.activity_result);
 
         initView();
         initListener();
@@ -135,7 +121,6 @@ public class TouchtoolActivity extends BaseActivity {
     private Handler threadhandler = new Handler() {
         public void handleMessage(Message msg) {
             finalImage.setImageBitmap(composedImage);
-            imageEditter();
             progressDialog.dismiss();
         }
     };
@@ -151,23 +136,6 @@ public class TouchtoolActivity extends BaseActivity {
         TextView subTitle1 = (TextView) findViewById(R.id.subTitle1);
         TextView txtHelp = (TextView) findViewById(R.id.txtHelp);
         btnHelp = (LinearLayout) findViewById(R.id.btnHelp);
-        btnDraw = (LinearLayout) findViewById(R.id.btnDraw);
-        TextView txtDraw = (TextView) findViewById(R.id.txtDraw);
-        seekBarDraw = (SeekBar) findViewById(R.id.seekBarDraw);
-        TextView toolSize1 = (TextView) findViewById(R.id.toolSize1);
-        sizeView1 = (ImageView) findViewById(R.id.sizeView1);
-        btnErase = (LinearLayout) findViewById(R.id.btnErase);
-        TextView txtErase = (TextView) findViewById(R.id.txtErase);
-        seekBarErase = (SeekBar) findViewById(R.id.seekBarErase);
-        TextView toolSize2 = (TextView) findViewById(R.id.toolSize2);
-        sizeView2 = (ImageView) findViewById(R.id.sizeView2);
-        TextView seekbarNum1 = (TextView) findViewById(R.id.seekbarNum1);
-        TextView seekbarNum2 = (TextView) findViewById(R.id.seekbarNum2);
-        TextView seekbarNum3 = (TextView) findViewById(R.id.seekbarNum3);
-        TextView seekbar2Num1 = (TextView) findViewById(R.id.seekbar2Num1);
-        TextView seekbar2Num2 = (TextView) findViewById(R.id.seekbar2Num2);
-        TextView seekbar2Num3 = (TextView) findViewById(R.id.seekbar2Num3);
-        TextView subTitle2 = (TextView) findViewById(R.id.subTitle2);
         back1 = (ImageView) findViewById(R.id.back1);
         back2 = (ImageView) findViewById(R.id.back2);
         back3 = (ImageView) findViewById(R.id.back3);
@@ -186,14 +154,6 @@ public class TouchtoolActivity extends BaseActivity {
         TextView txtCheck1 = (TextView) findViewById(R.id.txtCheck1);
         TextView txtCheck2 = (TextView) findViewById(R.id.txtCheck2);
         checkBox = (CheckBox) findViewById(R.id.checkBox);
-        btnDraw.setSelected(true);
-
-        ShapeDrawable sd = new ShapeDrawable(new RectShape());
-        sd.setIntrinsicWidth(pencil_size);
-        sd.setIntrinsicHeight(eraser_size);
-        sd.getPaint().setColor(Color.parseColor("#000000"));
-        sizeView1.setImageDrawable(sd);
-        sizeView2.setImageDrawable(sd);
 
         String size = new Constants().getCurrentPhotoWidth() + getContext().getResources().getString(R.string.multiply)
                 + new Constants().getCurrentPhotoHeight() + getContext().getResources().getString(R.string.mm);
@@ -202,9 +162,8 @@ public class TouchtoolActivity extends BaseActivity {
         titleSize.setText(size);
         titleName.setText(name);
 
-        setFontToViewBold(titleSize, titleName, subTitle1, txtHelp, txtDraw, toolSize1, txtErase, toolSize2,
-                seekbarNum1, seekbarNum2, seekbarNum3, seekbar2Num1, seekbar2Num2, seekbar2Num3,
-                subTitle2, txtGetBack, subTitle3, imageSave, imageShare, imageReplay, imageCompare,
+        setFontToViewBold(titleSize, titleName, subTitle1, txtHelp,
+                txtGetBack, subTitle3, imageSave, imageShare, imageReplay, imageCompare,
                 txtCheck1, txtCheck2);
     }
 
@@ -217,80 +176,7 @@ public class TouchtoolActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 CommonDialog dialog = new CommonDialog();
-                dialog.showDialog(getContext(), getResources().getString(R.string.help), getResources().getString(R.string.helper));
-            }
-        });
-        btnDraw.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                btnDraw.setSelected(true);
-                currentMode = MODE_DRAW;
-                if (btnErase.isSelected())
-                    btnErase.setSelected(false);
-
-            }
-        });
-        btnErase.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                btnErase.setSelected(true);
-                currentMode = MODE_ERASE;
-                if (btnDraw.isSelected())
-                    btnDraw.setSelected(false);
-
-            }
-        });
-        seekBarDraw.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                if (i < 5) {
-                    pencil_size = 5;
-
-                } else {
-                    pencil_size = i;
-                }
-                ShapeDrawable sd = new ShapeDrawable(new RectShape());
-                sd.setIntrinsicWidth(pencil_size);
-                sd.setIntrinsicHeight(pencil_size);
-                sd.getPaint().setColor(Color.parseColor("#000000"));
-                sizeView1.setImageDrawable(sd);
-                sizeView1.invalidateDrawable(sd);
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
-        seekBarErase.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                if (i < 5) {
-                    eraser_size = 5;
-                } else {
-                    eraser_size = i;
-                }
-                ShapeDrawable sd = new ShapeDrawable(new RectShape());
-                sd.setIntrinsicWidth(eraser_size);
-                sd.setIntrinsicHeight(eraser_size);
-                sd.getPaint().setColor(Color.parseColor("#000000"));
-                sizeView2.setImageDrawable(sd);
-                sizeView2.invalidateDrawable(sd);
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
+                dialog.showDialog(getContext(), getResources().getString(R.string.help), getResources().getString(R.string.helper_simplified));
             }
         });
 
@@ -424,122 +310,6 @@ public class TouchtoolActivity extends BaseActivity {
     }
 
     /**
-     * 화면 터치로 합성하는 기능
-     * 이 부분에서는 compose완료된 이미지와 오리지널 이미지를 비트맵으로 가지고 있어야 하며,
-     * getPixel에서는 recycle된 비트맵에 대해 지원되지 않는다.
-     */
-    public void imageEditter() {
-        final int[] viewCoords = new int[2];
-        finalImage.getLocationOnScreen(viewCoords);
-
-        Log.d(TAG, "viewCoords[0] : " + viewCoords[0]
-                + ", viewCoordes[1] : " + viewCoords[1]
-                + ", finalImage.getWidth : " + finalImage.getWidth()
-                + ", finalImage.getHeight : " + finalImage.getHeight());
-
-        final double widthParameter = composedImage.getWidth() / Constants.photoWidth;
-        final double heightParameter = composedImage.getHeight() / Constants.photoHeight;
-
-        Log.d(TAG, "composedImage.getWidth : " + composedImage.getWidth() +
-                ", composedImage.getHeight : " + composedImage.getHeight() +
-                ", photh Width : " + Constants.photoWidth +
-                ", photh Height : " + Constants.photoHeight +
-                ", widthPara : " + widthParameter +
-                ", heightPara : " + heightParameter);
-
-        finalImage.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                int action = motionEvent.getAction();
-                if (action == MotionEvent.ACTION_DOWN) {
-                    Log.d(TAG, "action down");
-                    global_x = (int) (motionEvent.getX() * widthParameter);
-                    global_y = (int) (motionEvent.getY() * heightParameter);
-                    Log.i(TAG, "getX() : " + motionEvent.getX() + ", getY() : " + motionEvent.getY());
-                    /*
-                    global_x -= viewCoords[0];
-                    global_y -= viewCoords[1];
-                    Log.i(TAG, "global_x : " + global_x + ", global_y : " + global_y);*/
-                    return true;
-                }
-                if (action == MotionEvent.ACTION_MOVE) {
-                    Log.d(TAG, "action move");
-                    global_x = (int) (motionEvent.getX() * widthParameter);
-                    global_y = (int) (motionEvent.getY() * heightParameter);
-                    Log.i(TAG, "getX() : " + motionEvent.getX() + ", getY() : " + motionEvent.getY());
-                    /*
-                    global_x -= viewCoords[0];
-                    global_y -= viewCoords[1];
-                    Log.i(TAG, "global_x : " + global_x + ", global_y : " + global_y);*/
-
-                    switch (currentMode) {
-                        case MODE_DRAW:
-                            Log.i(TAG, "pencil : " + pencil_size
-                                    + ", composedImage.getWidth() : " + composedImage.getWidth()
-                                    + ", composedImage.getHeight() : " + composedImage.getHeight());
-
-                            if (global_x > pencil_size / 2
-                                    && global_x < composedImage.getHeight() - pencil_size / 2
-                                    && global_y > pencil_size / 2
-                                    && global_y < composedImage.getWidth() - pencil_size / 2) {
-
-                                for (int n = global_x - pencil_size / 2; n < global_x + pencil_size / 2; n++) {
-                                    for (int m = global_y - pencil_size / 2; m < global_y + pencil_size / 2; m++) {
-                                        int c = 0;
-                                        if (background.isRecycled()) {
-                                            Log.d(TAG, "background is recycled.");
-                                            background = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.photo_back);
-                                        } else {
-                                            c = background.getPixel(n, m);
-                                        }
-
-                                        if (composedImage.isRecycled()) {
-                                            Log.d(TAG, "composedImage is recycled.");
-                                            updateBack(background);
-                                        }
-                                        composedImage.setPixel(n, m, c);
-                                        Log.d(TAG, "Draw");
-                                    }
-                                }
-                                finalImage.setImageBitmap(composedImage);
-                                finalImage.invalidate();
-                            } else {
-                                Log.d(TAG, "Out Of Range");
-                            }
-                            break;
-
-
-                        case MODE_ERASE:
-                            Log.i(TAG, "erase_size : " + eraser_size
-                                    + ", composedImage.getWidth() : " + composedImage.getWidth()
-                                    + ", composedImage.getHeight() : " + composedImage.getHeight());
-
-                            if (global_x > eraser_size / 2
-                                    && global_x < composedImage.getHeight() - eraser_size / 2
-                                    && global_y > eraser_size / 2
-                                    && global_y < composedImage.getWidth() - eraser_size / 2) {
-
-                                for (int n = global_x - eraser_size / 2; n < global_x + eraser_size / 2; n++) {
-                                    for (int m = global_y - eraser_size / 2; m < global_y + eraser_size / 2; m++) {
-                                        int c = imageOrigin.getPixel(n, m);
-                                        composedImage.setPixel(n, m, c);
-                                        Log.d(TAG, "Erase");
-                                    }
-                                }
-                                finalImage.setImageBitmap(composedImage);
-                                finalImage.invalidate();
-                            } else {
-                                Log.d(TAG, "Out Of Range");
-                            }
-                            break;
-                    }
-                }
-                return true;
-            }
-        });
-    }
-
-    /**
      * background를 사용자가 원하는 것으로 바꾸어 다시 compose가능
      * 합수에서 쓰레드 진행됨, 핸들러는 공유
      */
@@ -640,3 +410,4 @@ public class TouchtoolActivity extends BaseActivity {
         cancelEdit();
     }
 }
+

@@ -5,6 +5,8 @@
     android:background="@drawable/common_back"
     android:orientation="vertical">
 
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -61,7 +63,7 @@
                         <TextView
                             android:id="@+id/subTitle1"
                             style="@style/touchtoolSubTitleTextStyle"
-                            android:text="@string/imageEdit" />
+                            android:text="@string/changeBack" />
 
                     </LinearLayout>
 
@@ -82,127 +84,6 @@
                             android:textSize="10sp" />
 
                     </LinearLayout>
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:id="@+id/btnDraw"
-                            style="@style/touchtoolEditItemBtnStyle"
-                            android:background="@drawable/s_btn_draw">
-
-                            <TextView
-                                android:id="@+id/txtDraw"
-                                style="@style/touchtoolEditItemTextStyle"
-                                android:text="@string/draw" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            style="@style/touchtoolSeekbarBaseStyle"
-                            android:orientation="vertical">
-
-                            <include layout="@layout/seekbar_num" />
-
-                            <SeekBar
-                                android:id="@+id/seekBarDraw"
-                                style="@style/seekbar" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/toolSize1"
-                                style="@style/toolSizeTextStyle" />
-
-                            <ImageView
-                                android:id="@+id/sizeView1"
-                                style="@style/toolSizeViewStyle" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:id="@+id/btnErase"
-                            style="@style/touchtoolEditItemBtnStyle"
-                            android:background="@drawable/s_btn_erase">
-
-                            <TextView
-                                android:id="@+id/txtErase"
-                                style="@style/touchtoolEditItemTextStyle"
-                                android:text="@string/erase" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            style="@style/touchtoolSeekbarBaseStyle"
-                            android:orientation="vertical">
-
-                            <include layout="@layout/seekbar_num2" />
-
-                            <SeekBar
-                                android:id="@+id/seekBarErase"
-                                style="@style/seekbar" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/toolSize2"
-                                style="@style/toolSizeTextStyle" />
-
-                            <ImageView
-                                android:id="@+id/sizeView2"
-                                style="@style/toolSizeViewStyle" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    style="@style/touchtoolSubTitleBaseStyle2"
-                    android:background="#41414d">
-
-                    <TextView
-                        android:id="@+id/subTitle2"
-                        style="@style/touchtoolSubTitleTextStyle"
-                        android:text="@string/changeBack" />
 
                 </LinearLayout>
 

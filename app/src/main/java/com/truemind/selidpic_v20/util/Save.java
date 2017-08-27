@@ -20,6 +20,7 @@ public final class Save {
     public static final String KEY_PHOTO_BYTE_STREAM = "pbs";
     public static final String KEY_ORIGIN_IMAGE = "oi";
     public static final String KEY_COMPOSED_IMAGE = "ci";
+    public static final String KEY_CAM_MANUAL = "cm";
 
     private static SharedPreferences instance(Context context) {
         if (SP == null) {
@@ -106,8 +107,16 @@ public final class Save {
         instance(context).edit().putString(KEY_ORIGIN_IMAGE, saveThis).apply();
     }
 
+    public static void camManualValidate(Context context, boolean isValidate){
+        instance(context).edit().putBoolean(KEY_CAM_MANUAL, isValidate).apply();
+    }
+
+    public static boolean camManualValidate(Context context){
+        return instance(context).getBoolean(KEY_CAM_MANUAL, true);
+    }
+
     /**
-     * 설정값 변경시 callback 수신을 취소할 수 있습니다.
+     * 설정값 변경시 callback 수신을 허용할 수 있습니다.
      *
      * @param l 콜백 수신자.
      */

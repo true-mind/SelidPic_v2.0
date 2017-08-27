@@ -36,11 +36,13 @@ import com.truemind.selidpic_v20.Constants;
 import com.truemind.selidpic_v20.R;
 import com.truemind.selidpic_v20.ui.CautionActivity;
 import com.truemind.selidpic_v20.ui.GalleryActivity;
+import com.truemind.selidpic_v20.ui.ResultActivity;
 import com.truemind.selidpic_v20.ui.TouchtoolActivity;
 
 import com.truemind.selidpic_v20.util.CamManualDialog;
 import com.truemind.selidpic_v20.util.CamSettingDialog;
 import com.truemind.selidpic_v20.util.CommonDialog;
+import com.truemind.selidpic_v20.util.Save;
 
 import java.io.ByteArrayOutputStream;
 import java.util.Timer;
@@ -220,7 +222,9 @@ public class SelidPicCam extends BaseActivity implements SensorEventListener {
                 }
                 if (all_task_done) {
                     isTypeManual = true;
-                    Intent intent = new Intent(getContext(), TouchtoolActivity.class);
+                    //Intent intent = new Intent(getContext(), TouchtoolActivity.class);
+                    /**Simplified result Activity*/
+                    Intent intent = new Intent(getContext(), ResultActivity.class);
                     startActivity(intent);
                     finish();
                 }
@@ -248,7 +252,7 @@ public class SelidPicCam extends BaseActivity implements SensorEventListener {
         /**camManualDialog는 설정에서의 guide와는 다른 guide
          * 만약 설정에서의 guide가 각 버튼에 대한 설명이라면
          * 이 다이얼로그에서의 guide는 각 기능에 대한 설명(자세함)*/
-        if (Constants.camManualGuide) {
+        if (Save.camManualValidate(getContext())) {
             CamManualDialog dialog = new CamManualDialog(getContext());
             dialog.show();
         }

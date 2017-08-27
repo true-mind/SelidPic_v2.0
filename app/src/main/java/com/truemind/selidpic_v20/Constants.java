@@ -72,7 +72,6 @@ public class Constants {
     public static boolean camGuideValidate = false;
     public static boolean camTitleInvalidate = false;
     public static int camTimerTime = 5;
-    public static boolean camManualGuide = false;
 
     /** 촬영된 사진의 byte Stream을 저장*/
     public static byte[] photoByteStream;

@@ -144,7 +144,9 @@ public class MainActivity extends BaseActivity {
         btn6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "6", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getContext(), AboutActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
             }
         });
 

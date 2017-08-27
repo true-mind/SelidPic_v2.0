@@ -12,6 +12,7 @@ import com.truemind.selidpic_v20.BaseActivity;
 import com.truemind.selidpic_v20.Constants;
 import com.truemind.selidpic_v20.R;
 import com.truemind.selidpic_v20.camera.SelidPicCam;
+import com.truemind.selidpic_v20.util.Save;
 
 /**
  * Created by 현석 on 2017-04-21.
@@ -70,7 +71,7 @@ public class CautionActivity extends BaseActivity {
         btnStart = (LinearLayout) findViewById(R.id.btnStart);
 
         checkBox = (CheckBox)findViewById(R.id.checkBox);
-        if(Constants.camManualGuide){
+        if(Save.camManualValidate(getContext())){
             checkBox.setChecked(false);
         }else{
             checkBox.setChecked(true);
@@ -141,7 +142,7 @@ public class CautionActivity extends BaseActivity {
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Constants.camManualGuide = !checkBox.isChecked();
+                Save.camManualValidate(getContext(), !checkBox.isChecked());
                 Intent intent = new Intent(getContext(), SelidPicCam.class);
                 startActivity(intent);
                 finish();

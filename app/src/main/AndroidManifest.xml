@@ -28,6 +28,7 @@
         <activity android:name=".ui.CautionActivity"/>
         <activity android:name=".ui.GalleryActivity"/>
         <activity android:name=".ui.TouchtoolActivity"/>
+        <activity android:name=".ui.ResultActivity"/>
         <activity android:name=".ui.AboutActivity"/>
         <activity android:name=".camera.SelidPicCam"/>
         <activity android:name=".easter.MiniGame"/>

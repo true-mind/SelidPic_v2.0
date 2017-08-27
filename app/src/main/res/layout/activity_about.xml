@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/common_back">
+    android:background="@drawable/common_back"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -10,34 +11,34 @@
         android:layout_weight="1"
         android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/iconShow"
-                android:layout_marginTop="50dp"
-                android:layout_width="132dp"
-                android:layout_height="132dp"
-                android:layout_gravity="center"
-                android:background="@drawable/iconshow"/>
+        <ImageView
+            android:id="@+id/iconShow"
+            android:layout_width="132dp"
+            android:layout_height="132dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/iconshow" />
 
-            <TextView
-                android:id="@+id/appId"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#000"
-                android:textSize="16sp"
-                android:text="@string/selidpic"/>
+        <TextView
+            android:id="@+id/appId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="@string/selidpic"
+            android:textColor="#000"
+            android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/version"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="30dp"
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#808080"
-                android:textSize="16sp"
-                android:text="@string/version_2_0"/>
+        <TextView
+            android:id="@+id/version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/version_2_0"
+            android:textColor="#808080"
+            android:textSize="16sp" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -46,52 +47,62 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="30dp"
                 android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/license"
                     style="@style/aboutTextButtonStyle"
-                    android:text="@string/license"/>
+                    android:text="@string/license" />
 
                 <LinearLayout
-                    android:visibility="gone"
                     android:id="@+id/licenseDetailBase"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
                     <TextView
                         android:id="@+id/licenseDetail"
                         style="@style/aboutTextLicenseStyle"
-                        android:text="@string/licenseDetail"/>
+                        android:text="@string/licenseDetail" />
 
                     <TextView
                         android:id="@+id/licenseDetail2"
                         style="@style/aboutTextLicenseStyle"
                         android:layout_marginLeft="20dp"
-                        android:text="@string/licenseDetail2"/>
+                        android:text="@string/licenseDetail2" />
 
                     <TextView
                         android:id="@+id/licenseDetail3"
                         style="@style/aboutTextLicenseStyle"
-                        android:text="@string/licenseDetail3"/>
+                        android:text="@string/licenseDetail3" />
 
                 </LinearLayout>
 
 
                 <TextView
                     android:id="@+id/intro"
-                    android:layout_marginTop="30dp"
                     style="@style/aboutTextButtonStyle"
-                    android:text="@string/intro_to_ur_fos"/>
+                    android:layout_marginTop="30dp"
+                    android:text="@string/about_truemind" />
+
+                <LinearLayout
+                    android:id="@+id/about_truemind_base"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/back"
-                    android:layout_marginTop="30dp"
                     style="@style/aboutTextButtonStyle"
-                    android:text="@string/back"/>
+                    android:layout_marginTop="30dp"
+                    android:text="@string/back" />
 
 
             </LinearLayout>
@@ -99,9 +110,8 @@
         </ScrollView>
 
 
-
     </LinearLayout>
 
-    <include layout="@layout/common_footer"/>
+    <include layout="@layout/common_footer" />
 
 </LinearLayout>

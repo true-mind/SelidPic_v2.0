@@ -58,7 +58,7 @@ public class AboutActivity extends BaseActivity{
         licenseContent.setSpan(new UnderlineSpan(), 0, licenseContent.length(), 0);
         license.setText(licenseContent);
 
-        SpannableString introContent = new SpannableString(getContext().getResources().getString(R.string.intro_to_ur_fos));
+        SpannableString introContent = new SpannableString(getContext().getResources().getString(R.string.about_truemind));
         introContent.setSpan(new UnderlineSpan(), 0, introContent.length(), 0);
         intro.setText(introContent);
 
