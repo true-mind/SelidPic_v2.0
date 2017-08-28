@@ -9,7 +9,7 @@ import android.view.View;
 
 public abstract class OnSingleClickListener implements View.OnClickListener {
 
-    private static final long MIN_CLICK_INTERVAL = 300;
+    private static final long MIN_CLICK_INTERVAL = 450;
     private long mLastClickTime;
 
     public abstract void onSingleClick(View v);

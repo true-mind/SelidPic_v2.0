@@ -1,33 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/splash_back">
+    android:background="@drawable/splash_back"
+    android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/title"
-        android:layout_gravity="center"
-        android:layout_width="match_parent"
+        android:layout_marginTop="120dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_gravity="center_horizontal">
 
-        <ImageView
-            android:layout_gravity="center"
-            android:layout_width="190dp"
-            android:layout_height="70dp"
-            android:background="@null"
-            android:src="@drawable/splash_title"/>
+        <View
+            android:id="@+id/viewLeft"
+            android:layout_width="4dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite" />
 
-        <TextView
-            android:gravity="center"
-            android:id="@+id/splashText"
-            android:layout_marginTop="35dp"
-            android:layout_gravity="center"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textColor="#fff"
-            android:text="@string/splashText"/>
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <View
+                android:id="@+id/viewTop"
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:background="@color/colorWhite" />
+
+            <LinearLayout
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="30dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="190dp"
+                    android:layout_height="70dp"
+                    android:layout_gravity="center"
+                    android:background="@null"
+                    android:src="@drawable/splash_title" />
+
+                <TextView
+                    android:id="@+id/splashText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="35dp"
+                    android:gravity="center"
+                    android:text="@string/splashText"
+                    android:textColor="#fff"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/viewBottom"
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:background="@color/colorWhite" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/viewRight"
+            android:layout_width="4dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite" />
 
     </LinearLayout>
 

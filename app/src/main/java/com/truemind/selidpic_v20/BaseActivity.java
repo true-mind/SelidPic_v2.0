@@ -41,19 +41,6 @@ public abstract class BaseActivity extends Activity {
     /**for onBackPress*/
     public final long FINISH_INTERVAL_TIME = 2000;
     public long backPressedTime = 0;
-/*
-
-    @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
-        initView();
-        initListener();
-
-    }
-
-    protected abstract void initView();
-    protected abstract void initListener();
-*/
 
     /**
      * Typeface로 폰트 적용
@@ -132,8 +119,10 @@ public abstract class BaseActivity extends Activity {
      * */
     public boolean closeMenu(){
         Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.slide_reverse);
-        fab_home_base.startAnimation(animation);
-        fab_gallery_base.startAnimation(animation);
+        Animation animation_100 = AnimationUtils.loadAnimation(getContext(), R.anim.slide_reverse_100);
+        Animation animation_200 = AnimationUtils.loadAnimation(getContext(), R.anim.slide_reverse_200);
+        fab_home_base.startAnimation(animation_200);
+        fab_gallery_base.startAnimation(animation_100);
         fab_about_base.startAnimation(animation);
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -142,7 +131,7 @@ public abstract class BaseActivity extends Activity {
                 fab_gallery_base.setVisibility(View.GONE);
                 fab_about_base.setVisibility(View.GONE);
             }
-        }, 300);
+        }, 500);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             fab_btn.setBackground(fab_btn_unselected);
         }
@@ -155,9 +144,11 @@ public abstract class BaseActivity extends Activity {
      * */
     public boolean openMenu(){
         Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.slide);
+        Animation animation_100 = AnimationUtils.loadAnimation(getContext(), R.anim.slide_100);
+        Animation animation_200 = AnimationUtils.loadAnimation(getContext(), R.anim.slide_200);
         fab_home_base.startAnimation(animation);
-        fab_gallery_base.startAnimation(animation);
-        fab_about_base.startAnimation(animation);
+        fab_gallery_base.startAnimation(animation_100);
+        fab_about_base.startAnimation(animation_200);
         fab_home_base.setVisibility(View.VISIBLE);
         fab_gallery_base.setVisibility(View.VISIBLE);
         fab_about_base.setVisibility(View.VISIBLE);

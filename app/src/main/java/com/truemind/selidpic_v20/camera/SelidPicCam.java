@@ -36,7 +36,6 @@ import com.truemind.selidpic_v20.Constants;
 import com.truemind.selidpic_v20.R;
 import com.truemind.selidpic_v20.ui.CautionActivity;
 import com.truemind.selidpic_v20.ui.GalleryActivity;
-import com.truemind.selidpic_v20.ui.ResultActivity;
 import com.truemind.selidpic_v20.ui.TouchtoolActivity;
 
 import com.truemind.selidpic_v20.util.CamManualDialog;
