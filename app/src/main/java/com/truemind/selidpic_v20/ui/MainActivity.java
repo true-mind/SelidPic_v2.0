@@ -2,18 +2,19 @@ package com.truemind.selidpic_v20.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.truemind.selidpic_v20.BaseActivity;
 import com.truemind.selidpic_v20.Constants;
 import com.truemind.selidpic_v20.R;
-
-import com.truemind.selidpic_v20.util.ProgressDialog;
+import com.truemind.selidpic_v20.ad.QuitAdDialogFactory;
 import com.truemind.selidpic_v20.util.UserSizeDialog;
 
 public class MainActivity extends BaseActivity {
@@ -27,6 +28,10 @@ public class MainActivity extends BaseActivity {
     private LinearLayout btn5;
     private LinearLayout btn6;
 
+    // Quit Ad Dialog
+    private AdRequest mQuitAdRequest;
+    private AdView mQuitPortraitAdView;
+    private AdView mQuitLandscapeAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +44,21 @@ public class MainActivity extends BaseActivity {
         initFooter();
         initFloating();
         floatingListener(getContext());
+
+        MobileAds.initialize(getContext(), Constants.APP_UNIT_ID);
+        initQuitAdView();
+    }
+
+
+    private void initQuitAdView() {
+        mQuitAdRequest = new AdRequest.Builder()
+                .addTestDevice("CC2A80F3D7ED02504314B961F17B72E8")
+                .addTestDevice("E1D20670773A41C2F5FB8D2122C22BB4")
+                .build();
+        mQuitPortraitAdView = QuitAdDialogFactory.initPortraitAdView(this, Constants.AD_UNIT_ID,
+                mQuitAdRequest);
+        mQuitLandscapeAdView = QuitAdDialogFactory.initLandscapeAdView(this, Constants.AD_UNIT_ID,
+                mQuitAdRequest);
     }
 
     /**View initiating, get all textviews for typekit*/
@@ -153,6 +173,20 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        mQuitPortraitAdView.resume();
+        mQuitLandscapeAdView.resume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mQuitPortraitAdView.pause();
+        mQuitLandscapeAdView.pause();
+    }
+
+    @Override
     public void onBackPressed() {
         long tempTime = System.currentTimeMillis();
         long intervalTime = tempTime - backPressedTime;
@@ -166,5 +200,36 @@ public class MainActivity extends BaseActivity {
             Toast.makeText(getContext(), R.string.exitMessage,Toast.LENGTH_SHORT).show();
         }
     }
+
+/*
+
+    @Override
+    public void onBackPressed() {
+        if (InternetConnectionManager.isNetworkAvailable(this)) {
+
+            QuitAdDialogFactory.Options options =
+                    new QuitAdDialogFactory.Options(this, mQuitPortraitAdView);
+            options.isAppCompat = false;
+            options.isRotatable = true;
+            options.landscapeAdView = mQuitLandscapeAdView;
+
+            Dialog adDialog = QuitAdDialogFactory.makeDialog(options);
+            if (adDialog != null) {
+                adDialog.show();
+                // make AdView again for next quit dialog
+                // prevent child reference
+                // 가로 모드는 7.5% 가량 사용하고 있기에 속도를 위해서 광고를 계속 불러오지 않음
+                mQuitPortraitAdView = QuitAdDialogFactory.initPortraitAdView(this,
+                        Constants.AD_UNIT_ID, mQuitAdRequest);
+            } else {
+                // just finish activity when dialog is null
+                super.onBackPressed();
+            }
+        } else {
+            // just finish activity when no ad item is bought
+            super.onBackPressed();
+        }
+    }
+*/
 
 }

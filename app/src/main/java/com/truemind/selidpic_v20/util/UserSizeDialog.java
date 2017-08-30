@@ -14,7 +14,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.truemind.selidpic_v20.Constants;
 import com.truemind.selidpic_v20.R;
 
 

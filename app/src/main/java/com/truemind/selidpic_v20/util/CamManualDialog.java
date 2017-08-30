@@ -99,7 +99,7 @@ public class CamManualDialog extends Dialog {
             view.setTypeface(NanumNormal);
     }
 
-    public void nextSwitch(int sequence){
+    private void nextSwitch(int sequence){
         switch (sequence){
             case SEQUENCE1:
                 image1.setVisibility(View.VISIBLE);

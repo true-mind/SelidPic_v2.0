@@ -8,8 +8,8 @@ android {
         applicationId "com.truemind.selidpic"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 2
-        versionName "2.0"
+        versionCode 4
+        versionName "2.2"
     }
     buildTypes {
         release {
@@ -19,9 +19,12 @@ android {
     }
 }
 
-subprojects{
+allprojects{
     repositories{
         jcenter()
+        maven {
+            url "https://maven.google.com"
+        }
     }
 }
 
@@ -29,6 +32,7 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.google.android.gms:play-services-ads:11.2.0'
     compile 'com.commit451:PhotoView:1.2.4'
 
 

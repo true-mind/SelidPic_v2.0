@@ -4,9 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
-import android.view.Gravity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -45,6 +43,13 @@ public class CommonDialog {
      */
     public Dialog showDialog(Context context, String message) {
         return showDialog(context, "", message, true, "확인");
+    }
+
+    /**
+     * 확인 버튼만 가지고 있음(버튼 1개), title 없음, Cancel 가능 여부 지정 가능
+     */
+    public Dialog showDialog(Context context, String message, boolean cancelable) {
+        return showDialog(context, "", message, cancelable, "확인");
     }
 
     /**

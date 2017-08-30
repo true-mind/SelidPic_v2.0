@@ -36,6 +36,7 @@ import com.truemind.selidpic_v20.Constants;
 import com.truemind.selidpic_v20.R;
 import com.truemind.selidpic_v20.ui.CautionActivity;
 import com.truemind.selidpic_v20.ui.GalleryActivity;
+import com.truemind.selidpic_v20.ui.MainActivity;
 import com.truemind.selidpic_v20.ui.TouchtoolActivity;
 
 import com.truemind.selidpic_v20.util.CamManualDialog;
@@ -600,17 +601,19 @@ public class SelidPicCam extends BaseActivity implements SensorEventListener {
                     /** Access denied (user denied permission)*/
 
                     CommonDialog dialog = new CommonDialog();
-                    dialog.showDialog(this, "권한이 없습니다.");
-                    new Handler().postDelayed(new Runnable() {
+                    dialog.setOnCloseListener(new CommonDialog.OnCloseListener() {
                         @Override
-                        public void run() {
-                            Intent intent = new Intent(getContext(), CautionActivity.class);
-                            startActivity(intent);
-                            finish();
+                        public void onClose(DialogInterface dialog, int which, Object data) {
+                            if(which==1){
+                                Intent intent = new Intent(getContext(), CautionActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
                         }
-                    }, 2000);
-
+                    });
+                    dialog.showDialog(this, "권한이 없습니다.", false);
                 }
+
         }
 
     }

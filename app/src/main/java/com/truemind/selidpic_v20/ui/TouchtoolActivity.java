@@ -122,11 +122,12 @@ public class TouchtoolActivity extends BaseActivity {
         initFloating();
         floatingListener(getContext());
 
-        background = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.photo_back);
-        updateBack(background);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkPermission();
+        }else{
+            background = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.photo_back);
+            updateBack(background);
         }
     }
 
@@ -143,14 +144,6 @@ public class TouchtoolActivity extends BaseActivity {
         }
     };
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        scrollEnable(checkScroll.isChecked());
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            checkPermission();
-        }
-    }
 
     /**
      * View initiating
@@ -643,6 +636,8 @@ public class TouchtoolActivity extends BaseActivity {
         } else {
             /** Access already granted (Permission granted)*/
 
+            background = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.photo_back);
+            updateBack(background);
 
         }
     }
@@ -655,22 +650,25 @@ public class TouchtoolActivity extends BaseActivity {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
                     /** Access granted (Permission granted)*/
+                    background = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.photo_back);
+                    updateBack(background);
 
                 } else {
 
                     /** Access denied (user denied permission)*/
 
                     CommonDialog dialog = new CommonDialog();
-                    dialog.showDialog(this, "권한이 없습니다.");
-                    new Handler().postDelayed(new Runnable() {
+                    dialog.setOnCloseListener(new CommonDialog.OnCloseListener() {
                         @Override
-                        public void run() {
-                            Intent intent = new Intent(getContext(), MainActivity.class);
-                            startActivity(intent);
-                            finish();
+                        public void onClose(DialogInterface dialog, int which, Object data) {
+                            if(which==1){
+                                Intent intent = new Intent(getContext(), SelidPicCam.class);
+                                startActivity(intent);
+                                finish();
+                            }
                         }
-                    }, 2000);
-
+                    });
+                    dialog.showDialog(this, "권한이 없습니다.", false);
                 }
         }
 

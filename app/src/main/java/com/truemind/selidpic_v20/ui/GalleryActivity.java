@@ -2,6 +2,7 @@ package com.truemind.selidpic_v20.ui;
 
 import android.Manifest;
 import android.annotation.TargetApi;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -10,7 +11,6 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -20,12 +20,12 @@ import android.widget.ImageView;
 
 import com.truemind.selidpic_v20.BaseActivity;
 import com.truemind.selidpic_v20.R;
+import com.truemind.selidpic_v20.util.CommonDialog;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 import uk.co.senab.photoview.PhotoViewAttacher;
-import com.truemind.selidpic_v20.util.CommonDialog;
 
 /**
  * Created by 현석 on 2017-04-24.
@@ -204,15 +204,17 @@ public class GalleryActivity extends BaseActivity {
                     /** Access denied (user denied permission)*/
 
                     CommonDialog dialog = new CommonDialog();
-                    dialog.showDialog(this, "권한이 없습니다.");
-                    new Handler().postDelayed(new Runnable() {
+                    dialog.setOnCloseListener(new CommonDialog.OnCloseListener() {
                         @Override
-                        public void run() {
-                            finish();
+                        public void onClose(DialogInterface dialog, int which, Object data) {
+                            if(which==1){
+                                finish();
+                            }
                         }
-                    }, 2000);
-
+                    });
+                    dialog.showDialog(this, "권한이 없습니다.", false);
                 }
+
         }
 
     }

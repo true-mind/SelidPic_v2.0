@@ -3,7 +3,6 @@ package com.truemind.selidpic_v20.util;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Typeface;
-import android.support.annotation.NonNull;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;

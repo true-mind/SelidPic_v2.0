@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">SelidPic</string>
+    <string name="version_2_0">Version : 2.2</string>
+
     <string name="type1Size">25 x 30</string>
     <string name="mm">(mm)</string>
     <string name="type3Size">30 x 40</string>
@@ -75,7 +77,6 @@
     <string name="quater3">○ ○ ● ○</string>
     <string name="quater4">○ ○ ○ ●</string>
     <string name="selidpic">SelidPic</string>
-    <string name="version_2_0">Version : 2.0</string>
     <string name="license">오픈소스 라이센스</string>
     <string name="back">뒤로</string>
     <string name="intro_to_ur_fos">친구들에게 소개하기</string>
@@ -133,4 +134,14 @@ limitations under the License.
     </string>
     <string name="initiate_auto_shot">Initiate auto shot</string>
     <string name="scroll">화면 스크롤 허용</string>
+
+    <string name="yes">종료</string>
+    <string name="no">취소</string>
+    <string name="permission_deny">권한이 거부되었습니다.\n이 권한이 없으면 기능을 사용할 수 없습니다.\n\n권한을 확인해주세요.</string>
+    <string name="permission_deny_write_storage">저장소 읽기 권한이 거부되었습니다.\n이 권한이 없으면 기능을 사용할 수 없습니다.\n\n권한을 확인해주세요.</string>
+    <string name="permission_deny_read_storage">저장소 쓰기 권한이 거부되었습니다.\n이 권한이 없으면 기능을 사용할 수 없습니다.\n\n권한을 확인해주세요.</string>
+    <string name="permission_deny_internet">인터넷 권한이 거부되었습니다.\n이 권한이 없으면 기능을 사용할 수 없습니다.\n\n권한을 확인해주세요.</string>
+    <string name="permission_deny_network_state">네트워크 읽기 권한이 거부되었습니다.\n이 권한이 없으면 기능을 사용할 수 없습니다.\n\n권한을 확인해주세요.</string>
+    <string name="permission_deny_camera">카메라 권한이 거부되었습니다.\n이 권한이 없으면 기능을 사용할 수 없습니다.\n\n권한을 확인해주세요.</string>
+
 </resources>

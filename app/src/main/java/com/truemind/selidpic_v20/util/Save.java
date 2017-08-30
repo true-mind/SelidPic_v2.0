@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.Base64;
 
 import java.io.ByteArrayOutputStream;
@@ -17,12 +15,12 @@ import java.io.ByteArrayOutputStream;
 public final class Save {
 
     private static SharedPreferences SP;
-    public static final String KEY_PHOTO_BYTE_STREAM = "pbs";
-    public static final String KEY_ORIGIN_IMAGE = "oi";
-    public static final String KEY_COMPOSED_IMAGE = "ci";
-    public static final String KEY_CAM_MANUAL = "cm";
-    public static final String KEY_USER_SIZE_WIDTH = "usw";
-    public static final String KEY_USER_SIZE_HEIGHT = "ush";
+    private static final String KEY_PHOTO_BYTE_STREAM = "pbs";
+    private static final String KEY_ORIGIN_IMAGE = "oi";
+    private static final String KEY_COMPOSED_IMAGE = "ci";
+    private static final String KEY_CAM_MANUAL = "cm";
+    private static final String KEY_USER_SIZE_WIDTH = "usw";
+    private static final String KEY_USER_SIZE_HEIGHT = "ush";
 
     private static SharedPreferences instance(Context context) {
         if (SP == null) {

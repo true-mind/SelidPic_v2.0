@@ -5,15 +5,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.text.SpannableString;
-import android.text.style.UnderlineSpan;
 import android.view.View;
 import android.view.Window;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.truemind.selidpic_v20.Constants;
 import com.truemind.selidpic_v20.R;
@@ -24,9 +21,9 @@ import com.truemind.selidpic_v20.R;
 
 public class CamSettingDialog extends Dialog {
 
-    public final static int CANCEL = -1;
-    public final static int BUTTON1 = 1;
-    public final static int BUTTON2 = 2;
+    private final static int CANCEL = -1;
+    private final static int BUTTON1 = 1;
+    private final static int BUTTON2 = 2;
 
     private LinearLayout btn1;
     private LinearLayout btn2;

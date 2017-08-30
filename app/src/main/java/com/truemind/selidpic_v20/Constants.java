@@ -6,6 +6,8 @@ package com.truemind.selidpic_v20;
 public class Constants {
 
     public static final String APP_LINK = "https://play.google.com/store/apps/details?id=com.truemind.selidpic";
+    public static final String APP_UNIT_ID = "ca-app-pub-9445172748967898~8610269103";
+    public static final String AD_UNIT_ID = "ca-app-pub-9445172748967898/4207333124";
 
     /** PHOTO_TYPE은 촬영하고자 하는 규격의 이름을 담당함*/
     public static final String PHOTO_TYPE1 = "증명사진";
