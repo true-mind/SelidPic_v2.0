@@ -103,9 +103,9 @@ public class SelidPicCam extends BaseActivity implements SensorEventListener {
 
         timer = new Timer(false);
 
-        type = new Constants().getCurrentPhotoType();
-        width = new Constants().getCurrentPhotoWidth();
-        height = new Constants().getCurrentPhotoHeight();
+        type = Constants.PHOTO_CURRENT_TYPE;
+        width = Constants.PHOTO_CURRENT_WIDTH;
+        height = Constants.PHOTO_CURRENT_HEIGTH;
 
         initView();
         initListener();
