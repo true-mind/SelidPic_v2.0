@@ -7,9 +7,11 @@ import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
+import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
@@ -17,9 +19,8 @@ import com.google.android.gms.ads.AdView;
 import com.truemind.selidpic_v20.R;
 
 /**
- *
  * AdDialogFactory
- *  종료시 애드뷰를 띄워주는 팩토리 클래스
+ * 종료시 애드뷰를 띄워주는 팩토리 클래스
  */
 public class QuitAdDialogFactory {
     /**
@@ -30,7 +31,8 @@ public class QuitAdDialogFactory {
         final Activity activity;
         @NonNull
         final AdView portraitAdView;
-        @Nullable public AdView landscapeAdView;
+        @Nullable
+        public AdView landscapeAdView;
         public boolean isRotatable = false;
         public boolean isAppCompat = true;
         boolean isAdIncluded = true;
@@ -41,7 +43,9 @@ public class QuitAdDialogFactory {
         }
     }
 
-    private QuitAdDialogFactory() { throw new AssertionError("Must not create this class!"); }
+    private QuitAdDialogFactory() {
+        throw new AssertionError("Must not create this class!");
+    }
 
     public static AdView initPortraitAdView(Context context, String adUnitId, AdRequest adRequest) {
         // make AdView again for next quit dialog
@@ -74,6 +78,7 @@ public class QuitAdDialogFactory {
     private static AlertDialog makeAppCompatDialog(Options options) {
         final Activity activity = options.activity;
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setMessage("SelidPic을 종료하시겠습니까?");
         builder.setPositiveButton(activity.getString(R.string.yes),
                 new DialogInterface.OnClickListener() {
                     @Override
@@ -119,7 +124,7 @@ public class QuitAdDialogFactory {
     }
 
     private static void applyPadding(AlertDialog dialog, final Options options,
-                                        final Activity activity) {
+                                     final Activity activity) {
         dialog.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override
             public void onShow(DialogInterface dialog) {
@@ -137,6 +142,7 @@ public class QuitAdDialogFactory {
     private static android.app.AlertDialog makeBaseDialog(Options options) {
         final Activity activity = options.activity;
         android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(activity);
+        builder.setMessage("종료하시겠습니까?");
         builder.setPositiveButton(activity.getString(R.string.yes),
                 new DialogInterface.OnClickListener() {
                     @Override

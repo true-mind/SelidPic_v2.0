@@ -7,10 +7,6 @@ import android.net.NetworkInfo;
 
 /**
  * Created by Hyunseok on 2017-08-30.
- */
-
-/**
- * Created by Donghyeon Jeong in MorningKit from Yooii Studios Co., LTD. on 2014. 5. 28.
  *
  * InternetConnectionManager
  *  네트워크 가능여부를 체크하는 클래스

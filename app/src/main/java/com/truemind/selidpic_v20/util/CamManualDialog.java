@@ -138,7 +138,7 @@ public class CamManualDialog extends Dialog {
                 txtBtn.setText(getContext().getResources().getString(R.string.camStart));
                 break;
         }
-
     }
+
 
 }

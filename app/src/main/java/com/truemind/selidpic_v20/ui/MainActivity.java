@@ -1,8 +1,10 @@
 package com.truemind.selidpic_v20.ui;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -14,6 +16,7 @@ import com.google.android.gms.ads.MobileAds;
 import com.truemind.selidpic_v20.BaseActivity;
 import com.truemind.selidpic_v20.Constants;
 import com.truemind.selidpic_v20.R;
+import com.truemind.selidpic_v20.ad.InternetConnectionManager;
 import com.truemind.selidpic_v20.ad.QuitAdDialogFactory;
 import com.truemind.selidpic_v20.util.UserSizeDialog;
 
@@ -61,8 +64,10 @@ public class MainActivity extends BaseActivity {
                 mQuitAdRequest);
     }
 
-    /**View initiating, get all textviews for typekit*/
-    public void initView(){
+    /**
+     * View initiating, get all textviews for typekit
+     */
+    public void initView() {
 
         btn1 = (LinearLayout) findViewById(R.id.main_btn1);
         btn2 = (LinearLayout) findViewById(R.id.main_btn2);
@@ -96,8 +101,10 @@ public class MainActivity extends BaseActivity {
 
     }
 
-    /**initiating listener*/
-    public void initListener(){
+    /**
+     * initiating listener
+     */
+    public void initListener() {
 
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,13 +124,13 @@ public class MainActivity extends BaseActivity {
                     @Override
                     public void onClose(int which, Object data) {
                         /** 1 for confirm, -1, 2 for cancel*/
-                        if(which==1){
+                        if (which == 1) {
                             Intent intent = new Intent(getContext(), CautionActivity.class);
                             intent.putExtra("type", Constants.PHOTO_TYPE2);
                             startActivity(intent);
                             finish();
-                        }else{
-                         Log.d(TAG, getString(R.string.userCancel));
+                        } else {
+                            Log.d(TAG, getString(R.string.userCancel));
                         }
                     }
                 });
@@ -186,6 +193,9 @@ public class MainActivity extends BaseActivity {
         mQuitLandscapeAdView.pause();
     }
 
+
+/*
+
     @Override
     public void onBackPressed() {
         long tempTime = System.currentTimeMillis();
@@ -200,8 +210,8 @@ public class MainActivity extends BaseActivity {
             Toast.makeText(getContext(), R.string.exitMessage,Toast.LENGTH_SHORT).show();
         }
     }
+*/
 
-/*
 
     @Override
     public void onBackPressed() {
@@ -221,15 +231,26 @@ public class MainActivity extends BaseActivity {
                 // 가로 모드는 7.5% 가량 사용하고 있기에 속도를 위해서 광고를 계속 불러오지 않음
                 mQuitPortraitAdView = QuitAdDialogFactory.initPortraitAdView(this,
                         Constants.AD_UNIT_ID, mQuitAdRequest);
+                TextView messageText = (TextView) adDialog.findViewById(android.R.id.message);
+                if (messageText != null) {
+                    messageText.setGravity(Gravity.CENTER);
+                }
             } else {
                 // just finish activity when dialog is null
                 super.onBackPressed();
             }
         } else {
             // just finish activity when no ad item is bought
-            super.onBackPressed();
+            long tempTime = System.currentTimeMillis();
+            long intervalTime = tempTime - backPressedTime;
+
+            if (0 <= intervalTime && FINISH_INTERVAL_TIME >= intervalTime) {
+                super.onBackPressed();
+            } else {
+                backPressedTime = tempTime;
+                Toast.makeText(getContext(), R.string.exitMessage, Toast.LENGTH_SHORT).show();
+            }
         }
     }
-*/
 
 }
